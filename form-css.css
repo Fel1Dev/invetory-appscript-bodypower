@@ -19,16 +19,25 @@ body {
 
 }
 
-.main {
+.main {    
     width: 100%;
     height: 100%;
     display: flex;
-    align-items: center;
     justify-content: center;
 }
 
+.recordForm {
+    margin-top: 50px;
+    width: 450px;
+    height: 600px;
+}
+
 .recordForm--title {
-    margin: 20px 0px;    
+    margin: 20px 0px;
+}
+
+.recordForm--fields__hidden {
+    display: none;
 }
 
 .title {
@@ -36,15 +45,16 @@ body {
 }
 
 .recordForm--common {
-    font-size: 1.5rem;
+    margin: 20px 0px;
 }
 
-.recordForm--common li {
+.recordForm--fields li {
     margin: 10px 0px;
 }
 
-.common--label {    
+.common--label {
     width: 100px;
+    font-size: 1.5rem;
 }
 
 .common--input {
@@ -52,6 +62,7 @@ body {
     margin: 0px 20px 0px 0px;
     border: 1px solid #ced4da;
     border-radius: 4px;
+    font-size: 1.5rem;
 }
 
 .common--input:disabled {
@@ -59,3 +70,31 @@ body {
     background-color: #e9ecef;
 }
 
+.record-form-tabs {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-top: 20px;
+    
+}
+
+.record-form--content {
+    height: 200px;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    border-left: 1px solid #dee2e6;
+    border-right: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.record-form--footer {
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer--btn {
+    width: 100px;
+}
+
+.hidden {
+    display: none;
+}
