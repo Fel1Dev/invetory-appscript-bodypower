@@ -33,15 +33,15 @@
           </li>
           <li>
             <label class="common--label" for="product" >Producto</label>
-            <select class="common--input" id="product" name="productList"></select>
+            <select class="common--input" id="product"></select>
           </li>          
           <li>
-            <label class="common--label" for="currentStock">Stock actual</label>
-            <input class="common--input" id="currentStock" type="text" disabled>
+            <label class="common--label" for="current-stock">Stock actual</label>
+            <input class="common--input" id="current-stock" type="text" disabled>
           </li>
           <li>
             <label class="common--label" for="units">Unidades</label>
-            <select class="common--input" id="units" name="unitList"></select>
+            <select class="common--input" id="units"></select>
           </li>
         </ul>
         <!-- Tabs menu -->
@@ -62,23 +62,23 @@
             <div class="record-form--fields">            
               <ul>
                   <li>
-                      <label class="common--label" for="newQuantity">Nuevo stock:</label>
-                      <input class="common--input" id="newQuantity" type="number"></input>
+                      <label class="common--label" for="new-quantity">Nuevo stock:</label>
+                      <input class="common--input" id="new-quantity" type="number"></input>
                   </li>
                   <li>
-                      <label class="common--label" for="finalStockNew">Diferencia:</label>
-                      <input class="common--input" id="finalStockNew" type="number" disabled>
+                      <label class="common--label" for="final-stock-new">Diferencia:</label>
+                      <input class="common--input" id="final-stock-new" type="number" disabled>
                   </li>
                   <div class="list--input hidden">
                       <h4>Entrada</h4>
                       <ul>
                           <li>
-                              <label class="common--label" for="newStockInvoice"># Factura</label>
-                              <input class="common--input" id="newStockInvoice" type="text"></input>
+                              <label class="common--label" for="new-stock-invoice"># Factura</label>
+                              <input class="common--input" id="new-stock-invoice" type="text"></input>
                           </li>
                           <li>
-                              <label class="common--label" for="newStockAmount">Valor entrada</label>
-                              <input class="common--input" id="newStockAmount" type="number"></input>
+                              <label class="common--label" for="new-stock-amount">Valor entrada</label>
+                              <input class="common--input" id="new-stock-amount" type="number"></input>
                           </li>
                       </ul>
                   </div>
@@ -86,12 +86,12 @@
                       <h4>Salida</h4>
                       <ul>
                         <li>
-                          <label class="common--label" for="outputType">Tipo salida</label>
-                          <select class="common--input" id="outputType" name="outputList"></select>
+                          <label class="common--label" for="new-output-type">Tipo salida</label>
+                          <select class="common--input" id="new-output-type"></select>
                         </li>
                         <li class="output--details">
-                          <label class="common--label" for="outputDesc">Detalle</label>
-                          <textarea class="" id="outputDesc" name="outputDesc" rows="4"></textarea>
+                          <label class="common--label" for="new-output-desc">Detalle</label>
+                          <textarea class="" id="new-output-desc" rows="4"></textarea>
                         </li>
                       </ul>
                   </div>                
@@ -106,16 +106,16 @@
                       <input class="common--input" id="invoice" type="text"></input>
                   </li>
                   <li>
-                      <label class="common--label" for="value">Valor entrada</label>
-                      <input class="common--input" id="value" type="number"></input>
+                      <label class="common--label" for="amount">Valor entrada</label>
+                      <input class="common--input" id="amount" type="number"></input>
                   </li>
                   <li>
                       <label class="common--label" for="quantity">Cantidad</label>
                       <input class="common--input" id="quantity" type="number"></input>
                   </li>
                   <li>
-                      <label class="common--label" for="finalStockNew">Stock final</label>
-                      <input class="common--input" id="finalStockNew" type="number" disabled>
+                      <label class="common--label" for="final-stock-new">Stock final</label>
+                      <input class="common--input" id="final-stock-new" type="number" disabled>
                   </li>
               </ul>
             </div>
@@ -124,20 +124,20 @@
             <div class="record-form--fields">
               <ul>
                   <li>
-                      <label class="common--label" for="outputType">Tipo salida</label>
-                      <select class="common--input" id="outputType" name="outputList"></select>
+                      <label class="common--label" for="output-type">Tipo salida</label>
+                      <select class="common--input" id="output-type"></select>
                   </li>
                   <li>
-                      <label class="common--label" for="outQuantity">Cantidad</label>
-                      <input  class="common--input" id="outQuantity" type="number"></input>
+                      <label class="common--label" for="out-quantity">Cantidad</label>
+                      <input  class="common--input" id="out-quantity" type="number"></input>
                   </li>                  
                   <li>
-                      <label class="common--label"  for="finalStockSalida">Stock final</label>
-                      <input class="common--input" id="finalStockSalida" type="number" disabled>
+                      <label class="common--label"  for="final-stock-out">Stock final</label>
+                      <input class="common--input" id="final-stock-out" type="number" disabled>
                   </li>
                   <li class="output--details">
-                    <label class="common--label" for="outputDesc">Detalle</label>
-                    <textarea class="common--input" id="outputDesc" name="outputDesc" rows="4"></textarea>
+                    <label class="common--label" for="output-description">Detalle</label>
+                    <textarea class="common--input" id="output-description" rows="4"></textarea>
                   </li>
               </ul>
             </div>
