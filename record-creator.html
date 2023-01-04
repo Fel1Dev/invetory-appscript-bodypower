@@ -11,7 +11,7 @@
   </head>
   <body>
     <main class="main">
-      <form class="record-form">
+      <form class="record-form needs-validation" method="post" action="<?= pubUrl ?>" nonvalidate>
         <div class="record-form--title">
           <div>
             <span>Body Power</span>
@@ -21,19 +21,28 @@
         <ul class="record-form--fields">
           <li>
             <label class="common--label" for="record-date">Fecha</label>
-            <input class="common--input" id="record-date"  type="date">
+            <input class="common--input" id="record-date" type="date" required>
             <input id="keep-date" type="checkbox">
             <label class="common--label" for="keep-date">Mantener</label>
+            <div class="invalid-feedback">
+              Fecha requerida.
+            </div>
           </li>
           <li>
             <label class="common--label" for="user-list">Encargado</label>
-            <select class="common--input" id="user-list"></select>
+            <select class="common--input" id="user-list" required></select>
             <input id="keep-user-list" type="checkbox">
             <label class="common--label" for="keep-user-list">Mantener</label>
+            <div class="invalid-feedback">
+              Encargado requerido.
+            </div>
           </li>
           <li>
-            <label class="common--label" for="product" >Producto</label>
-            <select class="common--input" id="product"></select>
+            <label class="common--label" for="product">Producto</label>
+            <input id="product" class="common--input common--input__large" placeholder="Escribe para buscar...">
+            <div class="invalid-feedback">
+              Producto requerido.
+            </div>
           </li>          
           <li>
             <label class="common--label" for="current-stock">Stock actual</label>
@@ -122,11 +131,7 @@
           </div>
           <div class="tab-pane fade" id="output-tab-pane" role="tabpanel" aria-labelledby="Output-tab" tabindex="0">
             <div class="record-form--fields">
-              <ul>
-                  <li>
-                      <label class="common--label" for="output-type">Tipo salida</label>
-                      <select class="common--input" id="output-type"></select>
-                  </li>
+              <ul>                  
                   <li>
                       <label class="common--label" for="out-quantity">Cantidad</label>
                       <input  class="common--input" id="out-quantity" type="number"></input>
@@ -134,6 +139,10 @@
                   <li>
                       <label class="common--label"  for="final-stock-out">Stock final</label>
                       <input class="common--input" id="final-stock-out" type="number" disabled>
+                  </li>
+                  <li>
+                    <label class="common--label" for="output-type">Tipo salida</label>
+                    <select class="common--input" id="output-type"></select>
                   </li>
                   <li class="output--details">
                     <label class="common--label" for="output-description">Detalle</label>
