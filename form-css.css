@@ -34,9 +34,9 @@ body {
 .record-form--content {
     padding-top: 10px;
     margin-bottom: 10px;
-    border-left: 1px solid #dee2e6;
-    border-right: 1px solid #dee2e6;
-    border-bottom: 1px solid #dee2e6;
+    border-left: 1px solid var(--bs-gray-300);
+    border-right: 1px solid var(--bs-gray-300);
+    border-bottom: 1px solid var(--bs-gray-300);
 }
 
 .record-form--title {
@@ -61,14 +61,18 @@ body {
 .common--input {
     width: 140px;
     margin: 0px 20px 0px 0px;
-    border: 1px solid #ced4da;
+    border: 1px solid var(--bs-gray-400);
     border-radius: 4px;
     font-size: 1.5rem;
 }
 
 .common--input:disabled {
     opacity: 1;
-    background-color: #e9ecef;
+    background-color: var(--bs-gray-200);
+}
+
+.common--input__large {
+    width: 60%;
 }
 
 .record-form-tabs {
@@ -97,7 +101,7 @@ body {
     resize: none;
     width: 200px;
     margin: 0px 20px 0px 0px;
-    border: 1px solid #ced4da;
+    border: 1px solid var(--bs-gray-400);
     border-radius: 4px;
     font-size: 1.5rem;
 }
