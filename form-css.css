@@ -61,6 +61,7 @@ body {
 .common--input {
     width: 140px;
     margin: 0px 20px 0px 0px;
+    padding: 0px 5px;
     border: 1px solid var(--bs-gray-400);
     border-radius: 4px;
     font-size: 1.5rem;
@@ -101,6 +102,7 @@ body {
     resize: none;
     width: 200px;
     margin: 0px 20px 0px 0px;
+    padding: 0px 5px;
     border: 1px solid var(--bs-gray-400);
     border-radius: 4px;
     font-size: 1.5rem;
