@@ -45,6 +45,6 @@ function createRecord() {
     
 }
 
-function getItemData(itemsData) {
+function loadItemData(itemsData) {
 
 }
