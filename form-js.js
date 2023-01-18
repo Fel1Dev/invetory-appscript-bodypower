@@ -30,7 +30,7 @@ function clearFields() {
     document.getElementById("invoice").value = "";
     document.getElementById("amount").value = "";
     document.getElementById("quantity").value = "";
-    document.getElementById("final-stock-new").value = "";
+    document.getElementById("final-stock-input").value = "";
     
     // Output
     document.getElementById("output-type").value = "";
@@ -41,6 +41,10 @@ function clearFields() {
 
 function createRecord() {
     
-    //Leer campos
+    //read fields
     
+}
+
+function getItemData(itemsData) {
+
 }
