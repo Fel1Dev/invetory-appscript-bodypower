@@ -167,10 +167,16 @@
       window.addEventListener("load", startUpForm);
 
       function startUpForm() {
-        //set currentDate
-        document.getElementById('record-date').valueAsDate = new Date();
+        //set currentDate --Consider timezone.
+        document.getElementById('record-date').value = getLocalDateAsValue();
         //Initialize lists
         loadItemData();
+      }
+
+      function getLocalDateAsValue() {
+        let local = new Date();
+        local.setMinutes(local.getMinutes() - local.getTimezoneOffset());
+        return local.toJSON().slice(0,10);
       }
 
       function loadItemData() {
