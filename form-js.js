@@ -3,6 +3,36 @@ document.getElementById('clear-fields').addEventListener("click", clearFields);
 document.getElementById('create-record').addEventListener("click", createRecord);
 window.addEventListener("load", startUpForm);
 
+    function startUpForm() {
+      //set currentDate with timezone
+      document.getElementById('record-date').value = getLocalDateAsValue();
+
+      //Initialize lists
+      loadItemData();
+    }
+
+    function getLocalDateAsValue() {
+      let local = new Date();
+      local.setMinutes(local.getMinutes() - local.getTimezoneOffset());
+      return local.toJSON().slice(0,10);
+    }
+
+    function loadItems( itemsData ) {
+      console.log('loadItems');
+      const itemListInput = document.getElementById('item-list-options');
+      itemsData.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item[1];
+        option.text = item[1] + ", " + item[3];
+        itemListInput.appendChild(option);
+      });
+    }
+
+    function loadItemData() {
+      console.log('DataList ItemData');
+      google.script.run.withSuccessHandler( loadItems ).getItemsData();
+    }
+
 
 function clearFields() {
     let keepDate = document.getElementById("keep-date").checked;
@@ -39,40 +69,12 @@ function clearFields() {
     document.getElementById("out-quantity").value = "";
     document.getElementById("final-stock-out").value = "";
     document.getElementById("output-description").value = "";
+
+    startUpForm();
 }
 
 function createRecord() {
   //read fields
   console.log('create record');
     
-}
-
-function startUpForm() {
-  //set currentDate with timezone
-  document.getElementById('record-date').value = getLocalDateAsValue();
-
-  //Initialize lists
-  loadItemData();
-}
-
-function getLocalDateAsValue() {
-  let local = new Date();
-  local.setMinutes(local.getMinutes() - local.getTimezoneOffset());
-  return local.toJSON().slice(0,10);
-}
-
-function loadItemData() {
-  console.log('DataList ItemData');
-  google.script.run.withSuccessHandler( loadItems )
-  .getItemsData();
-}
-
-function loadItems( itemsData ) {
-  const itemListInput = document.getElementById('item-list-options');
-  itemsData.forEach(item => {
-    const option = document.createElement('option');
-    option.value = item[1];
-    option.text = item[1] + ", " + item[3];
-    itemListInput.appendChild(option);
-  });
 }
