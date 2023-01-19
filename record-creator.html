@@ -38,12 +38,14 @@
             </div>
           </li>
           <li>
-            <label class="common--label" for="product">Producto</label>
-            <input id="product" class="common--input common--input__large" placeholder="Escribe para buscar...">
+            <label class="common--label" for="item-list">Producto</label>
+            <input id="item-list" list="item-list-options" class="common--input common--input__large" placeholder="Escribe para buscar...">
+            <datalist id="item-list-options">              
+            </datalist>
             <div class="invalid-feedback">
               Producto requerido.
             </div>
-          </li>          
+          </li>
           <li>
             <label class="common--label" for="current-stock">Stock actual</label>
             <input class="common--input" id="current-stock" type="text" disabled>
@@ -163,26 +165,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
     <script src="/form-js.js"></script>
     <?!= include("form-js"); ?>
-    <script>
-      window.addEventListener("load", startUpForm);
-
-      function startUpForm() {
-        //set currentDate --Consider timezone.
-        document.getElementById('record-date').value = getLocalDateAsValue();
-        //Initialize lists
-        loadItemData();
-      }
-
-      function getLocalDateAsValue() {
-        let local = new Date();
-        local.setMinutes(local.getMinutes() - local.getTimezoneOffset());
-        return local.toJSON().slice(0,10);
-      }
-
-      function loadItemData() {
-        console.log('DataList ItemData');
-      }      
-      
-    </script>
   </body>
 </html>
