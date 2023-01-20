@@ -30,7 +30,9 @@
           </li>
           <li>
             <label class="common--label" for="user-list">Encargado</label>
-            <select class="common--input" id="user-list" required></select>
+            <input id="user-list" list="user-list-options" class="common--input" placeholder="Seleccionar...">
+            <datalist id="user-list-options">
+            </datalist>
             <input id="keep-user-list" type="checkbox">
             <label class="common--label" for="keep-user-list">Mantener</label>
             <div class="invalid-feedback">
@@ -51,8 +53,10 @@
             <input class="common--input" id="current-stock" type="text" disabled>
           </li>
           <li>
-            <label class="common--label" for="units">Unidades</label>
-            <select class="common--input" id="units"></select>
+            <label class="common--label" for="unit-list">Unidades</label>
+            <input id="unit-list" list="unit-list-options" class="common--input" placeholder="Seleccionar...">
+            <datalist id="unit-list-options">
+            </datalist>
           </li>
         </ul>
         <!-- Tabs menu -->
@@ -80,7 +84,7 @@
                       <label class="common--label" for="final-stock-new">Diferencia:</label>
                       <input class="common--input" id="final-stock-new" type="number" disabled>
                   </li>
-                  <div class="list--input hidden">
+                  <div class="list--input">
                       <h4>Entrada</h4>
                       <ul>
                           <li>
@@ -97,8 +101,10 @@
                       <h4>Salida</h4>
                       <ul>
                         <li>
-                          <label class="common--label" for="new-output-type">Tipo salida</label>
-                          <select class="common--input" id="new-output-type"></select>
+                          <label class="common--label" for="new-output-type-list">Tipo salida</label>
+                          <input id="new-output-type-list" list="new-output-list-options" class="common--input" placeholder="Seleccionar...">
+                          <datalist id="new-output-list-options">
+                          </datalist>
                         </li>
                         <li class="output--details">
                           <label class="common--label" for="new-output-desc">Detalle</label>
@@ -143,8 +149,10 @@
                       <input class="common--input" id="final-stock-out" type="number" disabled>
                   </li>
                   <li>
-                    <label class="common--label" for="output-type">Tipo salida</label>
-                    <select class="common--input" id="output-type"></select>
+                    <label class="common--label" for="output-type-list">Tipo salida</label>
+                    <input id="output-type-list" list="output-list-options" class="common--input" placeholder="Seleccionar...">
+                    <datalist id="output-list-options">
+                    </datalist>
                   </li>
                   <li class="output--details">
                     <label class="common--label" for="output-description">Detalle</label>
