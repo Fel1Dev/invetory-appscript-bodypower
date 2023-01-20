@@ -8,8 +8,102 @@ function startUpForm() {
   document.getElementById('record-date').value = getLocalDateAsValue();
 
   //Initialize lists
-  loadItemData();
-  loadUserData();
+  //loadItemData();
+  //loadUserData();
+  
+
+  //Jerry
+
+  //Las demas
+  let jerry = [
+    'PARTYCLASSIFICATIONASSOCIATION',
+'PARTYCONTRACTVERSION',
+'PARTYIDENTIFIER',
+'PARTYPARENTCOMPANYDETAIL',
+'PARTYPOSTALADDRESS',
+'UTILITYGROUP',
+'UTILITYPORDISCOUNTHISTORY',
+'UTILITYSALESTERRITORY',
+'UTILITYTRANSMISSIONRATE',
+  ]
+
+  let otros = [
+    'PARTY',
+'PARTYCALENDARASSOCIATION',
+'PARTYCONTACTMECHANISM',
+'PARTYCONTACTMECHANISMLINK',
+'PARTYCREDITRATING',
+'PARTYHISTORY',
+'PARTYPARENTACCOUNT',
+'PARTYPARENTCOMPANYADDRESS',
+'PARTYPARENTCVASSOCIATION',
+'PARTYPAYMENTACCOUNT',
+'PARTYRELATIONSHIP',
+'PARTYROLE',
+'UTILITYPERHOUR',
+'UTILITYPORDISCOUNT',
+'UTILITYPRICINGCOMPONENT',
+'UTILITYPTC',
+'UTILITYSTATEASSOCIATION',
+'UTILITYTERRITORY',
+  ];
+
+  let all = [
+    'PARTY',
+'PARTYCALENDARASSOCIATION',
+'PARTYCLASSIFICATIONASSOCIATION',
+'PARTYCONTACTMECHANISM',
+'PARTYCONTACTMECHANISMLINK',
+'PARTYCONTRACTVERSION',
+'PARTYCREDITRATING',
+'PARTYHISTORY',
+'PARTYIDENTIFIER',
+'PARTYPARENTACCOUNT',
+'PARTYPARENTCOMPANYADDRESS',
+'PARTYPARENTCOMPANYDETAIL',
+'PARTYPARENTCVASSOCIATION',
+'PARTYPAYMENTACCOUNT',
+'PARTYPOSTALADDRESS',
+'PARTYRELATIONSHIP',
+'PARTYROLE',
+'UTILITYGROUP',
+'UTILITYPERHOUR',
+'UTILITYPORDISCOUNT',
+'UTILITYPORDISCOUNTHISTORY',
+'UTILITYPRICINGCOMPONENT',
+'UTILITYPTC',
+'UTILITYSALESTERRITORY',
+'UTILITYSTATEASSOCIATION',
+'UTILITYTERRITORY',
+'UTILITYTRANSMISSIONRATE',
+  ]
+
+  let result = "";
+
+  all.forEach(table => {
+    let tempalteSql = `DROP TABLE if exists importnextstar.${table};  
+CREATE TABLE importnextstar.${table} 
+USING parquet
+LOCATION "wasbs://nextstar@stgbillingpoc.blob.core.windows.net/parquet-nextstar-raw/${table.toLowerCase()}";
+
+`;
+
+    let templatePanda = `${table} = sqlContext.sql("select * from importnextstar.${table}")
+${table}_pandas_df = ps.DataFrame(${table})
+${table}_pandas_df_unique = ps.DataFrame(${table}_pandas_df.nunique())
+${table}_pandas_df_na = ps.DataFrame(${table}_pandas_df.isna().sum())
+${table}_pandas_df_unique.reset_index(inplace=True)
+${table}_pandas_df_na.reset_index(inplace=True)
+${table}_results = ${table}_pandas_df_unique.merge(${table}_pandas_df_na, on='index')
+${table}_results.rename({'index': 'Colname', 'None_x': 'Uniquevals', 'None_y': 'Nullvals'}, axis=1, inplace=True)
+
+`;
+    
+    result += templatePanda;
+  });
+  
+  console.log(result);
+; 
 }
 
 function getLocalDateAsValue() {
