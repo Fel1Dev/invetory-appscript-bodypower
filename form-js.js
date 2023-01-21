@@ -37,19 +37,16 @@ function loadItemsData() {
 }
 
 function createSimpleListsOptions( allListsData ) {
-  console.table(allListsData);
   const usersListInput = document.getElementById('user-list-options');
   const unitsListInput = document.getElementById('unit-list-options');
   const newOutTypesListInput = document.getElementById('new-output-list-options');
   const outOutTypesListInput = document.getElementById('output-list-options');
   allListsData.forEach(dataRow => {
-    console.log(dataRow);
     createListOption(unitsListInput, dataRow[0]);
     createListOption(usersListInput, dataRow[1]);
     createListOption(newOutTypesListInput, dataRow[3]);
     createListOption(outOutTypesListInput, dataRow[3]);
   });
-  console.log('Final simple list');
   stopLoadingScreen();
 }
 
@@ -120,15 +117,20 @@ function startLoadingScreen() {
 }
 
 function addListenerItemChange() {
-  document.getElementById('item-list').addEventListener('onChange', getCurrentStock );
+  document.getElementById('item-list').addEventListener('change', getCurrentStock );
 }
 
 function getCurrentStock() {
-  //TODO
-  const itemName = document.getElementById('item-list').getValue();
-  console.log(itemName);
+  startLoadingScreen();
+  const itemName = document.getElementById('item-list').value;
+  document.getElementById('new-quantity').value = '';
   //Call backed function to get only one row
-  searchItemData(itemName)
+  if(itemName) {
+    searchItemData(itemName)
+  } else {
+    updateCurrentStock('');
+    disableNewQuantity();
+  }
 }
 
 function searchItemData( name ) {
@@ -136,10 +138,20 @@ function searchItemData( name ) {
 }
 
 function processItemData( itemData ) {
-  let value = parseInt(itemData[6]);
-  showCurrentStock(value);
+  let value = parseInt(itemData);
+  enableNewQuantity();
+  updateCurrentStock(value);
 }
 
 function updateCurrentStock(value) {
   document.getElementById('current-stock').value = value;
+  stopLoadingScreen();
+}
+
+function disableNewQuantity() {
+  document.getElementById('new-quantity').disabled = true;
+}
+
+function enableNewQuantity() {  
+  document.getElementById('new-quantity').disabled = false;
 }
