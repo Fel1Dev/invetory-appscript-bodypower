@@ -4,12 +4,15 @@ document.getElementById('create-record').addEventListener("click", createRecord)
 window.addEventListener("load", startUpForm);
 
 function startUpForm() {
+  initCurrDateField();
+  //Initialize lists
+  loadItemsData();
+  loadSimpleListsData();
+}
+
+function initCurrDateField() {
   //set currentDate with timezone
   document.getElementById('record-date').value = getLocalDateAsValue();
-
-  //Initialize lists
-  loadItemData();
-  loadUserData();
 }
 
 function getLocalDateAsValue() {
@@ -18,8 +21,7 @@ function getLocalDateAsValue() {
   return local.toJSON().slice(0,10);
 }
 
-function loadItemList( itemsData ) {
-  console.log('loadItems');
+function createItemsOptions( itemsData ) {
   const itemListInput = document.getElementById('item-list-options');
   itemsData.forEach(item => {
     const option = document.createElement('option');
@@ -27,30 +29,40 @@ function loadItemList( itemsData ) {
     option.text = item[1] + ", " + item[3];
     itemListInput.appendChild(option);
   });
+  addListenerItemChange();
 }
 
-function loadItemData() {
-  console.log('DataList ItemData');
-  google.script.run.withSuccessHandler( loadItemList ).getItemsData();
+function loadItemsData() {
+  google.script.run.withSuccessHandler( createItemsOptions ).getItemsData();
 }
 
-function loadUserList( usersData ) {
-  console.log('loadItems');
-  console.table(usersData);
+function createSimpleListsOptions( allListsData ) {
+  console.table(allListsData);
   const usersListInput = document.getElementById('user-list-options');
   const unitsListInput = document.getElementById('unit-list-options');
   const newOutTypesListInput = document.getElementById('new-output-list-options');
   const outOutTypesListInput = document.getElementById('output-list-options');
-  usersData.forEach(user => {
-    const option = document.createElement('option');
-    option.value = user[1];
-    option.text = user[1];
-    usersListInput.appendChild(option);
+  allListsData.forEach(dataRow => {
+    console.log(dataRow);
+    createListOption(unitsListInput, dataRow[0]);
+    createListOption(usersListInput, dataRow[1]);
+    createListOption(newOutTypesListInput, dataRow[3]);
+    createListOption(outOutTypesListInput, dataRow[3]);
   });
+  console.log('Final simple list');
+  stopLoadingScreen();
 }
 
-function loadUserData() {
-  google.script.run.withSuccessHandler( loadUserList ).getUsersData();
+function createListOption(inputElement, value) {
+  if(value) {
+    const option = document.createElement('option');
+    option.value = value;
+    inputElement.appendChild(option);
+  }
+}
+
+function loadSimpleListsData() {
+  google.script.run.withSuccessHandler( createSimpleListsOptions ).getSimpleListsData();
 }
 
 
@@ -90,11 +102,44 @@ function clearFields() {
     document.getElementById("output-type-list").value = "";
     document.getElementById("output-description").value = "";
 
-    startUpForm();
+    initCurrDateField();
 }
 
 function createRecord() {
   //read fields
   console.log('create record');
     
+}
+
+function stopLoadingScreen() {
+  document.getElementById('loading').classList.add('hide');
+}
+
+function startLoadingScreen() {
+  document.getElementById('loading').classList.remove('hide');
+}
+
+function addListenerItemChange() {
+  document.getElementById('item-list').addEventListener('onChange', getCurrentStock );
+}
+
+function getCurrentStock() {
+  //TODO
+  const itemName = document.getElementById('item-list').getValue();
+  console.log(itemName);
+  //Call backed function to get only one row
+  searchItemData(itemName)
+}
+
+function searchItemData( name ) {
+  google.script.run.withSuccessHandler( processItemData ).getItemData(name);
+}
+
+function processItemData( itemData ) {
+  let value = parseInt(itemData[6]);
+  showCurrentStock(value);
+}
+
+function updateCurrentStock(value) {
+  document.getElementById('current-stock').value = value;
 }
