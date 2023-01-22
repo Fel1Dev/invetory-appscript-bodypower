@@ -1,6 +1,7 @@
 
-document.getElementById('clear-fields').addEventListener("click", clearFields);
-document.getElementById('create-record').addEventListener("click", createRecord);
+document.getElementById('clear-fields').addEventListener('click', clearFields);
+document.getElementById('create-record').addEventListener('click', createRecord);
+document.getElementById('new-quantity').addEventListener('change', processNewStock)
 window.addEventListener("load", startUpForm);
 
 function startUpForm() {
@@ -155,3 +156,29 @@ function disableNewQuantity() {
 function enableNewQuantity() {  
   document.getElementById('new-quantity').disabled = false;
 }
+
+function getNewQuantityValue() {
+  return document.getElementById('new-quantity').value;
+}
+
+function getStockValue() {
+  return document.getElementById('current-stock').value;
+}
+
+function processNewStock() {
+  let newQuantity = getNewQuantityValue();
+  if(newQuantity) {
+    let currentStock = getStockValue();
+    //Check the logic in spredsheet to do this action.
+    //TODO
+    //  Check difference
+    //  Enable Input or Output fieds according difference
+    //  If out type
+   //     Enable Detail field according outputType
+  }
+}
+
+function updateDifferenceValue(newValue) {
+  document.getElementById('final-stock-new').value = newValue;
+}
+
