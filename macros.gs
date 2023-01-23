@@ -33,7 +33,7 @@ function getItemsData() {
   const SS = SpreadsheetApp.getActiveSpreadsheet();
   const itemSheet = SS.getSheetByName('Inventario');
   const itemsData = itemSheet.getDataRange().getDisplayValues();
-  
+ 
   //Delete first 3 lines
   itemsData.splice(0,3);
   return itemsData;
@@ -48,7 +48,7 @@ function getSimpleListsData() {
   return itemsData;
 }
 
-function getItemData(itemName) {
+function getSingleItemData(itemName) {
   const columWithStock = 8;
   const SS = SpreadsheetApp.getActiveSpreadsheet();
   const itemSheet = SS.getSheetByName('Inventario');

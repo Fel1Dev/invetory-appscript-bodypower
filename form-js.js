@@ -135,13 +135,18 @@ function getCurrentStock() {
 }
 
 function searchItemData( name ) {
-  google.script.run.withSuccessHandler( processItemData ).getItemData(name);
+  google.script.run.withSuccessHandler( processItemData ).withFailureHandler( processEmptyItemData ).getSingleItemData(name);
 }
 
 function processItemData( itemData ) {
-  let value = parseInt(itemData);
-  enableNewQuantity();
-  updateCurrentStock(value);
+  if(itemData){
+    enableNewQuantity();
+    updateCurrentStock(parseInt(itemData));
+  }
+}
+
+function processEmptyItemData() {
+  updateCurrentStock('');
 }
 
 function updateCurrentStock(value) {
@@ -172,9 +177,9 @@ function processNewStock() {
     //Check the logic in spredsheet to do this action.
     //TODO
     //  Check difference
-    //  Enable Input or Output fieds according difference
+    //  Enable Input or Output fields according difference value
     //  If out type
-   //     Enable Detail field according outputType
+   //     Enable Detail field when outputType is 'Baja'
   }
 }
 
