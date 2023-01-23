@@ -22,7 +22,17 @@ const INVOICE_NUM_CELL = "F11"
 const USER_CELL = "C4";
 
 function doGet() {
-  return HtmlService.createTemplateFromFile('record-creator.html').evaluate();
+  let template = HtmlService.createTemplateFromFile('record-creator.html');
+  template.pubUrl = "https://script.google.com/macros/s/AKfycbz2YxeYGx1dWv51h4RhkDhfhj9lWw_CExZ3MexkMiQ/dev";
+  let output = template.evaluate();
+  return output;
+}
+
+function doPost( event ) {
+  const SS = SpreadsheetApp.getActiveSpreadsheet();
+  let sheetInventory = SS.getSheetByName('Inventario');
+
+  console.log( event );
 }
 
 function include(filename) {

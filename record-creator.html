@@ -21,55 +21,66 @@
         <div></div>
       </div>
     </div>
-    <main class="main">
-      <form class="record-form needs-validation" method="post" nonvalidate>
-        <div class="record-form--title">
-          <div>
-            <span>Body Power</span>
+    <main class="container text-center">      
+      <h1>Body Power</h1>
+      <h2>Inventario Diario</h2>
+      <form class="needs-validation" novalidate >
+
+        <div class="row">
+          <div class="col">
+            <div class="mb-3">
+              <label class="form-label" for="record-date">Fecha</label>
+              <input class="form-control" id="record-date" type="date" required>
+              <div class="invalid-feedback">
+                Fecha requerida.
+              </div>              
+            </div>            
           </div>
-          <span>Inventario Diario</span>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input" id="keep-date" type="checkbox">
+              <label class="form-check-label" for="keep-date">Mantener</label>
+            </div>
+          </div>          
         </div>
-        <ul class="record-form--fields">
-          <li>
-            <label class="common--label" for="record-date">Fecha</label>
-            <input class="common--input" id="record-date" type="date" required>
-            <input id="keep-date" type="checkbox">
-            <label class="common--label" for="keep-date">Mantener</label>
-            <div class="invalid-feedback">
-              Fecha requerida.
+        <div class="row">
+          <div class="col">
+            <label class="form-label" for="user-list">Encargado</label>
+            <div class="mb-3">
+              <input id="user-list" class="form-select" type="search" list="user-list-options"  placeholder="Seleccionar..." required>
+              <datalist id="user-list-options">
+              </datalist>          
+              <div class="invalid-feedback">
+                Encargado requerido.
+              </div>
             </div>
-          </li>
-          <li>
-            <label class="common--label" for="user-list">Encargado</label>
-            <input id="user-list" type="search" list="user-list-options" class="common--input" placeholder="Seleccionar...">
-            <datalist id="user-list-options">
-            </datalist>
-            <input id="keep-user-list" type="checkbox">
-            <label class="common--label" for="keep-user-list">Mantener</label>
-            <div class="invalid-feedback">
-              Encargado requerido.
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input" id="keep-user-list" type="checkbox">
+              <label class="form-check-label" for="keep-user-list">Mantener</label>
             </div>
-          </li>
-          <li>
-            <label class="common--label" for="item-list">Producto</label>
-            <input id="item-list" type="search" list="item-list-options" class="common--input common--input__large" placeholder="Escribe para buscar...">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label class="form-label" for="item-list">Producto</label>
+            <input id="item-list" type="search" list="item-list-options" class="form-select" placeholder="Escribe para buscar..." required>
             <datalist id="item-list-options">              
             </datalist>
             <div class="invalid-feedback">
               Producto requerido.
             </div>
-          </li>
-          <li>
-            <label class="common--label" for="current-stock">Stock actual</label>
-            <input class="common--input" id="current-stock" type="text" disabled>
-          </li>
-          <!-- <li>
-            <label class="common--label" for="unit-list">Unidades</label>
-            <input id="unit-list" type="search" list="unit-list-options" class="common--input" placeholder="Seleccionar...">
-            <datalist id="unit-list-options">
-            </datalist>
-          </li> -->
-        </ul>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <label class="form-label" for="current-stock">Stock actual</label>
+          <input class="form-control" id="current-stock" type="text" disabled>
+        </div>
+
         <!-- Tabs menu -->
         <ul class="nav nav-tabs record-form-tabs" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
@@ -89,11 +100,14 @@
               <ul>
                   <li>
                       <label class="common--label" for="new-quantity">Nuevo stock:</label>
-                      <input class="common--input" id="new-quantity" type="number" disabled>
+                      <input class="form-control" id="new-quantity" type="number" disabled required>
+                      <div class="invalid-feedback">
+                        Por favor ingrese un nuevo stock.
+                      </div>
                   </li>
                   <li>
                       <label class="common--label" for="final-stock-new">Diferencia:</label>
-                      <input class="common--input" id="final-stock-new" type="number" disabled>
+                      <input class="common--input" id="final-stock-new" type="number" disabled>                      
                   </li>
                   <div id="new-stock-input-fields" class="list--input hidden">
                       <h4>Entrada</h4>
@@ -104,7 +118,10 @@
                           </li>
                           <li>
                               <label class="common--label" for="new-stock-amount">Valor entrada</label>
-                              <input class="common--input" id="new-stock-amount" type="number">
+                              <input class="common--input" id="new-stock-amount" type="number" required>
+                              <div class="invalid-feedback">
+                                Por favor ingrese un valor de entrada.
+                              </div>
                           </li>
                       </ul>
                   </div>
@@ -113,13 +130,19 @@
                       <ul>
                         <li>
                           <label class="common--label" for="new-output-type-list">Tipo salida</label>
-                          <input id="new-output-type-list" type="search" list="new-output-list-options" class="common--input" placeholder="Seleccionar...">
+                          <input id="new-output-type-list" type="search" list="new-output-list-options" class="common--input" placeholder="Seleccionar..." required>
                           <datalist id="new-output-list-options">
                           </datalist>
+                          <div class="invalid-feedback">
+                            Por favor seleccione un tipo de salida.
+                          </div>
                         </li>
                         <li id="new-stock-output-detail" class="output--details hidden">
                           <label class="common--label" for="new-output-desc">Detalle</label>
-                          <textarea class="" id="new-output-desc" rows="4"></textarea>
+                          <textarea class="" id="new-output-desc" rows="4" required></textarea>
+                          <div class="invalid-feedback">
+                            Por favor ingrese una descipción.
+                          </div>
                         </li>
                       </ul>
                   </div>                
@@ -174,8 +197,8 @@
           </div>
         </div>
         <div class="record-form--footer">
-          <button id="clear-fields" type="button" class="btn btn-secondary btn-lg">Limpiar</button>
-          <button id="create-record" type="button" class="btn btn-success btn-lg">Crear registro</button>
+          <button id="clear-fields" class="btn btn-secondary btn-lg">Limpiar</button>
+          <button id="create-record" type="submit" class="btn btn-success btn-lg">Crear registro</button>
         </div>
       </form>      
     </main>
