@@ -63,12 +63,12 @@
             <label class="common--label" for="current-stock">Stock actual</label>
             <input class="common--input" id="current-stock" type="text" disabled>
           </li>
-          <li>
+          <!-- <li>
             <label class="common--label" for="unit-list">Unidades</label>
             <input id="unit-list" type="search" list="unit-list-options" class="common--input" placeholder="Seleccionar...">
             <datalist id="unit-list-options">
             </datalist>
-          </li>
+          </li> -->
         </ul>
         <!-- Tabs menu -->
         <ul class="nav nav-tabs record-form-tabs" id="myTab" role="tablist">
@@ -95,7 +95,7 @@
                       <label class="common--label" for="final-stock-new">Diferencia:</label>
                       <input class="common--input" id="final-stock-new" type="number" disabled>
                   </li>
-                  <div class="list--input">
+                  <div id="new-stock-input-fields" class="list--input hidden">
                       <h4>Entrada</h4>
                       <ul>
                           <li>
@@ -108,7 +108,7 @@
                           </li>
                       </ul>
                   </div>
-                  <div class="list--output">
+                  <div id="new-stock-output-fields" class="list--output hidden">
                       <h4>Salida</h4>
                       <ul>
                         <li>
@@ -117,7 +117,7 @@
                           <datalist id="new-output-list-options">
                           </datalist>
                         </li>
-                        <li class="output--details">
+                        <li id="new-stock-output-detail" class="output--details hidden">
                           <label class="common--label" for="new-output-desc">Detalle</label>
                           <textarea class="" id="new-output-desc" rows="4"></textarea>
                         </li>
