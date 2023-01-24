@@ -150,42 +150,42 @@ function getValuesByType(recordType) {
   if (recordType === ENTRADA_STOCK) {
     console.log(ENTRADA_STOCK);
     return [[
-      "",  //empty
-      userName,  //user
-      formSheet.getRange(INVOICE_NUM_CELL).getValue(),  //# invoice
-      date,  //date
-      itemName,  //item
-      formSheet.getRange(NEW_STOCK_AMOUNT_CELL).getValue(),  //amount
-      formSheet.getRange(UNIT_CELL).getValue(),  //unit
-      formSheet.getRange(TOTAL_CELL).getValue(),  //total 
+      "",                                                     //empty
+      userName,                                               //user
+      formSheet.getRange(INVOICE_NUM_CELL).getValue(),        //# invoice
+      date,                                                   //date
+      itemName,                                               //item
+      formSheet.getRange(NEW_STOCK_AMOUNT_CELL).getValue(),   //amount
+      formSheet.getRange(UNIT_CELL).getValue(),               //unit
+      formSheet.getRange(TOTAL_CELL).getValue(),              //total 
     ]];
   }
 
   if (recordType === ENTRADA) {
     console.log(ENTRADA);
     return [[
-      "",  //empty
-      userName,  //user
-      formSheet.getRange(INVOICE_NUM_CELL).getValue(),  //# invoice
-      date,  //date
-      itemName,  //item
-      formSheet.getRange(INPUT_STOCK_AMOUNT_CELL).getValue(),  //amount
-      formSheet.getRange(UNIT_CELL).getValue(),  //unit
-      formSheet.getRange(TOTAL_CELL).getValue(),  //total 
+      "",                                                     //empty
+      userName,                                               //user
+      formSheet.getRange(INVOICE_NUM_CELL).getValue(),        //# invoice
+      date,                                                   //date
+      itemName,                                               //item
+      formSheet.getRange(INPUT_STOCK_AMOUNT_CELL).getValue(), //amount
+      formSheet.getRange(UNIT_CELL).getValue(),               //unit
+      formSheet.getRange(TOTAL_CELL).getValue(),              //total 
     ]];
   }
 
   if (recordType === SALIDA_STOCK) {
     console.log(SALIDA_STOCK);
     return [[
-      "",  //empty
-      userName,  //user
-      date,  //date
-      itemName,  //item
-      formSheet.getRange(UNIT_CELL).getValue(),  //unit
-      Math.abs(formSheet.getRange("C19").getValue()),  //amount
-      formSheet.getRange(TIPO_SALIDA_CELL).getValue(),  //outType
-    ]];
+      "",                                                     //empty
+      userName,                                               //user
+      date,                                                   //date
+      itemName,                                               //item
+      formSheet.getRange(UNIT_CELL).getValue(),               //unit
+      Math.abs(formSheet.getRange("C19").getValue()),         //amount
+      formSheet.getRange(TIPO_SALIDA_CELL).getValue(),        //outType
+    ]];                                                       //desc
   }
 
   if (recordType === SALIDA) {
@@ -204,7 +204,7 @@ function getValuesByType(recordType) {
 
 function createRow(recordType, values) {
   const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-  console.log("valuies: " + values);
+  console.log("values: " + values);
 
   if (values === undefined) {
     console.log("exit empty");

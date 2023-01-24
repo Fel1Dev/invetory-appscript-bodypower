@@ -1,18 +1,28 @@
 
-/* Initial events */
+/* Global events */
 window.addEventListener("load", startUpForm);
 document.getElementById('clear-fields').addEventListener('click', clearFields);
-document.getElementById('create-record').addEventListener('click', createRecord);
-document.getElementById(NEW_QUANTITY_ID).addEventListener('change', processNewStock);
-document.getElementById(ITEM_LIST_ID).addEventListener('change', getCurrentStock );
-document.getElementById('new-output-type-list').addEventListener('change', processOutputType);
+document.getElementById('form-inventory').addEventListener('submit', dataValidtation);
 
+// Tab Panel events
 document.getElementById('new-stock-tab').addEventListener('click', clickOnNewStock);
 document.getElementById('input-tab').addEventListener('click', clickOnInput);
 document.getElementById('output-tab').addEventListener('click', clickOnOutput);
 
+// New Stock events
+document.getElementById(NEW_STOCK_ID).addEventListener('change', processNewStock);
+document.getElementById(ITEM_LIST_ID).addEventListener('change', getCurrentStock );
+document.getElementById(STOCK_OUTPUT_TYPE_LIST).addEventListener('change', processOutputType);
+
+// Input events
+
+//Output events
+
 
 function startUpForm() {
+  // local tests
+  // stopLoadingScreen();
+
   initCurrDateField();
   //Initialize lists
   loadItemsData();
@@ -79,7 +89,7 @@ function createRecord() {
 function getCurrentStock(event) {
   startLoadingScreen();
   const itemName = event.target.value
-  document.getElementById(NEW_QUANTITY_ID).value = '';
+  document.getElementById(NEW_STOCK_ID).value = '';
   //Call backed function to get only one row
   if(itemName) {
     searchItemData(itemName)
@@ -97,7 +107,7 @@ function searchItemData( name ) {
 
 function processItemData( itemData ) {
   if(itemData){
-    unBlockNewQuantity();
+    unBlockNewStock();
     updateCurrentStock(parseInt(itemData));  
   }
 }
@@ -111,19 +121,19 @@ function updateCurrentStock(value) {
   stopLoadingScreen();
 }
 
-function getNewQuantityValue() {
-  return document.getElementById(NEW_QUANTITY_ID).value;
+function getNewStock() {
+  return document.getElementById(NEW_STOCK_ID).value;
 }
 
-function getStockValue() {
+function getCurrentStockValue() {
   return document.getElementById(CURRENT_STOCK_ID).value;
 }
 
 function processNewStock() {
-  let newQuantity = getNewQuantityValue();
-  if(newQuantity) {
-    let currentStock = getStockValue();
-    let difference = newQuantity - currentStock;
+  let newStock = getNewStock();
+  if(newStock) {
+    let currentStock = getCurrentStockValue();
+    let difference = newStock - currentStock;
     updateDifferenceValue(difference);
     //TODO
     //  Check difference
@@ -139,12 +149,10 @@ function processNewStock() {
 }
 
 function updateDifferenceValue(newValue) {
-  document.getElementById('final-stock-new').value = newValue;
+  document.getElementById(DIFFERENCE_ID).value = newValue;
 }
 
-function processOutputType(event) { 
-  //  If out type
-  //     Enable Detail field when outputType is 'Baja'
+function processOutputType(event) {
   if(event.target.value.toUpperCase() === OUTPUT_TYPE_BAJA) {
     showStockOutputDetail();
   } else {
@@ -152,10 +160,11 @@ function processOutputType(event) {
   }
 }
 
-function dataValidtation(form) {
+function dataValidtation(event) {
   event.preventDefault();
-  console.log(form);
-  google.script.run.withSuccessHandler( checkResponse ).getFrontData(form);
+  
+  const data = {};
+  google.script.run.withSuccessHandler( checkResponse ).getFrontData(data);
   
 }
 function checkResponse() {
