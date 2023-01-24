@@ -22,7 +22,13 @@ const INVOICE_NUM_CELL = "F11"
 const USER_CELL = "C4";
 
 function doGet() {
-  return HtmlService.createTemplateFromFile('record-creator.html').evaluate();
+  let template = HtmlService.createTemplateFromFile('record-creator.html');
+  let output = template.evaluate();
+  return output;
+}
+
+function getFrontData( event ) {
+  console.log( event );
 }
 
 function include(filename) {

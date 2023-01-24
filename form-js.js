@@ -1,13 +1,4 @@
 
-/* Field definition */
-const REACORD_DATE_ID = 'record-date';
-const USER_LIST_ID = 'user-list';
-const ITEM_LIST_ID = 'item-list';
-const CURRENT_STOCK_ID = 'current-stock';
-const NEW_QUANTITY_ID = 'new-quantity';
-
-const OUTPUT_TYPE_BAJA = 'BAJA';
-
 /* Initial events */
 window.addEventListener("load", startUpForm);
 document.getElementById('clear-fields').addEventListener('click', clearFields);
@@ -60,6 +51,7 @@ function clearNewStockFields() {
 }
 
 function clearInputFields() {
+  // Input
   document.getElementById("invoice").value = "";
   document.getElementById("amount").value = "";
   document.getElementById("quantity").value = "";
@@ -67,10 +59,49 @@ function clearInputFields() {
 }
 
 function clearOutputFields() {
+  // Output
   document.getElementById("out-quantity").value = "";
   document.getElementById("final-stock-out").value = "";
   document.getElementById("output-type-list").value = "";
   document.getElementById("output-description").value = "";
+}
+
+function showStockInputFields() {
+  document.getElementById('new-stock-input-fields').classList.remove('hidden');
+
+  document.getElementById("new-stock-amount").disabled = false;  
+}
+
+function hideStockInputFields() {
+  document.getElementById('new-stock-input-fields').classList.add('hidden');
+  
+  document.getElementById("new-stock-amount").disabled = true; 
+}
+
+function showStockOutputFields() {
+  document.getElementById('new-stock-output-fields').classList.remove('hidden');
+
+  document.getElementById("new-output-type-list").disabled = false;  
+}
+
+function hideStockOutputFields() {
+  document.getElementById('new-stock-output-fields').classList.add('hidden');
+  document.getElementById('new-stock-output-detail').classList.add('hidden');
+
+  document.getElementById("new-output-type-list").disabled = true;
+  document.getElementById("new-output-desc").disabled = true;
+}
+
+function showStockOutputDetail() {
+  document.getElementById('new-stock-output-detail').classList.remove('hidden');
+
+  document.getElementById("new-output-desc").disabled = false;
+}
+
+function hideStockOutputDetail() {
+  document.getElementById('new-stock-output-detail').classList.add('hidden');
+
+  document.getElementById("new-output-desc").disabled = true;
 }
 
 function hideStockFields() {
@@ -170,9 +201,6 @@ function startLoadingScreen() {
 function getCurrentStock(event) {
   startLoadingScreen();
   const itemName = event.target.value
-  console.log('value: ' + event.target.value);
-  console.log('text: ' + event.target.text);
-  console.log(event.target.text);
   document.getElementById(NEW_QUANTITY_ID).value = '';
   //Call backed function to get only one row
   if(itemName) {
@@ -240,41 +268,26 @@ function processNewStock() {
   }
 }
 
-function showStockInputFields() {
-  document.getElementById('new-stock-input-fields').classList.remove('hidden');
-}
-
-function hideStockInputFields() {
-  document.getElementById('new-stock-input-fields').classList.add('hidden');   
-}
-
-function showStockOutputFields() {
-  document.getElementById('new-stock-output-fields').classList.remove('hidden');   
-}
-
-function hideStockOutputFields() {
-  document.getElementById('new-stock-output-fields').classList.add('hidden');
-  document.getElementById('new-stock-output-detail').classList.add('hidden');
-}
-
-//  If out type
-//     Enable Detail field when outputType is 'Baja'
-function showStockOutputDetail() {
-  document.getElementById('new-stock-output-detail').classList.remove('hidden');
-}
-
-function hideStockOutputDetail() {
-  document.getElementById('new-stock-output-detail').classList.add('hidden');
-}
-
 function updateDifferenceValue(newValue) {
   document.getElementById('final-stock-new').value = newValue;
 }
 
 function processOutputType(event) { 
+  //  If out type
+  //     Enable Detail field when outputType is 'Baja'
   if(event.target.value.toUpperCase() === OUTPUT_TYPE_BAJA) {
     showStockOutputDetail();
   } else {
     hideStockOutputDetail();
   }
+}
+
+function dataValidtation(form) {
+  event.preventDefault();
+  console.log(form);
+  google.script.run.withSuccessHandler( checkResponse ).getFrontData(form);
+  
+}
+function checkResponse() {
+  console.log('response');
 }
