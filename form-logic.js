@@ -12,11 +12,14 @@ document.getElementById('output-tab').addEventListener('click', clickOnOutput);
 // New Stock events
 document.getElementById(NEW_STOCK_ID).addEventListener('change', processNewStock);
 document.getElementById(ITEM_LIST_ID).addEventListener('change', getCurrentStock );
-document.getElementById(STOCK_OUTPUT_TYPE_LIST).addEventListener('change', processOutputType);
+document.getElementById(STOCK_OUTPUT_TYPE_LIST).addEventListener('change', processStockOutputType);
 
 // Input events
+document.getElementById(QUANTITY_ID).addEventListener('change', processInQuantity);
 
 //Output events
+document.getElementById(OUT_QUANTITY_ID).addEventListener('change', processOutQuantity);
+document.getElementById(OUTPUT_TYPE_LIST).addEventListener('change', processOutputTypeList);
 
 
 function startUpForm() {
@@ -152,11 +155,41 @@ function updateDifferenceValue(newValue) {
   document.getElementById(DIFFERENCE_ID).value = newValue;
 }
 
-function processOutputType(event) {
+function processStockOutputType(event) {
   if(event.target.value.toUpperCase() === OUTPUT_TYPE_BAJA) {
     showStockOutputDetail();
   } else {
     hideStockOutputDetail();
+  }
+}
+
+function processInQuantity() {
+  const inputQuantity = document.getElementById(QUANTITY_ID).value;
+  if(inputQuantity > 0) {
+    const currStock = document.getElementById(CURRENT_STOCK_ID).value;
+    const finalStock = parseInt(currStock) + parseInt(inputQuantity);
+    document.getElementById(FINAL_STOCK_INPUT_ID).value = finalStock;
+    return;
+  }
+  document.getElementById(FINAL_STOCK_INPUT_ID).value = '';
+}
+
+function processOutQuantity() {
+  const outputQuantity = document.getElementById(OUT_QUANTITY_ID).value;
+  if(outputQuantity > 0) {
+    const currStock = document.getElementById(CURRENT_STOCK_ID).value;
+    const finalStock = parseInt(currStock) - parseInt(outputQuantity);
+    document.getElementById(FINAL_STOCK_OUT_ID).value = finalStock;
+    return;
+  }
+  document.getElementById(FINAL_STOCK_OUT_ID).value = '';
+}
+
+function processOutputTypeList(event) {
+  if(event.target.value.toUpperCase() === OUTPUT_TYPE_BAJA) {
+    showOutputDetail();
+  } else {
+    hideOutputDetail();
   }
 }
 
