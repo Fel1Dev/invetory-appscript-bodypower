@@ -24,7 +24,7 @@ document.getElementById(OUTPUT_TYPE_LIST).addEventListener('change', processOutp
 
 function startUpForm() {
   // local tests
-  // stopLoadingScreen();
+  stopLoadingScreen();
 
   initCurrDateField();
   //Initialize lists

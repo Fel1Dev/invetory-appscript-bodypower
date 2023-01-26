@@ -22,162 +22,164 @@
       </div>
     </div>
     <main class="main">
-      <form id="form-inventory" class="record-form needs-validation">
-        <div class="record-form--title">
-          <div>
-            <span>Body Power</span>
+      <article class="main--article">
+        <form id="form-inventory" class="record-form needs-validation">
+          <div class="record-form--title">
+            <div>
+              <span>Body Power</span>
+            </div>
+            <span>Inventario Diario</span>
           </div>
-          <span>Inventario Diario</span>
-        </div>
-        <ul class="record-form--fields">
-          <li>
-            <label class="common--label" for="record-date">Fecha</label>
-            <input id="record-date" class="common--input" type="date" required>
-            <input id="keep-date" type="checkbox">
-            <label class="common--label" for="keep-date">Mantener</label>
-            <div class="invalid-feedback">
-              Fecha requerida.
-            </div>
-          </li>
-          <li>
-            <label class="common--label" for="user-list">Encargado</label>
-            <input id="user-list" type="search" list="user-list-options" class="common--input" placeholder="Seleccionar..." required>
-            <datalist id="user-list-options">
-            </datalist>
-            <input id="keep-user-list" type="checkbox">
-            <label class="common--label" for="keep-user-list">Mantener</label>
-            <div class="invalid-feedback">
-              Encargado requerido.
-            </div>
-          </li>
-          <li>
-            <label class="common--label" for="item-list">Producto</label>
-            <input id="item-list" type="search" list="item-list-options" class="common--input common--input__large" placeholder="Escribe para buscar..." required>
-            <datalist id="item-list-options">              
-            </datalist>
-            <div class="invalid-feedback">
-              Producto requerido.
-            </div>
-          </li>
-          <li>
-            <label class="common--label" for="current-stock">Stock actual</label>
-            <input class="common--input" id="current-stock" type="text" disabled>
-          </li>
-          <!-- <li>
-            <label class="common--label" for="unit-list">Unidades</label>
-            <input id="unit-list" type="search" list="unit-list-options" class="common--input" placeholder="Seleccionar...">
-            <datalist id="unit-list-options">
-            </datalist>
-          </li> -->
-        </ul>
-        <!-- Tabs menu -->
-        <ul class="nav nav-tabs record-form-tabs" id="myTab" role="tablist">
-          <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="new-stock-tab" data-bs-toggle="tab" data-bs-target="#new-stock-tab-pane" type="button" role="tab" aria-controls="new-stock-tab-pane" aria-selected="true">Nuevo stock</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="input-tab" data-bs-toggle="tab" data-bs-target="#input-tab-pane" type="button" role="tab" aria-controls="input-tab-pane" aria-selected="false">Entrada</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="output-tab" data-bs-toggle="tab" data-bs-target="#output-tab-pane" type="button" role="tab" aria-controls="output-tab-pane" aria-selected="false">Salida</button>
-          </li>          
-        </ul>
-        <!-- Tabs panel  -->
-        <div class="tab-content record-form--content" id="myTabContent">
-          <div class="tab-pane fade show active" id="new-stock-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-            <div class="record-form--fields">            
-              <ul>
-                  <li>
-                      <label class="common--label" for="new-stock">Nuevo stock:</label>
-                      <input class="common--input" id="new-stock" type="number" min="0" disabled required>
-                  </li>
-                  <li>
-                      <label class="common--label" for="difference">Diferencia:</label>
-                      <input class="common--input" id="difference" type="number" disabled>
-                  </li>
-                  <div id="new-stock-input-fields" class="list--input hidden">
-                      <h4>Entrada</h4>
-                      <ul>
+          <ul class="record-form--fields">
+            <li>
+              <label class="common--label" for="record-date">Fecha</label>
+              <input id="record-date" class="common--input" type="date" required>
+              <input id="keep-date" type="checkbox">
+              <label class="common--label" for="keep-date">Mantener</label>
+              <div class="invalid-feedback">
+                Fecha requerida.
+              </div>
+            </li>
+            <li>
+              <label class="common--label" for="user-list">Encargado</label>
+              <input id="user-list" type="search" list="user-list-options" class="common--input" placeholder="Seleccionar..." required>
+              <datalist id="user-list-options">
+              </datalist>
+              <input id="keep-user-list" type="checkbox">
+              <label class="common--label" for="keep-user-list">Mantener</label>
+              <div class="invalid-feedback">
+                Encargado requerido.
+              </div>
+            </li>
+            <li>
+              <label class="common--label" for="item-list">Producto</label>
+              <input id="item-list" type="search" list="item-list-options" class="common--input common--input__large" placeholder="Escribe para buscar..." required>
+              <datalist id="item-list-options">              
+              </datalist>
+              <div class="invalid-feedback">
+                Producto requerido.
+              </div>
+            </li>
+            <li>
+              <label class="common--label" for="current-stock">Stock actual</label>
+              <input class="common--input" id="current-stock" type="text" disabled>
+            </li>
+            <!-- <li>
+              <label class="common--label" for="unit-list">Unidades</label>
+              <input id="unit-list" type="search" list="unit-list-options" class="common--input" placeholder="Seleccionar...">
+              <datalist id="unit-list-options">
+              </datalist>
+            </li> -->
+          </ul>
+          <!-- Tabs menu -->
+          <ul class="nav nav-tabs record-form-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="new-stock-tab" data-bs-toggle="tab" data-bs-target="#new-stock-tab-pane" type="button" role="tab" aria-controls="new-stock-tab-pane" aria-selected="true">Nuevo stock</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="input-tab" data-bs-toggle="tab" data-bs-target="#input-tab-pane" type="button" role="tab" aria-controls="input-tab-pane" aria-selected="false">Entrada</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="output-tab" data-bs-toggle="tab" data-bs-target="#output-tab-pane" type="button" role="tab" aria-controls="output-tab-pane" aria-selected="false">Salida</button>
+            </li>          
+          </ul>
+          <!-- Tabs panel  -->
+          <div class="tab-content record-form--content" id="myTabContent">
+            <div class="tab-pane fade show active" id="new-stock-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+              <div class="record-form--fields">            
+                <ul>
+                    <li>
+                        <label class="common--label" for="new-stock">Nuevo stock:</label>
+                        <input class="common--input" id="new-stock" type="number" min="0" disabled required>
+                    </li>
+                    <li>
+                        <label class="common--label" for="difference">Diferencia:</label>
+                        <input class="common--input" id="difference" type="number" disabled>
+                    </li>
+                    <div id="new-stock-input-fields" class="list--input hidden">
+                        <h4>Entrada</h4>
+                        <ul>
+                            <li>
+                                <label class="common--label" for="stock-invoice"># Factura</label>
+                                <input class="common--input" id="stock-invoice" type="text">
+                            </li>
+                            <li>
+                                <label class="common--label" for="stock-amount">Valor entrada</label>
+                                <input class="common--input" id="stock-amount" type="number" disabled required>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="new-stock-output-fields" class="list--output hidden">
+                        <h4>Salida</h4>
+                        <ul>
                           <li>
-                              <label class="common--label" for="stock-invoice"># Factura</label>
-                              <input class="common--input" id="stock-invoice" type="text">
+                            <label class="common--label" for="stock-output-type-list">Tipo salida</label>
+                            <input id="stock-output-type-list" type="search" list="new-output-list-options" class="common--input" placeholder="Seleccionar..." disabled required>
+                            <datalist id="new-output-list-options">
+                            </datalist>
                           </li>
-                          <li>
-                              <label class="common--label" for="stock-amount">Valor entrada</label>
-                              <input class="common--input" id="stock-amount" type="number" disabled required>
+                          <li id="new-stock-output-detail" class="output--details hidden">
+                            <label class="common--label" for="new-output-desc">Detalle</label>
+                            <textarea class="" id="new-output-desc" rows="4" disabled required></textarea>
                           </li>
-                      </ul>
-                  </div>
-                  <div id="new-stock-output-fields" class="list--output hidden">
-                      <h4>Salida</h4>
-                      <ul>
-                        <li>
-                          <label class="common--label" for="stock-output-type-list">Tipo salida</label>
-                          <input id="stock-output-type-list" type="search" list="new-output-list-options" class="common--input" placeholder="Seleccionar..." disabled required>
-                          <datalist id="new-output-list-options">
-                          </datalist>
-                        </li>
-                        <li id="new-stock-output-detail" class="output--details hidden">
-                          <label class="common--label" for="new-output-desc">Detalle</label>
-                          <textarea class="" id="new-output-desc" rows="4" disabled required></textarea>
-                        </li>
-                      </ul>
-                  </div>                
-              </ul>
+                        </ul>
+                    </div>                
+                </ul>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="input-tab-pane" role="tabpanel" aria-labelledby="Input-tab" tabindex="0">
+              <div class="record-form--fields">
+                <ul>
+                    <li>
+                        <label class="common--label" for="invoice"># Factura</label>
+                        <input class="common--input" id="invoice" type="text" disabled>
+                    </li>
+                    <li>
+                        <label class="common--label" for="amount">Valor entrada</label>
+                        <input class="common--input" id="amount" type="number" min="1" disabled required>
+                    </li>
+                    <li>
+                        <label class="common--label" for="quantity">Cantidad</label>
+                        <input class="common--input" id="quantity" type="number" min="1" disabled required>
+                    </li>
+                    <li>
+                        <label class="common--label" for="final-stock-input">Stock final</label>
+                        <input class="common--input" id="final-stock-input" type="number" disabled>
+                    </li>
+                </ul>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="output-tab-pane" role="tabpanel" aria-labelledby="Output-tab" tabindex="0">
+              <div class="record-form--fields">
+                <ul>                  
+                    <li>
+                        <label class="common--label" for="out-quantity">Cantidad</label>
+                        <input  class="common--input" id="out-quantity" min="1" type="number" disabled required>
+                    </li>                  
+                    <li>
+                        <label class="common--label"  for="final-stock-out">Stock final</label>
+                        <input class="common--input" id="final-stock-out" type="number" disabled>
+                    </li>
+                    <li>
+                      <label class="common--label" for="output-type-list">Tipo salida</label>
+                      <input id="output-type-list" type="search" list="output-list-options" class="common--input" placeholder="Seleccionar..." disabled required>
+                      <datalist id="output-list-options">
+                      </datalist>
+                    </li>
+                    <li id="output-detail" class="output--details hidden">
+                      <label class="common--label" for="output-description">Detalle</label>
+                      <textarea class="common--input" id="output-description" rows="4" disabled required></textarea>
+                    </li>
+                </ul>
+              </div>
             </div>
           </div>
-          <div class="tab-pane fade" id="input-tab-pane" role="tabpanel" aria-labelledby="Input-tab" tabindex="0">
-            <div class="record-form--fields">
-              <ul>
-                  <li>
-                      <label class="common--label" for="invoice"># Factura</label>
-                      <input class="common--input" id="invoice" type="text" disabled>
-                  </li>
-                  <li>
-                      <label class="common--label" for="amount">Valor entrada</label>
-                      <input class="common--input" id="amount" type="number" min="1" disabled required>
-                  </li>
-                  <li>
-                      <label class="common--label" for="quantity">Cantidad</label>
-                      <input class="common--input" id="quantity" type="number" min="1" disabled required>
-                  </li>
-                  <li>
-                      <label class="common--label" for="final-stock-input">Stock final</label>
-                      <input class="common--input" id="final-stock-input" type="number" disabled>
-                  </li>
-              </ul>
-            </div>
+          <div class="record-form--footer">
+            <button id="clear-fields" type="button" class="btn btn-secondary btn-lg footer--btn">Limpiar</button>
+            <button id="create-record" type="submit" class="btn btn-success btn-lg footer--btn">Crear registro</button>
           </div>
-          <div class="tab-pane fade" id="output-tab-pane" role="tabpanel" aria-labelledby="Output-tab" tabindex="0">
-            <div class="record-form--fields">
-              <ul>                  
-                  <li>
-                      <label class="common--label" for="out-quantity">Cantidad</label>
-                      <input  class="common--input" id="out-quantity" min="1" type="number" disabled required>
-                  </li>                  
-                  <li>
-                      <label class="common--label"  for="final-stock-out">Stock final</label>
-                      <input class="common--input" id="final-stock-out" type="number" disabled>
-                  </li>
-                  <li>
-                    <label class="common--label" for="output-type-list">Tipo salida</label>
-                    <input id="output-type-list" type="search" list="output-list-options" class="common--input" placeholder="Seleccionar..." disabled required>
-                    <datalist id="output-list-options">
-                    </datalist>
-                  </li>
-                  <li id="output-detail" class="output--details hidden">
-                    <label class="common--label" for="output-description">Detalle</label>
-                    <textarea class="common--input" id="output-description" rows="4" disabled required></textarea>
-                  </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="record-form--footer">
-          <button id="clear-fields" type="button" class="btn btn-secondary btn-lg">Limpiar</button>
-          <button id="create-record" type="submit" class="btn btn-success btn-lg">Crear registro</button>
-        </div>
-      </form>      
+        </form>
+      </article> 
     </main>
     <!-- bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>

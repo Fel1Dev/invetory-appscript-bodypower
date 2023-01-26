@@ -23,16 +23,27 @@ body {
     height: 100%;
     display: flex;
     justify-content: center;
+    padding-top: 50px;
+    background: #cce3d4;  /* fallback for old browsers */    
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2000' height='437'%3E%3Cpath fill='%23222f3e' fill-rule='evenodd' d='M0 349.974c218.558 116.035 460.05 116.035 1224.475 0s802.933-136.035 715.525 0V0H0v349.974z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+}
+
+.main--article {
+    background-color: white;
+    border-radius: 8px;
+    height: fit-content;
 }
 
 .record-form {
-    margin-top: 50px;
-    width: 450px;
-    height: 600px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    width: 410px;
 }
 
 .record-form--content {
     padding-top: 10px;
+    margin: 0px 2px;
     margin-bottom: 10px;
     border-left: 1px solid var(--bs-gray-300);
     border-right: 1px solid var(--bs-gray-300);
@@ -40,6 +51,7 @@ body {
 }
 
 .record-form--title {
+    text-align: center;
     margin: 20px 10px;
     font-size: 4em;
     font-weight: 600;
@@ -49,12 +61,16 @@ body {
     margin: 20px 0px;
 }
 
+.record-form--fields {
+    margin-bottom: 20px;
+}
+
 .record-form--fields li {
     margin: 10px 0px;
 }
 
 .common--label {
-    width: 100px;
+    width: 90px;
     font-size: 1.5rem;
 }
 
@@ -81,10 +97,9 @@ input[type=search]::-webkit-search-cancel-button {
 }
 
 .record-form-tabs {
+    margin: 0px 2px;
     font-size: 1.8rem;
     font-weight: 600;
-    margin-top: 20px;
-
 }
 
 .record-form--footer {
@@ -93,7 +108,7 @@ input[type=search]::-webkit-search-cancel-button {
 }
 
 .footer--btn {
-    width: 100px;
+    height: 30px;
 }
 
 .output--details {
