@@ -28,10 +28,6 @@ function doGet() {
   return output;
 }
 
-function getFrontData( event ) {
-  console.log( event );
-}
-
 function include(filename) {
   return HtmlService.createHtmlOutputFromFile(filename).getContent();
 }
@@ -66,6 +62,14 @@ function getSingleItemData(itemName) {
   let itemData = itemSheet.getRange(row, columWithStock).getValue();
 
   return itemData;
+}
+
+function getFrontData( recordType, data ) {
+  console.log('getFrontData');
+  console.log('RecordType: ' + recordType );
+  console.log('Data from interface: ' + data );
+  
+  createRow(recordType, data)
 }
 
 

@@ -26,8 +26,10 @@ const FINAL_STOCK_OUT_ID = 'final-stock-out';
 const OUTPUT_TYPE_LIST = 'output-type-list';
 const OUTPUT_DESC = 'output-description';
 
-
+/* Important values */
 const OUTPUT_TYPE_BAJA = 'BAJA';
+const ENTRADA_ROW_TYPE = 'ENTRADA';
+const SALIDA_ROW_TYPE = 'SALIDA';
 
 function clearFields() {
     let keepDate = document.getElementById("keep-date").checked;
@@ -87,23 +89,35 @@ function clearFields() {
 
     disableOutputFields();
   }
+
+  function clearStockInputFields() {
+    document.getElementById(STOCK_INVOICE_ID).value = '';
+    document.getElementById(STOCK_AMOUNT_ID).value = '';
+  }
+
+  function clearStockOutputFields() {
+    document.getElementById(STOCK_OUTPUT_TYPE_LIST).value = '';
+    document.getElementById(STOCK_OUTPUT_DESC).value = '';
+  }
   
   function showStockInputFields() {
     document.getElementById('new-stock-input-fields').classList.remove('hidden');
         
     document.getElementById(STOCK_AMOUNT_ID).disabled = false;
+    clearStockInputFields();
   }
   
   function hideStockInputFields() {
     document.getElementById('new-stock-input-fields').classList.add('hidden');
     
-    document.getElementById(STOCK_AMOUNT_ID).disabled = true;
+    document.getElementById(STOCK_AMOUNT_ID).disabled = true;    
   }
   
   function showStockOutputFields() {
     document.getElementById('new-stock-output-fields').classList.remove('hidden');
   
     document.getElementById(STOCK_OUTPUT_TYPE_LIST).disabled = false;
+    clearStockOutputFields();
   }
   
   function hideStockOutputFields() {
