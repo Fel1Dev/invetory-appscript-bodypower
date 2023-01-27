@@ -24,8 +24,8 @@ body {
     display: flex;
     justify-content: center;
     padding-top: 50px;
-    background: #cce3d4;  /* fallback for old browsers */    
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2000' height='437'%3E%3Cpath fill='%23222f3e' fill-rule='evenodd' d='M0 349.974c218.558 116.035 460.05 116.035 1224.475 0s802.933-136.035 715.525 0V0H0v349.974z'/%3E%3C/svg%3E");
+    background: #dfe4ea;  /* fallback for old browsers */    
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2000' height='437'%3E%3Cpath fill='%238DBF45' fill-rule='evenodd' d='M0 349.974c218.558 116.035 460.05 116.035 1224.475 0s802.933-136.035 715.525 0V0H0v349.974z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
 }
 
@@ -38,7 +38,6 @@ body {
 .record-form {
     margin-top: 0px;
     margin-bottom: 10px;
-    width: 410px;
 }
 
 .record-form--content {
@@ -52,9 +51,10 @@ body {
 
 .record-form--title {
     text-align: center;
-    margin: 20px 10px;
+    margin: 20px 0px;
     font-size: 4em;
     font-weight: 600;
+    border-bottom: 1px solid var(--bs-gray-400);
 }
 
 .record-form--common {
@@ -74,13 +74,23 @@ body {
     font-size: 1.5rem;
 }
 
+.common--label__small {
+    font-size: 1.5rem;
+    margin-right: 5px;
+}
+
 .common--input {
     width: 150px;
     margin: 0px 20px 0px 0px;
-    padding: 0px 5px;
+    padding-left: 5px;
+    padding-right: 2px;
     border: 1px solid var(--bs-gray-400);
     border-radius: 4px;
     font-size: 1.5rem;
+}
+
+.common--input__close {
+    margin-right: 5px;
 }
 
 input[type=search]::-webkit-search-cancel-button {
@@ -120,7 +130,7 @@ input[type=search]::-webkit-search-cancel-button {
 .output--details textarea {
     resize: none;
     width: 200px;
-    margin: 0px 20px 0px 0px;
+    margin: 0px 10px 0px 0px;
     padding: 0px 5px;
     border: 1px solid var(--bs-gray-400);
     border-radius: 4px;

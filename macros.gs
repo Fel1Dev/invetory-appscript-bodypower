@@ -24,6 +24,7 @@ const USER_CELL = "C4";
 function doGet() {
   let template = HtmlService.createTemplateFromFile('record-creator.html');
   let output = template.evaluate();
+  output.addMetaTag('viewport', 'width=device-width, initial-scale=1');
   return output;
 }
 

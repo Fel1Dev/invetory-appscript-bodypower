@@ -2,7 +2,6 @@
 <html lang="es">
   <head>
     <base target="_top">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>.:: Body Power - Inventario Diario ::.</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet" />    
     <!-- Bootstrap -->
@@ -33,20 +32,20 @@
           <ul class="record-form--fields">
             <li>
               <label class="common--label" for="record-date">Fecha</label>
-              <input id="record-date" class="common--input" type="date" required>
+              <input id="record-date" class="common--input common--input__close" type="date" required>
               <input id="keep-date" type="checkbox">
-              <label class="common--label" for="keep-date">Mantener</label>
+              <label class="common--label__small" for="keep-date">Mantener</label>
               <div class="invalid-feedback">
                 Fecha requerida.
               </div>
             </li>
             <li>
               <label class="common--label" for="user-list">Encargado</label>
-              <input id="user-list" type="search" list="user-list-options" class="common--input" placeholder="Seleccionar..." required>
+              <input id="user-list" type="search" list="user-list-options" class="common--input common--input__close" placeholder="Seleccionar..." required>
               <datalist id="user-list-options">
               </datalist>
               <input id="keep-user-list" type="checkbox">
-              <label class="common--label" for="keep-user-list">Mantener</label>
+              <label class="common--label__small" for="keep-user-list">Mantener</label>
               <div class="invalid-feedback">
                 Encargado requerido.
               </div>
@@ -175,7 +174,7 @@
             </div>
           </div>
           <div class="record-form--footer">
-            <button id="clear-fields" type="button" class="btn btn-secondary btn-lg footer--btn">Limpiar</button>
+            <button id="clear-fields" type="button" class="btn btn-danger btn-lg footer--btn">Limpiar</button>
             <button id="create-record" type="submit" class="btn btn-success btn-lg footer--btn">Crear registro</button>
           </div>
         </form>
