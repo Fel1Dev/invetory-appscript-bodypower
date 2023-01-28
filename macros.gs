@@ -52,15 +52,18 @@ function getSimpleListsData() {
 }
 
 function getSingleItemData(itemName) {
+  console.log('Search: ' + itemName);
   const columWithStock = 8;
   const SS = SpreadsheetApp.getActiveSpreadsheet();
   const itemSheet = SS.getSheetByName('Inventario');
-
-  const txtFinder = itemSheet.createTextFinder(itemName).findNext();
   
+  const txtFinder = itemSheet.createTextFinder(itemName).matchEntireCell(true).findNext();
+  console.log('found: ' + txtFinder.getValue());
   const row = txtFinder.getRow();  
+  console.log('row: ' + row);
   let itemData = itemSheet.getRange(row, columWithStock).getValue();
-
+  
+  console.log('itemData: ' + itemData);
   return itemData;
 }
 

@@ -87,6 +87,7 @@ function clearOutputFields() {
   document.getElementById(OUTPUT_DESC).value = '';
 
   disableOutputFields();
+  hideOutputDetail();
 }
 
 function clearStockInputFields() {
@@ -171,6 +172,7 @@ function enableOutputFields() {
 function disableOutputFields() {
   document.getElementById(OUT_QUANTITY_ID).disabled = true;
   document.getElementById(OUTPUT_TYPE_LIST).disabled = true;
+  document.getElementById(OUTPUT_DESC).disabled = true;
 }
 
 function hideStockFields() {
