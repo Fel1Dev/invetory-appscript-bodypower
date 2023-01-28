@@ -1,4 +1,3 @@
-
 /* Field definition */
 const RECORD_DATE_ID = 'record-date';
 const USER_LIST_ID = 'user-list';
@@ -32,189 +31,188 @@ const ENTRADA_ROW_TYPE = 'ENTRADA';
 const SALIDA_ROW_TYPE = 'SALIDA';
 
 function clearFields() {
-    let keepDate = document.getElementById("keep-date").checked;
-    let keepUserList = document.getElementById("keep-user-list").checked;
-  
-    if(!keepDate) {
-        document.getElementById(RECORD_DATE_ID).value = "";
-    }
-    if(!keepUserList) {
-        document.getElementById(USER_LIST_ID).value = "";
-    }       
-    // General fields
-    document.getElementById(ITEM_LIST_ID).value = "";
-    document.getElementById(CURRENT_STOCK_ID).value = "";
-    // document.getElementById("unit-list").value = "";
-    
-    // New Stock
-    clearNewStockFields();
-    
-    // Input
-    clearInputFields();
-    
-    // Output
-    clearOutputFields();
-  }
-  
-  function clearNewStockFields() {
-    // New Stock
-    document.getElementById(NEW_STOCK_ID).value = "";
-    document.getElementById(DIFFERENCE_ID).value = "";
-  
-    document.getElementById(STOCK_INVOICE_ID).value = "";
-    document.getElementById(STOCK_AMOUNT_ID).value = "";
-  
-    document.getElementById(STOCK_OUTPUT_TYPE_LIST).value = "";
-    document.getElementById(STOCK_OUTPUT_DESC).value = "";
-  
-    hideStockFields();
-  }
-  
-  function clearInputFields() {
-    // Input
-    document.getElementById(INVOICE_ID).value = "";
-    document.getElementById(AMOUNT_ID).value = "";
-    document.getElementById(QUANTITY_ID).value = "";
-    document.getElementById(FINAL_STOCK_INPUT_ID).value = "";
+  let keepDate = document.getElementById('keep-date').checked;
+  let keepUserList = document.getElementById('keep-user-list').checked;
 
-    disableInputFields();
+  if (!keepDate) {
+    document.getElementById(RECORD_DATE_ID).value = '';
   }
-  
-  function clearOutputFields() {
-    // Output
-    document.getElementById(OUT_QUANTITY_ID).value = "";
-    document.getElementById(FINAL_STOCK_OUT_ID).value = "";
-    document.getElementById(OUTPUT_TYPE_LIST).value = "";
-    document.getElementById(OUTPUT_DESC).value = "";
+  if (!keepUserList) {
+    document.getElementById(USER_LIST_ID).value = '';
+  }
+  // General fields
+  document.getElementById(ITEM_LIST_ID).value = '';
+  document.getElementById(CURRENT_STOCK_ID).value = '';
+  // document.getElementById("unit-list").value = "";
 
-    disableOutputFields();
-  }
+  // New Stock
+  clearNewStockFields();
 
-  function clearStockInputFields() {
-    document.getElementById(STOCK_INVOICE_ID).value = '';
-    document.getElementById(STOCK_AMOUNT_ID).value = '';
-  }
+  // Input
+  clearInputFields();
 
-  function clearStockOutputFields() {
-    document.getElementById(STOCK_OUTPUT_TYPE_LIST).value = '';
-    document.getElementById(STOCK_OUTPUT_DESC).value = '';
-  }
-  
-  function showStockInputFields() {
-    document.getElementById('new-stock-input-fields').classList.remove('hidden');
-        
-    document.getElementById(STOCK_AMOUNT_ID).disabled = false;
-    clearStockInputFields();
-  }
-  
-  function hideStockInputFields() {
-    document.getElementById('new-stock-input-fields').classList.add('hidden');
-    
-    document.getElementById(STOCK_AMOUNT_ID).disabled = true;    
-  }
-  
-  function showStockOutputFields() {
-    document.getElementById('new-stock-output-fields').classList.remove('hidden');
-  
-    document.getElementById(STOCK_OUTPUT_TYPE_LIST).disabled = false;
-    clearStockOutputFields();
-  }
-  
-  function hideStockOutputFields() {
-    document.getElementById('new-stock-output-fields').classList.add('hidden');
-    document.getElementById('new-stock-output-detail').classList.add('hidden');
-  
-    document.getElementById(STOCK_OUTPUT_TYPE_LIST).disabled = true;
-    document.getElementById(STOCK_OUTPUT_DESC).disabled = true;
-  }
-  
-  function showStockOutputDetail() {
-    document.getElementById('new-stock-output-detail').classList.remove('hidden');
-  
-    document.getElementById(STOCK_OUTPUT_DESC).disabled = false;
-  }
-  
-  function hideStockOutputDetail() {
-    document.getElementById('new-stock-output-detail').classList.add('hidden');
-  
-    document.getElementById(STOCK_OUTPUT_DESC).disabled = true;
-  }
+  // Output
+  clearOutputFields();
+}
 
-  function showOutputDetail() {
-    document.getElementById('output-detail').classList.remove('hidden');
-  
-    document.getElementById(OUTPUT_DESC).disabled = false;
-  }
-  
-  function hideOutputDetail() {
-    document.getElementById('output-detail').classList.add('hidden');
-  
-    document.getElementById(OUTPUT_DESC).disabled = true;
-  }
+function clearNewStockFields() {
+  // New Stock
+  document.getElementById(NEW_STOCK_ID).value = '';
+  document.getElementById(DIFFERENCE_ID).value = '';
 
-  function enableInputFields() {
-    document.getElementById(INVOICE_ID).disabled = false;
-    document.getElementById(AMOUNT_ID).disabled = false;
-    document.getElementById(QUANTITY_ID).disabled = false;
-  }
+  document.getElementById(STOCK_INVOICE_ID).value = '';
+  document.getElementById(STOCK_AMOUNT_ID).value = '';
 
-  function disableInputFields() {
-    document.getElementById(INVOICE_ID).disabled = true;
-    document.getElementById(AMOUNT_ID).disabled = true;
-    document.getElementById(QUANTITY_ID).disabled = true;
-  }
+  document.getElementById(STOCK_OUTPUT_TYPE_LIST).value = '';
+  document.getElementById(STOCK_OUTPUT_DESC).value = '';
 
-  function enableOutputFields() {
-    document.getElementById(OUT_QUANTITY_ID).disabled = false;
-    document.getElementById(OUTPUT_TYPE_LIST).disabled = false;
-  }
+  hideStockFields();
+}
 
-  function disableOutputFields() {
-    document.getElementById(OUT_QUANTITY_ID).disabled = true;
-    document.getElementById(OUTPUT_TYPE_LIST).disabled = true;
-  }
+function clearInputFields() {
+  // Input
+  document.getElementById(INVOICE_ID).value = '';
+  document.getElementById(AMOUNT_ID).value = '';
+  document.getElementById(QUANTITY_ID).value = '';
+  document.getElementById(FINAL_STOCK_INPUT_ID).value = '';
 
-  function hideStockFields() {
-    blockNewQuantity();
-    hideStockInputFields();
-    hideStockOutputFields();
-  }
-  
-  function clickOnInput() {
-    clearNewStockFields();
-    clearOutputFields();
-    enableInputFields();
-  }
-  
-  function clickOnOutput() {
-    clearNewStockFields();
-    clearInputFields();
-    enableOutputFields();
-  }
-  
-  function clickOnNewStock() {
-    clearOutputFields();
-    clearInputFields();
+  disableInputFields();
+}
 
-    const currStock = document.getElementById(CURRENT_STOCK_ID).value;
-    if(currStock) {
-      unBlockNewStock();
-    }
-  }
+function clearOutputFields() {
+  // Output
+  document.getElementById(OUT_QUANTITY_ID).value = '';
+  document.getElementById(FINAL_STOCK_OUT_ID).value = '';
+  document.getElementById(OUTPUT_TYPE_LIST).value = '';
+  document.getElementById(OUTPUT_DESC).value = '';
 
-  function stopLoadingScreen() {
-    document.getElementById('loading').classList.add('hide');
-  }
-  
-  function startLoadingScreen() {
-    document.getElementById('loading').classList.remove('hide');
-  }
+  disableOutputFields();
+}
 
-  function blockNewQuantity() {
-    document.getElementById(NEW_STOCK_ID).disabled = true;
+function clearStockInputFields() {
+  document.getElementById(STOCK_INVOICE_ID).value = '';
+  document.getElementById(STOCK_AMOUNT_ID).value = '';
+}
+
+function clearStockOutputFields() {
+  document.getElementById(STOCK_OUTPUT_TYPE_LIST).value = '';
+  document.getElementById(STOCK_OUTPUT_DESC).value = '';
+}
+
+function showStockInputFields() {
+  document.getElementById('new-stock-input-fields').classList.remove('hidden');
+
+  document.getElementById(STOCK_AMOUNT_ID).disabled = false;
+  clearStockInputFields();
+}
+
+function hideStockInputFields() {
+  document.getElementById('new-stock-input-fields').classList.add('hidden');
+
+  document.getElementById(STOCK_AMOUNT_ID).disabled = true;
+}
+
+function showStockOutputFields() {
+  document.getElementById('new-stock-output-fields').classList.remove('hidden');
+
+  document.getElementById(STOCK_OUTPUT_TYPE_LIST).disabled = false;
+  clearStockOutputFields();
+}
+
+function hideStockOutputFields() {
+  document.getElementById('new-stock-output-fields').classList.add('hidden');
+  document.getElementById('new-stock-output-detail').classList.add('hidden');
+
+  document.getElementById(STOCK_OUTPUT_TYPE_LIST).disabled = true;
+  document.getElementById(STOCK_OUTPUT_DESC).disabled = true;
+}
+
+function showStockOutputDetail() {
+  document.getElementById('new-stock-output-detail').classList.remove('hidden');
+
+  document.getElementById(STOCK_OUTPUT_DESC).disabled = false;
+}
+
+function hideStockOutputDetail() {
+  document.getElementById('new-stock-output-detail').classList.add('hidden');
+
+  document.getElementById(STOCK_OUTPUT_DESC).disabled = true;
+}
+
+function showOutputDetail() {
+  document.getElementById('output-detail').classList.remove('hidden');
+
+  document.getElementById(OUTPUT_DESC).disabled = false;
+}
+
+function hideOutputDetail() {
+  document.getElementById('output-detail').classList.add('hidden');
+
+  document.getElementById(OUTPUT_DESC).disabled = true;
+}
+
+function enableInputFields() {
+  document.getElementById(INVOICE_ID).disabled = false;
+  document.getElementById(AMOUNT_ID).disabled = false;
+  document.getElementById(QUANTITY_ID).disabled = false;
+}
+
+function disableInputFields() {
+  document.getElementById(INVOICE_ID).disabled = true;
+  document.getElementById(AMOUNT_ID).disabled = true;
+  document.getElementById(QUANTITY_ID).disabled = true;
+}
+
+function enableOutputFields() {
+  document.getElementById(OUT_QUANTITY_ID).disabled = false;
+  document.getElementById(OUTPUT_TYPE_LIST).disabled = false;
+}
+
+function disableOutputFields() {
+  document.getElementById(OUT_QUANTITY_ID).disabled = true;
+  document.getElementById(OUTPUT_TYPE_LIST).disabled = true;
+}
+
+function hideStockFields() {
+  blockNewQuantity();
+  hideStockInputFields();
+  hideStockOutputFields();
+}
+
+function clickOnInput() {
+  clearNewStockFields();
+  clearOutputFields();
+  enableInputFields();
+}
+
+function clickOnOutput() {
+  clearNewStockFields();
+  clearInputFields();
+  enableOutputFields();
+}
+
+function clickOnNewStock() {
+  clearOutputFields();
+  clearInputFields();
+
+  const currStock = document.getElementById(CURRENT_STOCK_ID).value;
+  if (currStock) {
+    unBlockNewStock();
   }
-  
-  function unBlockNewStock() {  
-    document.getElementById(NEW_STOCK_ID).disabled = false;
-  }
-  
+}
+
+function stopLoadingScreen() {
+  document.getElementById('loading').classList.add('hide');
+}
+
+function startLoadingScreen() {
+  document.getElementById('loading').classList.remove('hide');
+}
+
+function blockNewQuantity() {
+  document.getElementById(NEW_STOCK_ID).disabled = true;
+}
+
+function unBlockNewStock() {
+  document.getElementById(NEW_STOCK_ID).disabled = false;
+}
