@@ -36,9 +36,9 @@ function getItemsData() {
   const SS = SpreadsheetApp.getActiveSpreadsheet();
   const itemSheet = SS.getSheetByName('Inventario');
   const itemsData = itemSheet.getDataRange().getDisplayValues();
- 
+
   //Delete first 3 lines
-  itemsData.splice(0,3);
+  itemsData.splice(0, 3);
   return itemsData;
 }
 
@@ -46,8 +46,8 @@ function getSimpleListsData() {
   const SS = SpreadsheetApp.getActiveSpreadsheet();
   const itemSheet = SS.getSheetByName('DatosListas');
   const itemsData = itemSheet.getDataRange().getDisplayValues();
-  
-  itemsData.splice(0,1);
+
+  itemsData.splice(0, 1);
   return itemsData;
 }
 
