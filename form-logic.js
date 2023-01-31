@@ -9,16 +9,16 @@ document.getElementById('input-tab').addEventListener('click', clickOnInput);
 document.getElementById('output-tab').addEventListener('click', clickOnOutput);
 
 // New Stock events
-document.getElementById(NEW_STOCK_ID).addEventListener('change', processNewStock);
 document.getElementById(ITEM_LIST_ID).addEventListener('change', getCurrentStock);
-document.getElementById(STOCK_OUTPUT_TYPE_LIST).addEventListener('change', processStockOutputType);
+document.getElementById(NEW_STOCK_ID).addEventListener('input', processNewStock);
+document.getElementById(STOCK_OUTPUT_TYPE_LIST).addEventListener('input', processStockOutputType);
 
 // Input events
-document.getElementById(QUANTITY_ID).addEventListener('change', processInQuantity);
+document.getElementById(QUANTITY_ID).addEventListener('input', processInQuantity);
 
 //Output events
-document.getElementById(OUT_QUANTITY_ID).addEventListener('change', processOutQuantity);
-document.getElementById(OUTPUT_TYPE_LIST).addEventListener('change', processOutputTypeList);
+document.getElementById(OUT_QUANTITY_ID).addEventListener('input', processOutQuantity);
+document.getElementById(OUTPUT_TYPE_LIST).addEventListener('input', processOutputTypeList);
 
 function startUpForm() {
   // Only for local tests
