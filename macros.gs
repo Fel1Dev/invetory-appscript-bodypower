@@ -28,10 +28,6 @@ function doGet() {
   return output;
 }
 
-function getFrontData( event ) {
-  console.log( event );
-}
-
 function include(filename) {
   return HtmlService.createHtmlOutputFromFile(filename).getContent();
 }
@@ -40,9 +36,9 @@ function getItemsData() {
   const SS = SpreadsheetApp.getActiveSpreadsheet();
   const itemSheet = SS.getSheetByName('Inventario');
   const itemsData = itemSheet.getDataRange().getDisplayValues();
- 
+
   //Delete first 3 lines
-  itemsData.splice(0,3);
+  itemsData.splice(0, 3);
   return itemsData;
 }
 
@@ -50,22 +46,33 @@ function getSimpleListsData() {
   const SS = SpreadsheetApp.getActiveSpreadsheet();
   const itemSheet = SS.getSheetByName('DatosListas');
   const itemsData = itemSheet.getDataRange().getDisplayValues();
-  
-  itemsData.splice(0,1);
+
+  itemsData.splice(0, 1);
   return itemsData;
 }
 
 function getSingleItemData(itemName) {
+  console.log('Search: ' + itemName);
   const columWithStock = 8;
   const SS = SpreadsheetApp.getActiveSpreadsheet();
   const itemSheet = SS.getSheetByName('Inventario');
 
-  const txtFinder = itemSheet.createTextFinder(itemName).findNext();
-  
-  const row = txtFinder.getRow();  
+  const txtFinder = itemSheet.createTextFinder(itemName).matchCase(true).matchEntireCell(true).findNext();
+  console.log('found: ' + txtFinder.getValue());
+  const row = txtFinder.getRow();
+  console.log('row: ' + row);
   let itemData = itemSheet.getRange(row, columWithStock).getValue();
 
+  console.log('itemData: ' + itemData);
   return itemData;
+}
+
+function getFrontData(recordType, data) {
+  console.log('getFrontData');
+  console.log('RecordType: ' + recordType);
+  console.log('Data from interface: ' + data);
+
+  createRow(recordType, data)
 }
 
 
@@ -186,7 +193,8 @@ function getValuesByType(recordType) {
       formSheet.getRange(UNIT_CELL).getValue(),               //unit
       Math.abs(formSheet.getRange("C19").getValue()),         //amount
       formSheet.getRange(TIPO_SALIDA_CELL).getValue(),        //outType
-    ]];                                                       //desc
+      ''                                                      //desc
+    ]];                                                       
   }
 
   if (recordType === SALIDA) {
@@ -198,7 +206,8 @@ function getValuesByType(recordType) {
       itemName,  //item
       formSheet.getRange(UNIT_CELL).getValue(),  //unit
       formSheet.getRange(AMOUNT_OUTPUT_CELL).getValue(),  //amount
-      formSheet.getRange(TIPO_SALIDA_CELL).getValue(),  //outType      
+      formSheet.getRange(TIPO_SALIDA_CELL).getValue(),  //outType
+      ''                                                //Desc
     ]];
   }
 }
@@ -214,18 +223,16 @@ function createRow(recordType, values) {
   console.log('OK0');
   let destinationSheet;
   let itemColumn;
-  let columnsToInsert;
+  let columnsToInsert = 8;
   console.log('OK1');
   if (recordType === ENTRADA || recordType === ENTRADA_STOCK) {
     destinationSheet = spreadsheet.getSheetByName(INPUT_SHEET);
     itemColumn = 'E'
-    columnsToInsert = 8;
   }
   console.log('OK2');
   if (recordType === SALIDA || recordType === SALIDA_STOCK) {
     destinationSheet = spreadsheet.getSheetByName(OUTPUT_SHEET);
     itemColumn = 'D';
-    columnsToInsert = 7;
   }
   console.log('OK3');
   const lastRowWithFormula = destinationSheet.getLastRow();

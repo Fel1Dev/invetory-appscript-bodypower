@@ -1,6 +1,5 @@
-
 /* Global events */
-window.addEventListener("load", startUpForm);
+window.addEventListener('load', startUpForm);
 document.getElementById('clear-fields').addEventListener('click', clearFields);
 document.getElementById('form-inventory').addEventListener('submit', dataValidtation);
 
@@ -11,7 +10,7 @@ document.getElementById('output-tab').addEventListener('click', clickOnOutput);
 
 // New Stock events
 document.getElementById(NEW_STOCK_ID).addEventListener('change', processNewStock);
-document.getElementById(ITEM_LIST_ID).addEventListener('change', getCurrentStock );
+document.getElementById(ITEM_LIST_ID).addEventListener('change', getCurrentStock);
 document.getElementById(STOCK_OUTPUT_TYPE_LIST).addEventListener('change', processStockOutputType);
 
 // Input events
@@ -20,7 +19,6 @@ document.getElementById(QUANTITY_ID).addEventListener('change', processInQuantit
 //Output events
 document.getElementById(OUT_QUANTITY_ID).addEventListener('change', processOutQuantity);
 document.getElementById(OUTPUT_TYPE_LIST).addEventListener('change', processOutputTypeList);
-
 
 function startUpForm() {
   // Only for local tests
@@ -41,29 +39,29 @@ function initCurrDateField() {
 function getLocalDateAsValue() {
   let local = new Date();
   local.setMinutes(local.getMinutes() - local.getTimezoneOffset());
-  return local.toJSON().slice(0,10);
+  return local.toJSON().slice(0, 10);
 }
 
-function createItemsOptions( itemsData ) {
+function createItemsOptions(itemsData) {
   const itemListInput = document.getElementById('item-list-options');
-  itemsData.forEach(item => {
+  itemsData.forEach((item) => {
     const option = document.createElement('option');
     option.value = item[1];
-    option.text =  `Cantidad actual: ${item[7]} ${item[4]}`;
+    option.text = `Cantidad actual: ${item[7]} ${item[4]}`;
     itemListInput.appendChild(option);
   });
 }
 
 function loadItemsData() {
-  google.script.run.withSuccessHandler( createItemsOptions ).getItemsData();
+  google.script.run.withSuccessHandler(createItemsOptions).getItemsData();
 }
 
-function createSimpleListsOptions( allListsData ) {
+function createSimpleListsOptions(allListsData) {
   const usersListInput = document.getElementById('user-list-options');
   // const unitsListInput = document.getElementById('unit-list-options');
   const newOutTypesListInput = document.getElementById('new-output-list-options');
   const outOutTypesListInput = document.getElementById('output-list-options');
-  allListsData.forEach(dataRow => {
+  allListsData.forEach((dataRow) => {
     // createListOption(unitsListInput, dataRow[0]);
     createListOption(usersListInput, dataRow[1]);
     createListOption(newOutTypesListInput, dataRow[3]);
@@ -73,7 +71,7 @@ function createSimpleListsOptions( allListsData ) {
 }
 
 function createListOption(inputElement, value) {
-  if(value) {
+  if (value) {
     const option = document.createElement('option');
     option.value = value;
     inputElement.appendChild(option);
@@ -81,38 +79,40 @@ function createListOption(inputElement, value) {
 }
 
 function loadSimpleListsData() {
-  google.script.run.withSuccessHandler( createSimpleListsOptions ).getSimpleListsData();
+  google.script.run.withSuccessHandler(createSimpleListsOptions).getSimpleListsData();
 }
 
 function createRecord() {
   //read fields
   console.log('create record');
-    
 }
 
 function getCurrentStock(event) {
   startLoadingScreen();
-  const itemName = event.target.value
+  const itemName = event.target.value;
   document.getElementById(NEW_STOCK_ID).value = '';
   //Call backed function to get only one row
-  if(itemName) {
-    searchItemData(itemName)
-  } else {
-    updateCurrentStock('');
-    blockNewQuantity();
-    hideStockInputFields();
-    hideStockOutputFields();
+  if (itemName) {
+    searchItemData(itemName);
+    return;
   }
+  updateCurrentStock('');
+  blockNewQuantity();
+  hideStockInputFields();
+  hideStockOutputFields();
 }
 
-function searchItemData( name ) {
-  google.script.run.withSuccessHandler( processItemData ).withFailureHandler( processEmptyItemData ).getSingleItemData(name);
+function searchItemData(name) {
+  google.script.run
+    .withSuccessHandler(processItemData)
+    .withFailureHandler(processEmptyItemData)
+    .getSingleItemData(name);
 }
 
-function processItemData( itemData ) {
-  if(itemData){
+function processItemData(itemData) {
+  if (itemData) {
     unBlockNewStock();
-    updateCurrentStock(parseInt(itemData));  
+    updateCurrentStock(parseInt(itemData));
   }
 }
 
@@ -135,20 +135,20 @@ function getCurrentStockValue() {
 
 function processNewStock() {
   let newStock = getNewStock();
-  if(newStock) {
+  if (newStock) {
     let currentStock = getCurrentStockValue();
     let difference = newStock - currentStock;
     updateDifferenceValue(difference);
     //TODO
     //  Check difference
     //  Enable Input or Output fields according difference value
-    if(difference > 0) {
+    if (difference > 0) {
       showStockInputFields();
       hideStockOutputFields();
-    } else {
-      showStockOutputFields();
-      hideStockInputFields();
+      return;
     }
+    showStockOutputFields();
+    hideStockInputFields();
   }
 }
 
@@ -157,16 +157,16 @@ function updateDifferenceValue(newValue) {
 }
 
 function processStockOutputType(event) {
-  if(event.target.value.toUpperCase() === OUTPUT_TYPE_BAJA) {
+  if (event.target.value.toUpperCase() === OUTPUT_TYPE_BAJA) {
     showStockOutputDetail();
-  } else {
-    hideStockOutputDetail();
+    return;
   }
+  hideStockOutputDetail();
 }
 
 function processInQuantity() {
   const inputQuantity = document.getElementById(QUANTITY_ID).value;
-  if(inputQuantity > 0) {
+  if (inputQuantity > 0) {
     const currStock = document.getElementById(CURRENT_STOCK_ID).value;
     const finalStock = parseInt(currStock) + parseInt(inputQuantity);
     document.getElementById(FINAL_STOCK_INPUT_ID).value = finalStock;
@@ -177,7 +177,7 @@ function processInQuantity() {
 
 function processOutQuantity() {
   const outputQuantity = document.getElementById(OUT_QUANTITY_ID).value;
-  if(outputQuantity > 0) {
+  if (outputQuantity > 0) {
     const currStock = document.getElementById(CURRENT_STOCK_ID).value;
     const finalStock = parseInt(currStock) - parseInt(outputQuantity);
     document.getElementById(FINAL_STOCK_OUT_ID).value = finalStock;
@@ -187,20 +187,10 @@ function processOutQuantity() {
 }
 
 function processOutputTypeList(event) {
-  if(event.target.value.toUpperCase() === OUTPUT_TYPE_BAJA) {
+  if (event.target.value.toUpperCase() === OUTPUT_TYPE_BAJA) {
     showOutputDetail();
-  } else {
-    hideOutputDetail();
+    return;
   }
+  hideOutputDetail();
 }
 
-function dataValidtation(event) {
-  event.preventDefault();
-  
-  const data = {};
-  google.script.run.withSuccessHandler( checkResponse ).getFrontData(data);
-  
-}
-function checkResponse() {
-  console.log('response');
-}
