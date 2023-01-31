@@ -58,11 +58,9 @@ function loadItemsData() {
 
 function createSimpleListsOptions(allListsData) {
   const usersListInput = document.getElementById('user-list-options');
-  // const unitsListInput = document.getElementById('unit-list-options');
   const newOutTypesListInput = document.getElementById('new-output-list-options');
   const outOutTypesListInput = document.getElementById('output-list-options');
   allListsData.forEach((dataRow) => {
-    // createListOption(unitsListInput, dataRow[0]);
     createListOption(usersListInput, dataRow[1]);
     createListOption(newOutTypesListInput, dataRow[3]);
     createListOption(outOutTypesListInput, dataRow[3]);
