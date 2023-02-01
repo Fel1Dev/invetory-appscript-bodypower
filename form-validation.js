@@ -9,25 +9,21 @@ function dataValidtation(event) {
   const outputQuantity = document.getElementById(OUT_QUANTITY_ID).value;
 
   if (inputQuantity) {
-    console.log('----------input');
     recordType = ENTRADA_ROW_TYPE;
     formData = getFormDataAsInput();
   }
 
   if (outputQuantity) {
-    console.log('----------output');
     recordType = SALIDA_ROW_TYPE;
     formData = getFormDataAsOutput();
   }
 
   if (stockDifference > 0) {
-    console.log('----------Stock input');
     recordType = ENTRADA_ROW_TYPE;
     formData = getFormDataAsStockInput();
   }
 
   if (0 > stockDifference) {
-    console.log('----------Stock output');
     recordType = SALIDA_ROW_TYPE;
     formData = getFormDataAsStockOutput();
   }
@@ -40,10 +36,8 @@ function dataValidtation(event) {
 }
 
 function getFormDataAsInput() {
-  const userName = document.getElementById(USER_LIST_ID).value;
+  const { userName, recordDate, productName } = getCommonFields();
   const invoice = document.getElementById(INVOICE_ID).value;
-  const recordDate = document.getElementById(RECORD_DATE_ID).value;
-  const productName = document.getElementById(ITEM_LIST_ID).value;
   const inputQuantity = document.getElementById(QUANTITY_ID).value;
   const amount = document.getElementById(AMOUNT_ID).value;
 
@@ -51,9 +45,7 @@ function getFormDataAsInput() {
 }
 
 function getFormDataAsOutput() {
-  const userName = document.getElementById(USER_LIST_ID).value;
-  const recordDate = document.getElementById(RECORD_DATE_ID).value;
-  const productName = document.getElementById(ITEM_LIST_ID).value;
+  const { userName, recordDate, productName } = getCommonFields();
   const outputQuantity = document.getElementById(OUT_QUANTITY_ID).value;
   const outType = document.getElementById(OUTPUT_TYPE_LIST).value;
   const outDesc = document.getElementById(OUTPUT_DESC).value;
@@ -62,10 +54,8 @@ function getFormDataAsOutput() {
 }
 
 function getFormDataAsStockInput() {
-  const userName = document.getElementById(USER_LIST_ID).value;
+  const { userName, recordDate, productName } = getCommonFields();
   const invoice = document.getElementById(STOCK_INVOICE_ID).value;
-  const recordDate = document.getElementById(RECORD_DATE_ID).value;
-  const productName = document.getElementById(ITEM_LIST_ID).value;
   const inputQuantity = document.getElementById(DIFFERENCE_ID).value;
   const amount = document.getElementById(STOCK_AMOUNT_ID).value;
 
@@ -73,15 +63,35 @@ function getFormDataAsStockInput() {
 }
 
 function getFormDataAsStockOutput() {
-  const userName = document.getElementById(USER_LIST_ID).value;
-  const recordDate = document.getElementById(RECORD_DATE_ID).value;
-  const productName = document.getElementById(ITEM_LIST_ID).value;
+  const { userName, recordDate, productName } = getCommonFields();
   const outputQuantity = document.getElementById(DIFFERENCE_ID).value * -1;
   const outType = document.getElementById(STOCK_OUTPUT_TYPE_LIST).value;
   const outDesc = document.getElementById(STOCK_OUTPUT_DESC).value;
 
   return ['', userName, recordDate, productName, '', outputQuantity, outType, outDesc];
 }
+
+const getCommonFields = () => {
+  return {
+    userName: document.getElementById(USER_LIST_ID).value,
+    recordDate: formatDate(document.getElementById(RECORD_DATE_ID).value),
+    productName: document.getElementById(ITEM_LIST_ID).value,
+  };
+};
+
+const padTo2Digits = (num) => {
+  return num.toString().padStart(2, '0');
+};
+
+const formatDate = (dateText) => {
+  const recordDate = new Date(dateText);
+  if (recordDate)
+    return [
+      padTo2Digits(recordDate.getDate()),
+      padTo2Digits(recordDate.getMonth() + 1),
+      recordDate.getFullYear(),
+    ].join('/');
+};
 
 function successResponse() {
   console.log('Success response');
