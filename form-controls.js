@@ -46,16 +46,23 @@ function clearFields() {
   // General fields
   document.getElementById(ITEM_LIST_ID).value = '';
   document.getElementById(CURRENT_STOCK_ID).value = '';
-  // document.getElementById("unit-list").value = "";
 
   // New Stock
-  clearNewStockFields();
+  if (isTabActive(NEW_STOCK_TAB_ID)) {
+    clearNewStockFields();
+  }
 
   // Input
-  clearInputFields();
+  if (isTabActive(INPUT_TAB_ID)) {
+    clearInputFields();
+    disableInputFields();
+  }
 
   // Output
-  clearOutputFields();
+  if (isTabActive(OUTPUT_TAB_ID)) {
+    clearOutputFields();
+    disableOutputFields();
+  }
 }
 
 function clearNewStockFields() {
@@ -158,6 +165,18 @@ function enableInputFields() {
   document.getElementById(QUANTITY_ID).disabled = false;
 }
 
+function enableInputFieldsIfActive() {
+  if (isTabActive(INPUT_TAB_ID)) {
+    enableInputFields();
+  }
+}
+
+function enableInputFieldsIfItem() {
+  if (getCurrentStockValue()) {
+    enableInputFields();
+  }
+}
+
 function disableInputFields() {
   document.getElementById(INVOICE_ID).disabled = true;
   document.getElementById(AMOUNT_ID).disabled = true;
@@ -167,6 +186,18 @@ function disableInputFields() {
 function enableOutputFields() {
   document.getElementById(OUT_QUANTITY_ID).disabled = false;
   document.getElementById(OUTPUT_TYPE_LIST).disabled = false;
+}
+
+function enableOutputFieldsIfActive() {
+  if (isTabActive(OUTPUT_TAB_ID)) {
+    enableOutputFields();
+  }
+}
+
+function enableOutputFieldsIfItem() {
+  if (getCurrentStockValue()) {
+    enableOutputFields();
+  }
 }
 
 function disableOutputFields() {
