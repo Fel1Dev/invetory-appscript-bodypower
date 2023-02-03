@@ -233,7 +233,11 @@ function clickOnOutput() {
 
 function clickOnNewStock() {
   clearOutputFields();
+  hideOutputDetail();
+  disableOutputFields();
+
   clearInputFields();
+  disableInputFields();
 
   unlockNewStockIfItem();
 }
