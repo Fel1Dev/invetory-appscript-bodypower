@@ -5,6 +5,7 @@ const ITEM_LIST_ID = 'item-list';
 const CURRENT_STOCK_ID = 'current-stock';
 
 /* New Stock tab */
+const NEW_STOCK_TAB_ID = 'new-stock-tab';
 const NEW_STOCK_ID = 'new-stock';
 const DIFFERENCE_ID = 'difference';
 const STOCK_INVOICE_ID = 'stock-invoice';
@@ -14,12 +15,14 @@ const STOCK_OUTPUT_TYPE_LIST = 'stock-output-type-list';
 const STOCK_OUTPUT_DESC = 'new-output-desc';
 
 /* Input Tab */
+const INPUT_TAB_ID = 'input-tab';
 const INVOICE_ID = 'invoice';
 const AMOUNT_ID = 'amount';
 const QUANTITY_ID = 'quantity';
 const FINAL_STOCK_INPUT_ID = 'final-stock-input';
 
 /* Output Tab */
+const OUTPUT_TAB_ID = 'output-tab';
 const OUT_QUANTITY_ID = 'out-quantity';
 const FINAL_STOCK_OUT_ID = 'final-stock-out';
 const OUTPUT_TYPE_LIST = 'output-type-list';
@@ -75,8 +78,6 @@ function clearInputFields() {
   document.getElementById(AMOUNT_ID).value = '';
   document.getElementById(QUANTITY_ID).value = '';
   document.getElementById(FINAL_STOCK_INPUT_ID).value = '';
-
-  disableInputFields();
 }
 
 function clearOutputFields() {
@@ -86,7 +87,6 @@ function clearOutputFields() {
   document.getElementById(OUTPUT_TYPE_LIST).value = '';
   document.getElementById(OUTPUT_DESC).value = '';
 
-  disableOutputFields();
   hideOutputDetail();
 }
 
@@ -176,31 +176,35 @@ function disableOutputFields() {
 }
 
 function hideStockFields() {
-  blockNewQuantity();
+  lockNewStock();
   hideStockInputFields();
   hideStockOutputFields();
 }
 
 function clickOnInput() {
   clearNewStockFields();
+
   clearOutputFields();
-  enableInputFields();
+  disableOutputFields();
+  hideOutputDetail();
+
+  enableInputFieldsIfItem();
 }
 
 function clickOnOutput() {
   clearNewStockFields();
+
   clearInputFields();
-  enableOutputFields();
+  disableInputFields();
+
+  enableOutputFieldsIfItem();
 }
 
 function clickOnNewStock() {
   clearOutputFields();
   clearInputFields();
 
-  const currStock = document.getElementById(CURRENT_STOCK_ID).value;
-  if (currStock) {
-    unBlockNewStock();
-  }
+  unlockNewStockIfItem();
 }
 
 function stopLoadingScreen() {
@@ -211,10 +215,27 @@ function startLoadingScreen() {
   document.getElementById('loading').classList.remove('hide');
 }
 
-function blockNewQuantity() {
+function lockNewStock() {
   document.getElementById(NEW_STOCK_ID).disabled = true;
 }
 
-function unBlockNewStock() {
+function unlockNewStockField() {
   document.getElementById(NEW_STOCK_ID).disabled = false;
 }
+
+function unlockNewStockIfItem() {
+  if (getCurrentStockValue()) {
+    unlockNewStockField();
+  }
+}
+
+function unlockNewStockIfActive() {
+  if (isTabActive(NEW_STOCK_TAB_ID)) {
+    unlockNewStockField();
+  }
+}
+
+const isTabActive = (tabId) => {
+  const tab = document.getElementById(tabId);
+  return tab.classList.contains('active');
+};
