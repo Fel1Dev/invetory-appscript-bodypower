@@ -4,9 +4,9 @@ document.getElementById('clear-fields').addEventListener('click', clearFields);
 document.getElementById('form-inventory').addEventListener('submit', dataValidtation);
 
 // Tab Panel events
-document.getElementById('new-stock-tab').addEventListener('click', clickOnNewStock);
-document.getElementById('input-tab').addEventListener('click', clickOnInput);
-document.getElementById('output-tab').addEventListener('click', clickOnOutput);
+document.getElementById(NEW_STOCK_TAB_ID).addEventListener('click', clickOnNewStock);
+document.getElementById(INPUT_TAB_ID).addEventListener('click', clickOnInput);
+document.getElementById(OUTPUT_TAB_ID).addEventListener('click', clickOnOutput);
 
 // New Stock events
 document.getElementById(ITEM_LIST_ID).addEventListener('change', getCurrentStock);
@@ -88,16 +88,21 @@ function createRecord() {
 function getCurrentStock(event) {
   startLoadingScreen();
   const itemName = event.target.value;
-  document.getElementById(NEW_STOCK_ID).value = '';
+  setNewStock('');
   //Call backed function to get only one row
   if (itemName) {
     searchItemData(itemName);
     return;
   }
   updateCurrentStock('');
-  blockNewQuantity();
+  lockNewStock();
   hideStockInputFields();
   hideStockOutputFields();
+
+  disableInputFields();
+  disableOutputFields();
+
+  stopLoadingScreen();
 }
 
 function searchItemData(name) {
@@ -109,22 +114,34 @@ function searchItemData(name) {
 
 function processItemData(itemData) {
   if (itemData) {
-    unBlockNewStock();
     updateCurrentStock(parseInt(itemData));
+    unlockNewStockIfActive();
+    enableInputFieldsIfActive();
+    enableOutputFieldsIfActive();
+    stopLoadingScreen();
   }
 }
 
 function processEmptyItemData() {
   updateCurrentStock('');
+  lockNewStock();
+  hideStockInputFields();
+  hideStockOutputFields();
+
+  disableInputFields();
+  disableOutputFields();
 }
 
 function updateCurrentStock(value) {
   document.getElementById(CURRENT_STOCK_ID).value = value;
-  stopLoadingScreen();
 }
 
 function getNewStock() {
   return document.getElementById(NEW_STOCK_ID).value;
+}
+
+function setNewStock(val) {
+  document.getElementById(NEW_STOCK_ID).value = val;
 }
 
 function getCurrentStockValue() {
@@ -137,9 +154,7 @@ function processNewStock() {
     let currentStock = getCurrentStockValue();
     let difference = newStock - currentStock;
     updateDifferenceValue(difference);
-    //TODO
-    //  Check difference
-    //  Enable Input or Output fields according difference value
+
     if (difference > 0) {
       showStockInputFields();
       hideStockOutputFields();
@@ -191,4 +206,3 @@ function processOutputTypeList(event) {
   }
   hideOutputDetail();
 }
-
