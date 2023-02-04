@@ -22,7 +22,7 @@ const INVOICE_NUM_CELL = "F11"
 const USER_CELL = "C4";
 
 function doGet() {
-  let template = HtmlService.createTemplateFromFile('record-creator.html');
+  let template = HtmlService.createTemplateFromFile('record-creator');
   let output = template.evaluate();
   output.addMetaTag('viewport', 'width=device-width, initial-scale=1');
   return output;
@@ -233,6 +233,7 @@ function createRow(recordType, values) {
   if (recordType === SALIDA || recordType === SALIDA_STOCK) {
     destinationSheet = spreadsheet.getSheetByName(OUTPUT_SHEET);
     itemColumn = 'D';
+
   }
   console.log('OK3');
   const lastRowWithFormula = destinationSheet.getLastRow();
