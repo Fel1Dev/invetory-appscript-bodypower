@@ -96,7 +96,7 @@ const formatDate = (dateText) => {
 function successResponse() {
   console.log('Success response');
   clearFields();
-  stopLoadingScreen();
+  loadItemsDataStopLoader();
 }
 
 function failResponse(event) {

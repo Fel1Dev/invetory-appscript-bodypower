@@ -21,9 +21,7 @@ document.getElementById(OUT_QUANTITY_ID).addEventListener('input', processOutQua
 document.getElementById(OUTPUT_TYPE_LIST).addEventListener('input', processOutputTypeList);
 
 function startUpForm() {
-  // Only for local tests
-  //stopLoadingScreen();
-  // Only for local tests
+  startLoadingScreen();
 
   initCurrDateField();
   //Initialize lists
@@ -42,8 +40,14 @@ function getLocalDateAsValue() {
   return local.toJSON().slice(0, 10);
 }
 
+function createItemsOptionsStopLoader(itemsData) {
+  createItemsOptions(itemsData);
+  stopLoadingScreen();
+}
+
 function createItemsOptions(itemsData) {
   const itemListInput = document.getElementById('item-list-options');
+  itemListInput.textContent = '';
   itemsData.forEach((item) => {
     const option = document.createElement('option');
     option.value = item[1];
@@ -54,6 +58,10 @@ function createItemsOptions(itemsData) {
 
 function loadItemsData() {
   google.script.run.withSuccessHandler(createItemsOptions).getItemsData();
+}
+
+function loadItemsDataStopLoader() {
+  google.script.run.withSuccessHandler(createItemsOptionsStopLoader).getItemsData();
 }
 
 function createSimpleListsOptions(allListsData) {
@@ -130,6 +138,8 @@ function processEmptyItemData() {
 
   disableInputFields();
   disableOutputFields();
+
+  stopLoadingScreen();
 }
 
 function updateCurrentStock(value) {
