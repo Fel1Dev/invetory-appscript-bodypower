@@ -93,8 +93,6 @@ function clearOutputFields() {
   document.getElementById(FINAL_STOCK_OUT_ID).value = '';
   document.getElementById(OUTPUT_TYPE_LIST).value = '';
   document.getElementById(OUTPUT_DESC).value = '';
-
-  hideOutputDetail();
 }
 
 function clearStockInputFields() {
