@@ -1,0 +1,28 @@
+{
+  "name": "bodypower-appscript",
+  "version": "1.0.0",
+  "description": "Vanilla Javascript app to manage inventory of a point of sale. It will be deployed as Google AppScript web application.",
+  "main": "/src/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fel1Dev/invetory-appscript-bodypower.git"
+  },
+  "keywords": [
+    "Inventory",
+    "POS",
+    "Google",
+    "AppScript",
+    "Jest",
+    "Vanilla",
+    "Javascript"
+  ],
+  "author": "Andres Torres",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fel1Dev/invetory-appscript-bodypower/issues"
+  },
+  "homepage": "https://github.com/Fel1Dev/invetory-appscript-bodypower#readme"
+}
