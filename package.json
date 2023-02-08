@@ -4,7 +4,7 @@
   "description": "Vanilla Javascript app to manage inventory of a point of sale. It will be deployed as Google AppScript web application.",
   "main": "/src/index.html",
   "scripts": {
-    "test": "jest --watch",
+    "test": "jest",
     "coverage": "jest --coverage"
   },
   "repository": {

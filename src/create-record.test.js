@@ -1,32 +1,42 @@
-const { fireEvent, getByText } = require('@testing-library/dom');
-const jsdom = require('jsdom');
-const { JSDOM } = jsdom;
-const fs = require('fs');
-const path = require('path');
-// import { fireEvent, getByText } from '@testing-library/dom';
-// import '@testing-library/jest-dom/extend-expect';
-// import { JSDOM } from 'jsdom';
-// import fs from 'fs';
-// import path from 'path';
+import {
+  fireEvent,
+  getByLabelText,
+  getByText,
+  getByTestId,
+  queryByTestId,
+} from '@testing-library/dom';
+import { JSDOM } from 'jsdom';
 
-const html = fs.readFileSync(path.resolve(__dirname, './create-record.test.js'), 'utf8');
+describe('record-creator.html', () => {
+  it('no renders a loading animation', async () => {
+    let { document } = await load('./src/record-creator.html');
 
-let dom;
-let container;
-
-describe('index.html', () => {
-  beforeEach(() => {
-    // Constructing a new JSDOM with this option is the key
-    // to getting the code in the script tag to execute.
-    // This is indeed dangerous and should only be done with trusted content.
-    // https://github.com/jsdom/jsdom#executing-scripts
-    dom = new JSDOM(html, { runScripts: 'dangerously' });
-    container = dom.window.document.body;
+    const loadingElement = document.getElementById('loading');
+    expect(loadingElement).not.toBeNull();
+    expect(loadingElement.classList.contains('hide')).toBeTruthy();
   });
 
-  it('renders a heading element', () => {
-    // const titleContainer = container.getElementsByClassName('record-form--title');
-    expect(container.getElementsByClassName('record-form--title')).not.toBeNull();
-    // expect(titleContainer.querySelector('span')).toBeInTheDocument();
+  test('renders current date when the page load', async () => {
+    let { document } = await load('./src/record-creator.html');
+    const dateField = document.getElementById('record-date');
+
+    console.log(document.getElementById('record-date').value);
+    expect(dateField.value.length).toBeGreaterThan(0);
   });
+
+  async function load(file) {
+    let dom = await JSDOM.fromFile(file, {
+      runScripts: 'dangerously',
+      resources: 'usable',
+      url: `file://${__dirname}/record-creator.html`,
+    });
+    return new Promise((resolve) => {
+      dom.window.addEventListener('load', () => {
+        resolve({
+          window: dom.window,
+          document: dom.window.document,
+        });
+      });
+    });
+  }
 });
