@@ -50,6 +50,7 @@ function clearFields() {
   // New Stock
   if (isTabActive(NEW_STOCK_TAB_ID)) {
     clearNewStockFields();
+    hideStockFields();
   }
 
   // Input
@@ -75,8 +76,6 @@ function clearNewStockFields() {
 
   document.getElementById(STOCK_OUTPUT_TYPE_LIST).value = '';
   document.getElementById(STOCK_OUTPUT_DESC).value = '';
-
-  hideStockFields();
 }
 
 function clearInputFields() {
@@ -212,6 +211,7 @@ function hideStockFields() {
 
 function clickOnInput() {
   clearNewStockFields();
+  hideStockFields();
 
   clearOutputFields();
   disableOutputFields();
@@ -222,6 +222,7 @@ function clickOnInput() {
 
 function clickOnOutput() {
   clearNewStockFields();
+  hideStockFields();
 
   clearInputFields();
   disableInputFields();

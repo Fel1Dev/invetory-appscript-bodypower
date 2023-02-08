@@ -1,7 +1,7 @@
 /* Global events */
 window.addEventListener('load', startUpForm);
 document.getElementById('clear-fields').addEventListener('click', clearFields);
-document.getElementById('form-inventory').addEventListener('submit', dataValidtation);
+document.getElementById('form-inventory').addEventListener('submit', dataValidation);
 
 // Tab Panel events
 document.getElementById(NEW_STOCK_TAB_ID).addEventListener('click', clickOnNewStock);
@@ -57,11 +57,19 @@ function createItemsOptions(itemsData) {
 }
 
 function loadItemsData() {
-  google.script.run.withSuccessHandler(createItemsOptions).getItemsData();
+  if ('undefined' !== typeof google) {
+    google.script.run.withSuccessHandler(createItemsOptions).getItemsData();
+    return;
+  }
+  stopLoadingScreen();
 }
 
-function loadItemsDataStopLoader() {
-  google.script.run.withSuccessHandler(createItemsOptionsStopLoader).getItemsData();
+function loadItemsDataWithStopLoader() {
+  if ('undefined' !== typeof google) {
+    google.script.run.withSuccessHandler(createItemsOptionsStopLoader).getItemsData();
+    return;
+  }
+  stopLoadingScreen();
 }
 
 function createSimpleListsOptions(allListsData) {
@@ -85,7 +93,8 @@ function createListOption(inputElement, value) {
 }
 
 function loadSimpleListsData() {
-  google.script.run.withSuccessHandler(createSimpleListsOptions).getSimpleListsData();
+  if ('undefined' !== typeof google)
+    google.script.run.withSuccessHandler(createSimpleListsOptions).getSimpleListsData();
 }
 
 function createRecord() {
@@ -114,10 +123,19 @@ function getCurrentStock(event) {
 }
 
 function searchItemData(name) {
-  google.script.run
-    .withSuccessHandler(processItemData)
-    .withFailureHandler(processEmptyItemData)
-    .getSingleItemData(name);
+  if ('undefined' !== typeof google) {
+    google.script.run
+      .withSuccessHandler(processItemData)
+      .withFailureHandler(processEmptyItemData)
+      .getSingleItemData(name);
+    return;
+  }
+
+  updateCurrentStock(10);
+  unlockNewStockIfActive();
+  enableInputFieldsIfActive();
+  enableOutputFieldsIfActive();
+  stopLoadingScreen();
 }
 
 function processItemData(itemData) {

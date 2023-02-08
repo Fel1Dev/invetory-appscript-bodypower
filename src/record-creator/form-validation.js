@@ -1,4 +1,4 @@
-function dataValidtation(event) {
+function dataValidation(event) {
   event.preventDefault();
   startLoadingScreen();
   let recordType = '';
@@ -27,12 +27,21 @@ function dataValidtation(event) {
     recordType = SALIDA_ROW_TYPE;
     formData = getFormDataAsStockOutput();
   }
+
   console.log('recordType: ' + recordType);
   console.table(formData);
-  google.script.run
-    .withSuccessHandler(successResponse)
-    .withFailureHandler(failResponse)
-    .getFrontData(recordType, [formData]);
+
+  if ('undefined' !== typeof google) {
+    google.script.run
+      .withSuccessHandler(successResponse)
+      .withFailureHandler(failResponse)
+      .getFrontData(recordType, [formData]);
+    return;
+  }
+
+  console.log('Success response');
+  clearFields();
+  stopLoadingScreen();
 }
 
 function getFormDataAsInput() {
@@ -96,7 +105,7 @@ const formatDate = (dateText) => {
 function successResponse() {
   console.log('Success response');
   clearFields();
-  loadItemsDataStopLoader();
+  loadItemsDataWithStopLoader();
 }
 
 function failResponse(event) {
