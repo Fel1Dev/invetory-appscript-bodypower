@@ -27,6 +27,37 @@ describe('record-creator.html', () => {
     });
   }
 
+  function getStockFields() {
+    return {
+      newStock: document.getElementById('new-stock'),
+      differenceField: document.getElementById('difference'),
+      outputFields: document.getElementById('new-stock-output-fields'),
+      sotckOutType: document.getElementById('stock-output-type-list'),
+      stockOutputDesc: document.getElementById('new-output-desc'),
+      stockInvoice: document.getElementById('stock-invoice'),
+      stockAmount: document.getElementById('stock-amount'),
+    };
+  }
+
+  function getInputFields() {
+    return {
+      invoice: document.getElementById('invoice'),
+      amount: document.getElementById('amount'),
+      quantity: document.getElementById('quantity'),
+      finalStockInput: document.getElementById('final-stock-input'),
+    };
+  }
+
+  function getOutputFields() {
+    return {
+      outQuantity: document.getElementById('out-quantity'),
+      finalStockOut: document.getElementById('final-stock-out'),
+      quantity: document.getElementById('quantity'),
+      outputTypeList: document.getElementById('output-type-list'),
+      outputDescription: document.getElementById('output-description'),
+    };
+  }
+
   it('no renders a loading animation', async () => {
     let { document } = await load(testPath);
 
