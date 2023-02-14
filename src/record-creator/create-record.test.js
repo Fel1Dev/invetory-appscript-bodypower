@@ -8,7 +8,7 @@ import {
 import '@testing-library/jest-dom';
 import { JSDOM } from 'jsdom';
 
-const testPath = './src/record-creator/record-creator.html';
+const testPath = './src/record-creator/inventory-form-page.html';
 
 describe('Record Creator UI', () => {
   async function load(file) {

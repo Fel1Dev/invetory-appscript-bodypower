@@ -25,9 +25,12 @@ body {
   flex-direction: column;
 }
 
-nav a {
-  text-decoration: none;
+.navbar-link {
   color: var(--brand-color);
+}
+
+.navbar-link:hover {
+  cursor: pointer;
 }
 
 nav li {
@@ -68,6 +71,7 @@ nav li {
   margin: 0;
   padding: 0;
 }
+
 .main {
   width: 100%;
   height: 100%;

@@ -1,31 +1,37 @@
-const ENTRADA_STOCK = "ENTRADA_STOCK";
-const SALIDA_STOCK = "SALIDA_STOCK";
-const ENTRADA = "ENTRADA";
-const SALIDA = "SALIDA";
+const ENTRADA_STOCK = 'ENTRADA_STOCK';
+const SALIDA_STOCK = 'SALIDA_STOCK';
+const ENTRADA = 'ENTRADA';
+const SALIDA = 'SALIDA';
 
 const INPUT_SHEET = 'Entradas';
 const OUTPUT_SHEET = 'Salidas';
 
-const INVENTORY_SHEET = "Inventario";
-const CREATE_SHEET = "Crear registro";
+const INVENTORY_SHEET = 'Inventario';
+const CREATE_SHEET = 'Crear registro';
 
-const DATE_CELL = "C6";
-const NAME_CELL = "C8"
-const TOTAL_CELL = "F13";
-const UNIT_CELL = "C10";
-const TIPO_SALIDA_CELL = "I13";
-const AMOUNT_INPUT_CELL = "C17";
-const AMOUNT_OUTPUT_CELL = "I17";
-const INPUT_STOCK_AMOUNT_CELL = "F17";
-const NEW_STOCK_AMOUNT_CELL = "C19";
-const INVOICE_NUM_CELL = "F11"
-const USER_CELL = "C4";
+const DATE_CELL = 'C6';
+const NAME_CELL = 'C8';
+const TOTAL_CELL = 'F13';
+const UNIT_CELL = 'C10';
+const TIPO_SALIDA_CELL = 'I13';
+const AMOUNT_INPUT_CELL = 'C17';
+const AMOUNT_OUTPUT_CELL = 'I17';
+const INPUT_STOCK_AMOUNT_CELL = 'F17';
+const NEW_STOCK_AMOUNT_CELL = 'C19';
+const INVOICE_NUM_CELL = 'F11';
+const USER_CELL = 'C4';
 
 function doGet() {
-  let template = HtmlService.createTemplateFromFile('record-creator');
+  let template = HtmlService.createTemplateFromFile('home-page');
   let output = template.evaluate();
   output.addMetaTag('viewport', 'width=device-width, initial-scale=1');
   return output;
+}
+
+function getHTMLPageContent(page='inventory-form-page') {
+  const contentHTML = HtmlService.createHtmlOutputFromFile(page).getContent();
+  console.log(contentHTML);
+  return contentHTML;
 }
 
 function include(filename) {
@@ -57,7 +63,11 @@ function getSingleItemData(itemName) {
   const SS = SpreadsheetApp.getActiveSpreadsheet();
   const itemSheet = SS.getSheetByName('Inventario');
 
-  const txtFinder = itemSheet.createTextFinder(itemName).matchCase(true).matchEntireCell(true).findNext();
+  const txtFinder = itemSheet
+    .createTextFinder(itemName)
+    .matchCase(true)
+    .matchEntireCell(true)
+    .findNext();
   console.log('found: ' + txtFinder.getValue());
   const row = txtFinder.getRow();
   console.log('row: ' + row);
@@ -72,25 +82,23 @@ function getFrontData(recordType, data) {
   console.log('RecordType: ' + recordType);
   console.log('Data from interface: ' + data);
 
-  createRow(recordType, data)
+  createRow(recordType, data);
 }
-
 
 function Inventario() {
   var spreadsheet = SpreadsheetApp.getActive();
   spreadsheet.setActiveSheet(spreadsheet.getSheetByName('Inventario'), true);
-};
+}
 
 function Salidas() {
   var spreadsheet = SpreadsheetApp.getActive();
   spreadsheet.setActiveSheet(spreadsheet.getSheetByName(OUTPUT_SHEET), true);
-};
+}
 
 function Entradas() {
   var spreadsheet = SpreadsheetApp.getActive();
   spreadsheet.setActiveSheet(spreadsheet.getSheetByName(INPUT_SHEET), true);
-};
-
+}
 
 /*
 Create new record:
@@ -118,7 +126,7 @@ function CreateRecord() {
   createRow(recordType, values);
 
   ClearForm();
-};
+}
 
 function getRecordType(formSheet) {
   const newStockRecord = formSheet.getRange(AMOUNT_INPUT_CELL).getValue();
@@ -126,10 +134,10 @@ function getRecordType(formSheet) {
   const outputRecord = formSheet.getRange(AMOUNT_OUTPUT_CELL).getValue();
 
   if (newStockRecord) {
-    if (formSheet.getRange("C21").getValue() === ENTRADA) {
+    if (formSheet.getRange('C21').getValue() === ENTRADA) {
       return ENTRADA_STOCK;
     }
-    if (formSheet.getRange("C21").getValue() === SALIDA) {
+    if (formSheet.getRange('C21').getValue() === SALIDA) {
       return SALIDA_STOCK;
     }
   }
@@ -143,8 +151,8 @@ function getRecordType(formSheet) {
   }
 
   var ui = SpreadsheetApp.getUi();
-  ui.alert("Datos incompletos");
-  return ""
+  ui.alert('Datos incompletos');
+  return '';
 }
 
 function getValuesByType(recordType) {
@@ -157,68 +165,76 @@ function getValuesByType(recordType) {
 
   if (recordType === ENTRADA_STOCK) {
     console.log(ENTRADA_STOCK);
-    return [[
-      "",                                                     //empty
-      userName,                                               //user
-      formSheet.getRange(INVOICE_NUM_CELL).getValue(),        //# invoice
-      date,                                                   //date
-      itemName,                                               //item
-      formSheet.getRange(NEW_STOCK_AMOUNT_CELL).getValue(),   //amount
-      formSheet.getRange(UNIT_CELL).getValue(),               //unit
-      formSheet.getRange(TOTAL_CELL).getValue(),              //total 
-    ]];
+    return [
+      [
+        '', //empty
+        userName, //user
+        formSheet.getRange(INVOICE_NUM_CELL).getValue(), //# invoice
+        date, //date
+        itemName, //item
+        formSheet.getRange(NEW_STOCK_AMOUNT_CELL).getValue(), //amount
+        formSheet.getRange(UNIT_CELL).getValue(), //unit
+        formSheet.getRange(TOTAL_CELL).getValue(), //total
+      ],
+    ];
   }
 
   if (recordType === ENTRADA) {
     console.log(ENTRADA);
-    return [[
-      "",                                                     //empty
-      userName,                                               //user
-      formSheet.getRange(INVOICE_NUM_CELL).getValue(),        //# invoice
-      date,                                                   //date
-      itemName,                                               //item
-      formSheet.getRange(INPUT_STOCK_AMOUNT_CELL).getValue(), //amount
-      formSheet.getRange(UNIT_CELL).getValue(),               //unit
-      formSheet.getRange(TOTAL_CELL).getValue(),              //total 
-    ]];
+    return [
+      [
+        '', //empty
+        userName, //user
+        formSheet.getRange(INVOICE_NUM_CELL).getValue(), //# invoice
+        date, //date
+        itemName, //item
+        formSheet.getRange(INPUT_STOCK_AMOUNT_CELL).getValue(), //amount
+        formSheet.getRange(UNIT_CELL).getValue(), //unit
+        formSheet.getRange(TOTAL_CELL).getValue(), //total
+      ],
+    ];
   }
 
   if (recordType === SALIDA_STOCK) {
     console.log(SALIDA_STOCK);
-    return [[
-      "",                                                     //empty
-      userName,                                               //user
-      date,                                                   //date
-      itemName,                                               //item
-      formSheet.getRange(UNIT_CELL).getValue(),               //unit
-      Math.abs(formSheet.getRange("C19").getValue()),         //amount
-      formSheet.getRange(TIPO_SALIDA_CELL).getValue(),        //outType
-      ''                                                      //desc
-    ]];                                                       
+    return [
+      [
+        '', //empty
+        userName, //user
+        date, //date
+        itemName, //item
+        formSheet.getRange(UNIT_CELL).getValue(), //unit
+        Math.abs(formSheet.getRange('C19').getValue()), //amount
+        formSheet.getRange(TIPO_SALIDA_CELL).getValue(), //outType
+        '', //desc
+      ],
+    ];
   }
 
   if (recordType === SALIDA) {
     console.log(SALIDA);
-    return [[
-      "",  //empty
-      userName,  //user
-      date,  //date
-      itemName,  //item
-      formSheet.getRange(UNIT_CELL).getValue(),  //unit
-      formSheet.getRange(AMOUNT_OUTPUT_CELL).getValue(),  //amount
-      formSheet.getRange(TIPO_SALIDA_CELL).getValue(),  //outType
-      ''                                                //Desc
-    ]];
+    return [
+      [
+        '', //empty
+        userName, //user
+        date, //date
+        itemName, //item
+        formSheet.getRange(UNIT_CELL).getValue(), //unit
+        formSheet.getRange(AMOUNT_OUTPUT_CELL).getValue(), //amount
+        formSheet.getRange(TIPO_SALIDA_CELL).getValue(), //outType
+        '', //Desc
+      ],
+    ];
   }
 }
 
 function createRow(recordType, values) {
   const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-  console.log("values: " + values);
+  console.log('values: ' + values);
 
   if (values === undefined) {
-    console.log("exit empty");
-    return ""
+    console.log('exit empty');
+    return '';
   }
   console.log('OK0');
   let destinationSheet;
@@ -227,19 +243,22 @@ function createRow(recordType, values) {
   console.log('OK1');
   if (recordType === ENTRADA || recordType === ENTRADA_STOCK) {
     destinationSheet = spreadsheet.getSheetByName(INPUT_SHEET);
-    itemColumn = 'E'
+    itemColumn = 'E';
   }
   console.log('OK2');
   if (recordType === SALIDA || recordType === SALIDA_STOCK) {
     destinationSheet = spreadsheet.getSheetByName(OUTPUT_SHEET);
     itemColumn = 'D';
-
   }
   console.log('OK3');
   const lastRowWithFormula = destinationSheet.getLastRow();
   console.log('OK4');
   console.log('lastRowWithFormula: ' + lastRowWithFormula);
-  const lastRow = destinationSheet.getRange(itemColumn + (lastRowWithFormula + 1)).getNextDataCell(SpreadsheetApp.Direction.UP).getRow() + 1;
+  const lastRow =
+    destinationSheet
+      .getRange(itemColumn + (lastRowWithFormula + 1))
+      .getNextDataCell(SpreadsheetApp.Direction.UP)
+      .getRow() + 1;
   console.log('columnsToInsert: ' + columnsToInsert);
   console.log('lastRow: ' + lastRow);
   console.log('values: ' + values);
@@ -249,9 +268,20 @@ function createRow(recordType, values) {
 
 function ClearForm() {
   const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-  const formSheet = spreadsheet.getSheetByName("Crear registro");
+  const formSheet = spreadsheet.getSheetByName('Crear registro');
 
-  const rangeList = [USER_CELL, DATE_CELL, NAME_CELL, AMOUNT_INPUT_CELL, INPUT_STOCK_AMOUNT_CELL, AMOUNT_OUTPUT_CELL, INVOICE_NUM_CELL, UNIT_CELL, TOTAL_CELL, TIPO_SALIDA_CELL];
+  const rangeList = [
+    USER_CELL,
+    DATE_CELL,
+    NAME_CELL,
+    AMOUNT_INPUT_CELL,
+    INPUT_STOCK_AMOUNT_CELL,
+    AMOUNT_OUTPUT_CELL,
+    INVOICE_NUM_CELL,
+    UNIT_CELL,
+    TOTAL_CELL,
+    TIPO_SALIDA_CELL,
+  ];
   for (let i = 0; i < rangeList.length; i++) {
     formSheet.getRange(rangeList[i]).clearContent();
   }
@@ -261,4 +291,4 @@ function Lock() {
   var spreadsheet = SpreadsheetApp.getActive();
   spreadsheet.getRange('H10').activate();
   var protection = spreadsheet.getRange('H10').protect();
-};
+}

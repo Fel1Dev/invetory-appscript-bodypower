@@ -1,14 +1,17 @@
 const HOME_LINK_ID = 'home-page';
-const INVENTORY_PAGE_ID = 'inventory-page';
+const INVENTORY_PAGE_ID = 'inventory-form-page';
 const CONFIGURATION_LINK_ID = 'configuration-page';
 const REPORT_PAGE_ID = 'report-page';
 
 document.getElementById('header-navbar').addEventListener('click', navbarClicked);
 
 function navbarClicked(e) {
-  removeActiveLinks();
-  activeNavbarLink(e.target.id);
-  getPageContent(e.target.id);
+  console.log(e.target.id);
+  if (e.target.id !== 'header-navbar') {
+    removeActiveLinks();
+    activeNavbarLink(e.target.id);
+    getPageContent(e.target.id);
+  }
 }
 
 function removeActiveLinks() {
@@ -23,6 +26,10 @@ function activeNavbarLink(id) {
 }
 
 function getPageContent(pageId) {
-  google.script.run
-  .getHTMLPageContent(pageId);
+  google.script.run.withSuccessHandler(putHTMLContent).getHTMLPageContent(pageId);
+}
+
+function putHTMLContent(HTMLContent) {
+  console.log(HTMLContent);
+  document.getElementById('main-content').innerHTML = HTMLContent;
 }
