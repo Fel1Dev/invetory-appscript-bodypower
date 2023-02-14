@@ -1,3 +1,8 @@
+:root {
+  --brand-color: #8DBF4F;
+  --gray-backgorund: #dfe4ea;
+}
+
 html {
   font-size: 62.5%;
 }
@@ -22,7 +27,7 @@ body {
 
 nav a {
   text-decoration: none;
-  color: #8DBF4F;
+  color: var(--brand-color);
 }
 
 nav li {
@@ -69,7 +74,7 @@ nav li {
   display: flex;
   justify-content: center;
   padding-top: 30px;
-  background: #dfe4ea;
+  background: var(--gray-backgorund);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2000' height='437'%3E%3Cpath fill='%238DBF45' fill-rule='evenodd' d='M0 249.974c218.558 116.035 460.05 116.035 1224.475 0s802.933-136.035 715.525 0V0H0v349.974z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
 }
