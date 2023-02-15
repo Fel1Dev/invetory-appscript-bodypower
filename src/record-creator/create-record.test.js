@@ -174,7 +174,7 @@ describe('Record Creator UI', () => {
     expect(stockFields.inputFields).not.toBeVisible();
   });
 
-  test('renders input and oput values according with new stock field', async () => {
+  test('renders input and output values according with new stock field', async () => {
     let { document } = await load(testPath);
 
     const productField = document.getElementById('item-list');
@@ -188,13 +188,35 @@ describe('Record Creator UI', () => {
     fireEvent.input(stockFields.newStock, { target: { value: smallerStock } });
 
     expect(stockFields.outputFields).toBeVisible();
-    expect(stockFields.stockOutType).not.toBeDisabled()
-    expect(stockFields.stockAmount).toBeDisabled()
-    
+    expect(stockFields.stockOutType).not.toBeDisabled();
+    expect(stockFields.stockAmount).toBeDisabled();
+
     fireEvent.input(stockFields.newStock, { target: { value: biggerStock } });
-    
+
     expect(stockFields.inputFields).toBeVisible();
     expect(stockFields.stockAmount).not.toBeDisabled();
-    expect(stockFields.stockOutType).toBeDisabled()
+    expect(stockFields.stockOutType).toBeDisabled();
+  });
+
+  test('renders input final value after put values on input tab', async () => {
+    let { document } = await load(testPath);
+
+    const productField = document.getElementById('item-list');
+    const inputFields = getInputFields(document);
+    const inputTab = document.getElementById('input-tab');
+
+    const testProduct = 'Sal cocina';
+    const inputQuantity = 20;
+
+    fireEvent.change(productField, { target: { value: testProduct } });
+
+    fireEvent.click(inputTab);
+
+    expect(inputFields.amount).not.toBeDisabled();
+
+    fireEvent.input(inputFields.quantity, { target: { value: inputQuantity } });
+    
+    expect(inputFields.finalStockInput.value).toBe('30');
+    expect(inputFields.finalStockInput).toBeDisabled();
   });
 });
