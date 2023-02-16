@@ -30,11 +30,11 @@ function doGet() {
   return output;
 }
 
-function getHTMLPageContent(page='inventory-form-page') {
+function getHTMLPageContent(page = 'inventory-form-page') {
   const template = HtmlService.createTemplateFromFile(page);
   const contentHTML = template.evaluate();
   console.log(contentHTML.getContent());
-  return contentHTML.getContent();
+  return { content: contentHTML.getContent(), pageName: page };
 }
 
 function include(filename) {
