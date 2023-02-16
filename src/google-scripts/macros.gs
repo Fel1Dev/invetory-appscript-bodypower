@@ -22,16 +22,18 @@ const INVOICE_NUM_CELL = 'F11';
 const USER_CELL = 'C4';
 
 function doGet() {
-  let template = HtmlService.createTemplateFromFile('home-page');
+  let template = HtmlService.createTemplateFromFile('index');
   let output = template.evaluate();
   output.addMetaTag('viewport', 'width=device-width, initial-scale=1');
+  console.log(output.getContent());
   return output;
 }
 
 function getHTMLPageContent(page='inventory-form-page') {
-  const contentHTML = HtmlService.createHtmlOutputFromFile(page).getContent();
-  console.log(contentHTML);
-  return contentHTML;
+  const template = HtmlService.createTemplateFromFile(page);
+  const contentHTML = template.evaluate();
+  console.log(contentHTML.getContent());
+  return contentHTML.getContent();
 }
 
 function include(filename) {
