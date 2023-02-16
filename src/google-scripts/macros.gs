@@ -25,6 +25,7 @@ function doGet() {
   let template = HtmlService.createTemplateFromFile('index');
   let output = template.evaluate();
   output.addMetaTag('viewport', 'width=device-width, initial-scale=1');
+  output.setTitle('.:: Body Power Lunch ::.');
   console.log(output.getContent());
   return output;
 }
