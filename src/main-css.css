@@ -26,7 +26,7 @@ body {
 }
 
 .navbar-link {
-  color: var(--brand-color);
+  color: var(--gray-backgorund);
 }
 
 .navbar-link:hover {
@@ -38,7 +38,7 @@ nav li {
 }
 
 .nav-menu .active {
-  color: white;
+  color: var(--brand-color);
 }
 
 .logo {
