@@ -11,6 +11,7 @@ import { JSDOM } from 'jsdom';
 const testPath = './src/record-creator/record-creator.html';
 
 describe('Record Creator UI', () => {
+  const BAJA_VALUE = 'BAJA';
   async function load(file) {
     let dom = await JSDOM.fromFile(file, {
       runScripts: 'dangerously',
@@ -126,7 +127,6 @@ describe('Record Creator UI', () => {
 
     const testProduct = 'Sal cocina';
     const currentStockInput = 5;
-    const BAJA_VALUE = 'BAJA';
 
     expect(stockFields.stockOutputDesc).toBeDisabled();
 
@@ -215,8 +215,34 @@ describe('Record Creator UI', () => {
     expect(inputFields.amount).not.toBeDisabled();
 
     fireEvent.input(inputFields.quantity, { target: { value: inputQuantity } });
-    
+
     expect(inputFields.finalStockInput.value).toBe('30');
     expect(inputFields.finalStockInput).toBeDisabled();
+  });
+
+  test('renders oputput final value after put values on ouput tab', async () => {
+    let { document } = await load(testPath);
+
+    const productField = document.getElementById('item-list');
+    const outputFields = getOutputFields(document);
+    const ouputTab = document.getElementById('output-tab');
+
+    const testProduct = 'Sal cocina';
+    const outputQuantity = 5;
+
+    fireEvent.change(productField, { target: { value: testProduct } });
+
+    fireEvent.click(ouputTab);
+
+    expect(outputFields.outputTypeList).not.toBeDisabled();
+
+    fireEvent.input(outputFields.outQuantity, { target: { value: outputQuantity } });
+    expect(outputFields.finalStockOut.value).toBe('5');
+    expect(outputFields.finalStockOut).toBeDisabled();
+    expect(outputFields.outputDescription).toBeDisabled();
+
+    fireEvent.input(outputFields.outputTypeList, { target: { value: BAJA_VALUE } });
+
+    expect(outputFields.outputDescription).not.toBeDisabled();
   });
 });
