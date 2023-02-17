@@ -1,0 +1,55 @@
+:root {
+    --brand-color: #8DBF4F;
+    --brand-color-dark: #72a337;
+    --gray-backgorund: #dfe4ea;
+  }
+
+html {
+    font-size: 62.5%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    width: 100vw;
+    height: 100vh;
+}
+
+.home {
+    /* display: grid;
+    align-items: center;
+    grid-template-columns: repeat(4, 1fr); */
+    display: flex;
+    justify-content: center;
+}
+
+.home--card {
+    width: 200px;
+    
+    margin: 20px;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--gray-backgorund);
+
+    font-size: 1.5rem;
+}
+
+.card-content {
+    height: 100%;
+    width: 100%;
+    padding: 1rem 1rem;
+}
+
+.card--title {
+    margin-bottom: 1rem;
+}
+
+card--text {
+    flex-wrap: wrap;
+}
