@@ -30,7 +30,7 @@ body {
 
 .home--card {
     width: 200px;
-    
+    height: max-content;
     margin: 20px;
     border-radius: 1rem;
     display: flex;
@@ -38,18 +38,4 @@ body {
     border: 1px solid var(--gray-backgorund);
 
     font-size: 1.5rem;
-}
-
-.card-content {
-    height: 100%;
-    width: 100%;
-    padding: 1rem 1rem;
-}
-
-.card--title {
-    margin-bottom: 1rem;
-}
-
-card--text {
-    flex-wrap: wrap;
 }
