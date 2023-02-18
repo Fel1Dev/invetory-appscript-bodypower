@@ -1,17 +1,22 @@
-const HOME_LINK_ID = 'home-page';
+const HOME_PAGE_ID = 'home-page';
 const INVENTORY_PAGE_ID = 'inventory-form-page';
 const REPORT_PAGE_ID = 'report-page';
+
+const INVENTORY_HOME_CARD_ID = 'inventory-card';
+const REPORT_HOME_CARD_ID = 'report-card';
 
 document.getElementById('header-navbar').addEventListener('click', navbarClicked);
 window.addEventListener('load', startUpMainPage);
 
 function startUpMainPage() {
-  getPageContent(HOME_LINK_ID);
+  startLoadingScreen();
+  getPageContent(HOME_PAGE_ID);
 }
 
 function navbarClicked(e) {
   console.log(e.target.id);
   if (e.target.id !== 'header-navbar') {
+    startLoadingScreen();
     removeActiveLinks();
     activeNavbarLink(e.target.id);
     getPageContent(e.target.id);
@@ -19,7 +24,7 @@ function navbarClicked(e) {
 }
 
 function removeActiveLinks() {
-  document.getElementById(HOME_LINK_ID).classList.remove('active');
+  document.getElementById(HOME_PAGE_ID).classList.remove('active');
   document.getElementById(INVENTORY_PAGE_ID).classList.remove('active');
   document.getElementById(REPORT_PAGE_ID).classList.remove('active');
 }
@@ -39,29 +44,26 @@ function getPageContent(pageId) {
 }
 
 function failResponse() {
-  //redirect to home
-  //infinite loop
-  //getPageContent(HOME_LINK_ID);
+  stopLoadingScreen();
 }
 
 function putHTMLContent(HTMLContent) {
-  console.log(HTMLContent);
+  console.log('putHTMLContent: ');
+  console.table(HTMLContent);
   document.getElementById('main-content').innerHTML = HTMLContent.content;
   loadPageEventsByName(HTMLContent.pageName);
+  stopLoadingScreen();
 }
 
 function loadPageEventsByName(pageName) {
   console.log('pageName: ' + pageName);
 
   switch (pageName) {
-    case HOME_LINK_ID:
+    case HOME_PAGE_ID:
       loadHomePage();
       break;
     case INVENTORY_PAGE_ID:
       loadRecordFormLogic();
-      break;
-    case CONFIGURATION_LINK_ID:
-      loadConfigurationPage();
       break;
     case REPORT_PAGE_ID:
       loadReportPage();
@@ -88,13 +90,31 @@ function loadRecordFormLogic() {
   /* Input events */
   document.getElementById(QUANTITY_ID).addEventListener('input', processInQuantity);
 
-  /*Output event */
+  /* Output event */
   document.getElementById(OUT_QUANTITY_ID).addEventListener('input', processOutQuantity);
   document.getElementById(OUTPUT_TYPE_LIST).addEventListener('input', processOutputTypeList);
 }
 
-function loadConfigurationPage() {}
-
 function loadReportPage() {}
 
-function loadHomePage() {}
+function loadHomePage() {
+  console.log('rendering HomePage....');
+  document.getElementById(INVENTORY_HOME_CARD_ID).addEventListener('click', redirectToInventory);
+  document.getElementById(REPORT_HOME_CARD_ID).addEventListener('click', redirectToReportPage);
+}
+
+function redirectToReportPage() {
+  console.log('rendering ReportPage....');
+  startLoadingScreen();
+  removeActiveLinks();
+  activeNavbarLink(REPORT_PAGE_ID);
+  getPageContent(REPORT_PAGE_ID);
+}
+
+function redirectToInventory() {
+  console.log('rendering InventoryPage....');
+  startLoadingScreen();
+  removeActiveLinks();
+  activeNavbarLink(INVENTORY_PAGE_ID);
+  getPageContent(INVENTORY_PAGE_ID);
+}

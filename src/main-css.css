@@ -57,7 +57,7 @@ nav li {
   background-color: var(--bs-dark);
   color: white;
   font-size: 1.5rem;
-  grid-template-columns: 60px 1fr;
+  grid-template-columns: 70px 1fr;
   align-items: center;
   justify-items: end;
   margin: 0;
@@ -70,11 +70,12 @@ nav li {
   font-size: 1.5rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  justify-items: left;
+  justify-items: center;
   align-items: center;
   margin: 0;
   padding: 0;
-  gap: 1rem;
+  gap: 2rem;
+  margin-right: 50px;
 }
 
 .main {
