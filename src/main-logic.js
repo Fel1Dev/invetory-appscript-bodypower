@@ -1,9 +1,13 @@
 const HOME_LINK_ID = 'home-page';
 const INVENTORY_PAGE_ID = 'inventory-form-page';
-const CONFIGURATION_LINK_ID = 'configuration-page';
 const REPORT_PAGE_ID = 'report-page';
 
 document.getElementById('header-navbar').addEventListener('click', navbarClicked);
+window.addEventListener('load', startUpMainPage);
+
+function startUpMainPage() {
+  getPageContent(HOME_LINK_ID);
+}
 
 function navbarClicked(e) {
   console.log(e.target.id);
@@ -17,7 +21,6 @@ function navbarClicked(e) {
 function removeActiveLinks() {
   document.getElementById(HOME_LINK_ID).classList.remove('active');
   document.getElementById(INVENTORY_PAGE_ID).classList.remove('active');
-  document.getElementById(CONFIGURATION_LINK_ID).classList.remove('active');
   document.getElementById(REPORT_PAGE_ID).classList.remove('active');
 }
 
