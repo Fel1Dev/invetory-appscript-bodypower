@@ -1,24 +1,24 @@
-/* Global events */
-window.addEventListener('load', startUpForm);
-document.getElementById('clear-fields').addEventListener('click', clearFields);
-document.getElementById('form-inventory').addEventListener('submit', dataValidation);
+// /* Global events */
+// window.addEventListener('load', startUpForm);
+// document.getElementById('clear-fields').addEventListener('click', clearFields);
+// document.getElementById('form-inventory').addEventListener('submit', dataValidation);
 
-// Tab Panel events
-document.getElementById(NEW_STOCK_TAB_ID).addEventListener('click', clickOnNewStock);
-document.getElementById(INPUT_TAB_ID).addEventListener('click', clickOnInput);
-document.getElementById(OUTPUT_TAB_ID).addEventListener('click', clickOnOutput);
+// // Tab Panel events
+// document.getElementById(NEW_STOCK_TAB_ID).addEventListener('click', clickOnNewStock);
+// document.getElementById(INPUT_TAB_ID).addEventListener('click', clickOnInput);
+// document.getElementById(OUTPUT_TAB_ID).addEventListener('click', clickOnOutput);
 
-// New Stock events
-document.getElementById(ITEM_LIST_ID).addEventListener('change', getCurrentStock);
-document.getElementById(NEW_STOCK_ID).addEventListener('input', processNewStock);
-document.getElementById(STOCK_OUTPUT_TYPE_LIST).addEventListener('input', processStockOutputType);
+// // New Stock events
+// document.getElementById(ITEM_LIST_ID).addEventListener('change', getCurrentStock);
+// document.getElementById(NEW_STOCK_ID).addEventListener('input', processNewStock);
+// document.getElementById(STOCK_OUTPUT_TYPE_LIST).addEventListener('input', processStockOutputType);
 
-// Input events
-document.getElementById(QUANTITY_ID).addEventListener('input', processInQuantity);
+// // Input events
+// document.getElementById(QUANTITY_ID).addEventListener('input', processInQuantity);
 
-//Output events
-document.getElementById(OUT_QUANTITY_ID).addEventListener('input', processOutQuantity);
-document.getElementById(OUTPUT_TYPE_LIST).addEventListener('input', processOutputTypeList);
+// //Output events
+// document.getElementById(OUT_QUANTITY_ID).addEventListener('input', processOutQuantity);
+// document.getElementById(OUTPUT_TYPE_LIST).addEventListener('input', processOutputTypeList);
 
 
 // CODE TO GOOGLE ->
