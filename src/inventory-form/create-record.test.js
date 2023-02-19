@@ -8,15 +8,16 @@ import {
 import '@testing-library/jest-dom';
 import { JSDOM } from 'jsdom';
 
-const testPath = './src/record-creator/record-creator.html';
+const testPath = './src/inventory-form/inventory-form-page.html';
 
 describe('Record Creator UI', () => {
   const BAJA_VALUE = 'BAJA';
+
   async function load(file) {
     let dom = await JSDOM.fromFile(file, {
       runScripts: 'dangerously',
       resources: 'usable',
-      url: `file://${__dirname}/`,
+      url: `file://${__dirname}/inventory-form-page.html`,
     });
     return new Promise((resolve) => {
       dom.window.addEventListener('load', () => {

@@ -1,0 +1,49 @@
+:root {
+    --brand-color: #8DBF4F;
+    --brand-color-dark: #72a337;
+    --gray-backgorund: #dfe4ea;
+  }
+
+html {
+    font-size: 62.5%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.report {
+    width: 700px;
+    height: fit-content;
+    background-color: white;
+    border-radius: 5px;
+    overflow-x: hidden;
+}
+
+.report-content {
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.report-title {
+    padding: 10px;
+    font-size: 3em;
+    font-weight: 600;
+    text-align: center;
+}
+
+.report-control {
+    margin: 10px;
+    text-align: right;
+}
+
+table th {
+    text-align: center;
+}
+
+.table-content {
+    max-height: 550px;
+    overflow-y: scroll;
+}

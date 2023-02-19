@@ -20,6 +20,8 @@ document.getElementById(QUANTITY_ID).addEventListener('input', processInQuantity
 document.getElementById(OUT_QUANTITY_ID).addEventListener('input', processOutQuantity);
 document.getElementById(OUTPUT_TYPE_LIST).addEventListener('input', processOutputTypeList);
 
+// CODE TO GOOGLE ->
+
 function startUpForm() {
   startLoadingScreen();
 
@@ -95,11 +97,6 @@ function createListOption(inputElement, value) {
 function loadSimpleListsData() {
   if ('undefined' !== typeof google)
     google.script.run.withSuccessHandler(createSimpleListsOptions).getSimpleListsData();
-}
-
-function createRecord() {
-  //read fields
-  console.log('create record');
 }
 
 function getCurrentStock(event) {
