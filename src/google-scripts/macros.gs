@@ -88,6 +88,16 @@ function getFrontData(recordType, data) {
   createRow(recordType, data);
 }
 
+function getInventoryData() {
+  const SS = SpreadsheetApp.getActiveSpreadsheet();
+  const itemSheet = SS.getSheetByName('Inventario');
+  const itemsData = itemSheet.getDataRange().getDisplayValues();
+
+  //Delete first 3 lines
+  itemsData.splice(0, 3);
+  return itemsData;
+}
+
 function Inventario() {
   var spreadsheet = SpreadsheetApp.getActive();
   spreadsheet.setActiveSheet(spreadsheet.getSheetByName('Inventario'), true);
