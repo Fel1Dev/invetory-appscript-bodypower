@@ -11,6 +11,7 @@ import { JSDOM } from 'jsdom';
 const testPath = './src/record-creator/inventory-form-page.html';
 
 describe('Record Creator UI', () => {
+  const BAJA_VALUE = 'BAJA';
   async function load(file) {
     let dom = await JSDOM.fromFile(file, {
       runScripts: 'dangerously',
@@ -43,7 +44,7 @@ describe('Record Creator UI', () => {
       newStock: document.getElementById('new-stock'),
       differenceField: document.getElementById('difference'),
       outputFields: document.getElementById('new-stock-output-fields'),
-      sotckOutType: document.getElementById('stock-output-type-list'),
+      stockOutType: document.getElementById('stock-output-type-list'),
       stockOutputDesc: document.getElementById('new-output-desc'),
       inputFields: document.getElementById('new-stock-input-fields'),
       stockInvoice: document.getElementById('stock-invoice'),
@@ -126,7 +127,6 @@ describe('Record Creator UI', () => {
 
     const testProduct = 'Sal cocina';
     const currentStockInput = 5;
-    const BAJA_VALUE = 'BAJA';
 
     expect(stockFields.stockOutputDesc).toBeDisabled();
 
@@ -137,7 +137,7 @@ describe('Record Creator UI', () => {
     expect(stockFields.differenceField.value).toBe('-5');
     expect(stockFields.outputFields).not.toBeDisabled();
 
-    fireEvent.input(stockFields.sotckOutType, { target: { value: BAJA_VALUE } });
+    fireEvent.input(stockFields.stockOutType, { target: { value: BAJA_VALUE } });
     expect(stockFields.stockOutputDesc).not.toBeDisabled();
   });
 
@@ -172,5 +172,77 @@ describe('Record Creator UI', () => {
     expect(stockFields.differenceField).toBeDisabled();
     expect(stockFields.outputFields).not.toBeVisible();
     expect(stockFields.inputFields).not.toBeVisible();
+  });
+
+  test('renders input and output values according with new stock field', async () => {
+    let { document } = await load(testPath);
+
+    const productField = document.getElementById('item-list');
+    const stockFields = getStockFields(document);
+    const testProduct = 'Sal cocina';
+    const smallerStock = 5;
+    const biggerStock = 20;
+
+    fireEvent.change(productField, { target: { value: testProduct } });
+
+    fireEvent.input(stockFields.newStock, { target: { value: smallerStock } });
+
+    expect(stockFields.outputFields).toBeVisible();
+    expect(stockFields.stockOutType).not.toBeDisabled();
+    expect(stockFields.stockAmount).toBeDisabled();
+
+    fireEvent.input(stockFields.newStock, { target: { value: biggerStock } });
+
+    expect(stockFields.inputFields).toBeVisible();
+    expect(stockFields.stockAmount).not.toBeDisabled();
+    expect(stockFields.stockOutType).toBeDisabled();
+  });
+
+  test('renders input final value after put values on input tab', async () => {
+    let { document } = await load(testPath);
+
+    const productField = document.getElementById('item-list');
+    const inputFields = getInputFields(document);
+    const inputTab = document.getElementById('input-tab');
+
+    const testProduct = 'Sal cocina';
+    const inputQuantity = 20;
+
+    fireEvent.change(productField, { target: { value: testProduct } });
+
+    fireEvent.click(inputTab);
+
+    expect(inputFields.amount).not.toBeDisabled();
+
+    fireEvent.input(inputFields.quantity, { target: { value: inputQuantity } });
+
+    expect(inputFields.finalStockInput.value).toBe('30');
+    expect(inputFields.finalStockInput).toBeDisabled();
+  });
+
+  test('renders oputput final value after put values on ouput tab', async () => {
+    let { document } = await load(testPath);
+
+    const productField = document.getElementById('item-list');
+    const outputFields = getOutputFields(document);
+    const ouputTab = document.getElementById('output-tab');
+
+    const testProduct = 'Sal cocina';
+    const outputQuantity = 5;
+
+    fireEvent.change(productField, { target: { value: testProduct } });
+
+    fireEvent.click(ouputTab);
+
+    expect(outputFields.outputTypeList).not.toBeDisabled();
+
+    fireEvent.input(outputFields.outQuantity, { target: { value: outputQuantity } });
+    expect(outputFields.finalStockOut.value).toBe('5');
+    expect(outputFields.finalStockOut).toBeDisabled();
+    expect(outputFields.outputDescription).toBeDisabled();
+
+    fireEvent.input(outputFields.outputTypeList, { target: { value: BAJA_VALUE } });
+
+    expect(outputFields.outputDescription).not.toBeDisabled();
   });
 });
