@@ -14,13 +14,18 @@ function startUpMainPage() {
 }
 
 function navbarClicked(e) {
-  console.log(e.target.id);
-  if (e.target.id !== 'header-navbar') {
-    startLoadingScreen();
-    removeActiveLinks();
-    activeNavbarLink(e.target.id);
-    getPageContent(e.target.id);
+  const pageId = e.target.id;
+  console.log('pageId: ' + pageId);
+  if (pageId !== 'header-navbar') {
+    activePageByName(pageId);
   }
+}
+
+function activePageByName(pageName) {
+  startLoadingScreen();
+  removeActiveLinks();
+  activeNavbarLink(pageName);
+  getPageContent(pageName);
 }
 
 function removeActiveLinks() {
@@ -48,8 +53,6 @@ function failResponse() {
 }
 
 function putHTMLContent(HTMLContent) {
-  console.log('putHTMLContent: ');
-  console.table(HTMLContent);
   document.getElementById('main-content').innerHTML = HTMLContent.content;
   loadPageEventsByName(HTMLContent.pageName);
   stopLoadingScreen();
@@ -95,7 +98,9 @@ function loadRecordFormLogic() {
   document.getElementById(OUTPUT_TYPE_LIST).addEventListener('input', processOutputTypeList);
 }
 
-function loadReportPage() {}
+function loadReportPage() {
+  document.getElementById('reload-button').addEventListener('click', reloadReport);
+}
 
 function loadHomePage() {
   console.log('rendering HomePage....');
@@ -105,16 +110,10 @@ function loadHomePage() {
 
 function redirectToReportPage() {
   console.log('rendering ReportPage....');
-  startLoadingScreen();
-  removeActiveLinks();
-  activeNavbarLink(REPORT_PAGE_ID);
-  getPageContent(REPORT_PAGE_ID);
+  activePageByName(REPORT_PAGE_ID);
 }
 
 function redirectToInventory() {
   console.log('rendering InventoryPage....');
-  startLoadingScreen();
-  removeActiveLinks();
-  activeNavbarLink(INVENTORY_PAGE_ID);
-  getPageContent(INVENTORY_PAGE_ID);
+  activePageByName(INVENTORY_PAGE_ID);
 }
