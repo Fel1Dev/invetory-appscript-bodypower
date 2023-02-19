@@ -29,9 +29,16 @@ html {
 
 .report-title {
     margin: 10px;
+    font-size: 3em;
+    font-weight: 600;
+    text-align: center;
 }
 
 .report-control {
     margin: 10px;
     text-align: right;
+}
+
+table th {
+    text-align: center;
 }
