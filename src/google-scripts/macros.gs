@@ -26,14 +26,12 @@ function doGet() {
   let output = template.evaluate();
   output.addMetaTag('viewport', 'width=device-width, initial-scale=1');
   output.setTitle('.:: Body Power Lunch ::.');
-  console.log(output.getContent());
   return output;
 }
 
 function getHTMLPageContent(page = 'home-page') {
   const template = HtmlService.createTemplateFromFile(page);
   const contentHTML = template.evaluate();
-  console.log(contentHTML.getContent());
   return { content: contentHTML.getContent(), pageName: page };
 }
 
@@ -89,6 +87,24 @@ function getFrontData(recordType, data) {
 }
 
 function getInventoryData() {
+  const fullInvetoryData = getAllInventoryData();
+  const filteredData = filterLowerThanMinimal(fullInvetoryData);
+  return filteredData;
+}
+
+function filterLowerThanMinimal(inventoryData) {
+  return inventoryData.filter((row) => {
+    if (row[8]) {
+      const currStock = parseInt(row[7]);
+      const minStock = parseInt(row[8]);
+      if ((currStock - minStock) < 0) {
+        return row;
+      }
+    }
+  });
+}
+
+function getAllInventoryData() {
   const SS = SpreadsheetApp.getActiveSpreadsheet();
   const itemSheet = SS.getSheetByName('Inventario');
   const itemsData = itemSheet.getDataRange().getDisplayValues();
