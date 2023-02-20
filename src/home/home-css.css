@@ -2,7 +2,7 @@
     --brand-color: #8DBF4F;
     --brand-color-dark: #72a337;
     --gray-backgorund: #dfe4ea;
-  }
+}
 
 html {
     font-size: 62.5%;
@@ -20,12 +20,14 @@ body {
     height: 100vh;
 }
 
-.home {
-    /* display: grid;
-    align-items: center;
-    grid-template-columns: repeat(4, 1fr); */
+.home {    
     display: flex;
     justify-content: center;
+    /* display: grid;
+    gap: 1rem;
+    justify-items: center;
+    grid-auto-flow: column;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); */
 }
 
 .home--card {
