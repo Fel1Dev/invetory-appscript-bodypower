@@ -99,7 +99,7 @@ function loadRecordFormLogic() {
 
 function loadReportPage() {
   document.getElementById('reload-button').addEventListener('click', reloadReport);
-  stopLoadingScreen();
+  reloadReport();
 }
 
 function loadHomePage() {
