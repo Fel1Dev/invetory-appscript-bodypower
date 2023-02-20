@@ -47,3 +47,9 @@ table th {
     max-height: 550px;
     overflow-y: scroll;
 }
+
+#empty-response {
+    text-align: center;
+    font-size: 3em;
+    font-weight: 400;
+}

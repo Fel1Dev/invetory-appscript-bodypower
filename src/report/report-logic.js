@@ -20,6 +20,7 @@ function getReportData() {
 }
 
 function addContentToTable(dataFromInventory) {
+  hideEmptyResponse();
   renderDataOnTable(dataFromInventory);
   stopLoadingScreen();
 }
@@ -53,6 +54,10 @@ function renderDataOnTable(filteredData) {
     tableBody.appendChild(tableRow);
     counter++;
   });
+
+  if(counter === 1) {
+    showEmptyResponse();
+  }
 }
 
 function createCell(value) {
@@ -60,6 +65,14 @@ function createCell(value) {
   const nameTextNode = document.createTextNode(value);
   nameCell.appendChild(nameTextNode);
   return nameCell;
+}
+
+function showEmptyResponse() {
+    document.getElementById('empty-response').classList.remove('hidden');
+}
+
+function hideEmptyResponse() {
+    document.getElementById('empty-response').classList.add('hidden');
 }
 
 function failResponse() {
