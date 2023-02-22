@@ -6,6 +6,7 @@ const INVENTORY_HOME_CARD_ID = 'inventory-card';
 const REPORT_HOME_CARD_ID = 'report-card';
 
 document.getElementById('header-navbar').addEventListener('click', navbarClicked);
+document.getElementById('main-logo').addEventListener('click', redirecToHomePage);
 window.addEventListener('load', startUpMainPage);
 
 function startUpMainPage() {
@@ -117,4 +118,9 @@ function redirectToReportPage() {
 function redirectToInventory() {
   console.log('rendering InventoryPage....');
   activePageByName(INVENTORY_PAGE_ID);
+}
+
+function redirecToHomePage() {
+  console.log('rendering HomePage....');
+  activePageByName(HOME_PAGE_ID);
 }

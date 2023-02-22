@@ -53,6 +53,10 @@ nav li {
   border-radius: 50%;
 }
 
+.logo:hover {
+  cursor: pointer;
+}
+
 .nav-gen {
   display: grid;
   background-color: var(--bs-dark);
