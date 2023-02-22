@@ -55,30 +55,26 @@ function failResponse() {
 
 function putHTMLContent(HTMLContent) {
   document.getElementById('main-content').innerHTML = HTMLContent.content;
-  loadPageEventsByName(HTMLContent.pageName);  
+  loadPageEventsByName(HTMLContent.pageName);
 }
 
 function loadPageEventsByName(pageName) {
   console.log('pageName: ' + pageName);
 
-  switch (pageName) {
-    case HOME_PAGE_ID:
-      loadHomePage();
-      break;
-    case INVENTORY_PAGE_ID:
-      loadRecordFormLogic();
-      break;
-    case REPORT_PAGE_ID:
-      loadReportPage();
-      break;
-  }
+  const pageLoader = {
+    "home-page": () => loadHomePage(),
+    "inventory-form-page": () => loadInventoryFormLogic(),
+    "report-page": () => loadReportPage(),
+  };
+
+  (pageLoader[pageName] || loadHomePage)();
 }
 
-function loadRecordFormLogic() {
+function loadInventoryFormLogic() {
   /* Global events */
   document.getElementById('clear-fields').addEventListener('click', clearFields);
   document.getElementById('form-inventory').addEventListener('submit', dataValidation);
-  
+
   /* Tab Panel events */
   document.getElementById(NEW_STOCK_TAB_ID).addEventListener('click', clickOnNewStock);
   document.getElementById(INPUT_TAB_ID).addEventListener('click', clickOnInput);
@@ -88,10 +84,10 @@ function loadRecordFormLogic() {
   document.getElementById(ITEM_LIST_ID).addEventListener('change', getCurrentStock);
   document.getElementById(NEW_STOCK_ID).addEventListener('input', processNewStock);
   document.getElementById(STOCK_OUTPUT_TYPE_LIST).addEventListener('input', processStockOutputType);
-  
+
   /* Input events */
   document.getElementById(QUANTITY_ID).addEventListener('input', processInQuantity);
-  
+
   /* Output event */
   document.getElementById(OUT_QUANTITY_ID).addEventListener('input', processOutQuantity);
   document.getElementById(OUTPUT_TYPE_LIST).addEventListener('input', processOutputTypeList);
