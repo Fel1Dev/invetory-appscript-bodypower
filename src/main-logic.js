@@ -62,9 +62,9 @@ function loadPageEventsByName(pageName) {
   console.log('pageName: ' + pageName);
 
   const pageLoader = {
-    "home-page": () => loadHomePage(),
-    "inventory-form-page": () => loadInventoryFormLogic(),
-    "report-page": () => loadReportPage(),
+    [HOME_PAGE_ID]: () => loadHomePage(),
+    [INVENTORY_PAGE_ID]: () => loadInventoryFormLogic(),
+    [REPORT_PAGE_ID]: () => loadReportPage(),
   };
 
   (pageLoader[pageName] || loadHomePage)();
