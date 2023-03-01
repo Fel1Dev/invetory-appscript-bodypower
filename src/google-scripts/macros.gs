@@ -26,6 +26,7 @@ function doGet() {
   let output = template.evaluate();
   output.addMetaTag('viewport', 'width=device-width, initial-scale=1');
   output.setTitle('.:: Body Power Lunch ::.');
+  output.setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
   return output;
 }
 
@@ -58,7 +59,7 @@ function getSimpleListsData() {
   return itemsData;
 }
 
-function getSingleItemData(itemName) {
+function getSingleItemData(itemName='tr') {
   console.log('Search: ' + itemName);
   const columWithStock = 8;
   const SS = SpreadsheetApp.getActiveSpreadsheet();
