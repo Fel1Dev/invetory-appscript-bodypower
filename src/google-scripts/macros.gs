@@ -59,7 +59,7 @@ function getSimpleListsData() {
   return itemsData;
 }
 
-function getSingleItemData(itemName='tr') {
+function getSingleItemData(itemName) {
   console.log('Search: ' + itemName);
   const columWithStock = 8;
   const SS = SpreadsheetApp.getActiveSpreadsheet();
@@ -76,6 +76,9 @@ function getSingleItemData(itemName='tr') {
   let itemData = itemSheet.getRange(row, columWithStock).getValue();
 
   console.log('itemData: ' + itemData);
+  if (!itemData) {
+    throw Error();
+  }
   return itemData;
 }
 

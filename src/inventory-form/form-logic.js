@@ -136,13 +136,11 @@ function searchItemData(name) {
 }
 
 function processItemData(itemData) {
-  if (itemData) {
-    updateCurrentStock(parseInt(itemData));
-    unlockNewStockIfActive();
-    enableInputFieldsIfActive();
-    enableOutputFieldsIfActive();
-    stopLoadingScreen();
-  }
+  updateCurrentStock(parseInt(itemData));
+  unlockNewStockIfActive();
+  enableInputFieldsIfActive();
+  enableOutputFieldsIfActive();
+  stopLoadingScreen();
 }
 
 function processEmptyItemData() {
