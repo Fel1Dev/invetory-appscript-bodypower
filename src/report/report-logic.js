@@ -2,6 +2,7 @@
 //document.getElementById('reload-button').addEventListener('click', reloadReport);
 
 const TABLE_BODY_ID = 'table-body';
+const TABLE_CONTENT_ID = 'table-content';
 
 function reloadReport() {
   startLoadingScreen();
@@ -69,10 +70,12 @@ function createCell(value) {
 
 function showEmptyResponse() {
     document.getElementById('empty-response').classList.remove('hidden');
+    document.getElementById(TABLE_CONTENT_ID).classList.add('hidden');
 }
 
 function hideEmptyResponse() {
     document.getElementById('empty-response').classList.add('hidden');
+    document.getElementById(TABLE_CONTENT_ID).classList.remove('hidden');
 }
 
 function failResponse() {
