@@ -66,14 +66,6 @@ function loadItemsData() {
   stopLoadingScreen();
 }
 
-function loadItemsDataWithStopLoader() {
-  if ('undefined' !== typeof google) {
-    google.script.run.withSuccessHandler(createItemsOptionsStopLoader).getItemsData();
-    return;
-  }
-  stopLoadingScreen();
-}
-
 function createSimpleListsOptions(allListsData) {
   const usersListInput = document.getElementById('user-list-options');
   const newOutTypesListInput = document.getElementById('new-output-list-options');

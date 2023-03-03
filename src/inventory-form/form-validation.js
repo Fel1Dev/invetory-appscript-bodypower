@@ -1,4 +1,3 @@
-
 function dataValidation(event) {
   event.preventDefault();
   startLoadingScreen();
@@ -37,10 +36,15 @@ function dataValidation(event) {
       .withSuccessHandler(successResponse)
       .withFailureHandler(failResponse)
       .getFrontData(recordType, [formData]);
+    
+    setTimeout(() => {
+      stopLoadingScreen();
+      clearFields();
+    }, 500);
     return;
   }
 
-  console.log('Success response');
+  console.log('local response');
   clearFields();
   stopLoadingScreen();
 }
@@ -106,7 +110,7 @@ const formatDate = (dateText) => {
 function successResponse() {
   console.log('Success response');
   clearFields();
-  loadItemsDataWithStopLoader();
+  loadItemsData();
 }
 
 function failResponse(event) {
