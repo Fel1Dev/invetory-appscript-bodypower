@@ -61,7 +61,8 @@ function getSimpleListsData() {
 
 function getSingleItemData(itemName) {
   console.log('Search: ' + itemName);
-  const columWithStock = 8;
+  const columnWithStock = 8;
+  const columnWithUnit = 5;
   const SS = SpreadsheetApp.getActiveSpreadsheet();
   const itemSheet = SS.getSheetByName('Inventario');
 
@@ -73,11 +74,18 @@ function getSingleItemData(itemName) {
   console.log('found: ' + txtFinder.getValue());
   const row = txtFinder.getRow();
   console.log('row: ' + row);
-  let itemData = itemSheet.getRange(row, columWithStock).getValue();
+  let stock = itemSheet.getRange(row, columnWithStock).getValue();
+  let unit = itemSheet.getRange(row, columnWithUnit).getValue();
 
-  console.log('itemData: ' + itemData);
-  if (!itemData) {
+  console.log('stock: ' + stock);
+  console.log('unit: ' + unit);
+  if (!stock) {
     throw Error();
+  }
+
+  let itemData = {
+    stock: stock,
+    unit: unit
   }
   return itemData;
 }
@@ -296,13 +304,13 @@ function createRow(recordType, values) {
       .getRange(itemColumn + (lastRowWithFormula + 1))
       .getNextDataCell(SpreadsheetApp.Direction.UP)
       .getRow() + 1;
-      
+
   console.log('columnsToInsert: ' + columnsToInsert);
   console.log('lastRow: ' + lastRow);
   console.log('values: ' + values);
 
   destinationSheet.getRange(lastRow, 1, 1, columnsToInsert).setValues(values);
-  
+
   //Assign formula to get units
   destinationSheet.getRange(lastRow, unitColumn).setFormula(`=IFNA(VLOOKUP(${itemColumn}${lastRow},ItemFieldsList,4, FALSE), "")`);
 }
