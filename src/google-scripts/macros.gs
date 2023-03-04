@@ -272,17 +272,21 @@ function createRow(recordType, values) {
   console.log('OK0');
   let destinationSheet;
   let itemColumn;
+  let unitColum;
   let columnsToInsert = 8;
   console.log('OK1');
   if (recordType === ENTRADA || recordType === ENTRADA_STOCK) {
     destinationSheet = spreadsheet.getSheetByName(INPUT_SHEET);
     itemColumn = 'E';
+    unitColumn = 7;
   }
   console.log('OK2');
   if (recordType === SALIDA || recordType === SALIDA_STOCK) {
     destinationSheet = spreadsheet.getSheetByName(OUTPUT_SHEET);
     itemColumn = 'D';
+    unitColumn = 5;
   }
+
   console.log('OK3');
   const lastRowWithFormula = destinationSheet.getLastRow();
   console.log('OK4');
@@ -292,11 +296,15 @@ function createRow(recordType, values) {
       .getRange(itemColumn + (lastRowWithFormula + 1))
       .getNextDataCell(SpreadsheetApp.Direction.UP)
       .getRow() + 1;
+      
   console.log('columnsToInsert: ' + columnsToInsert);
   console.log('lastRow: ' + lastRow);
   console.log('values: ' + values);
 
   destinationSheet.getRange(lastRow, 1, 1, columnsToInsert).setValues(values);
+  
+  //Assign formula to get units
+  destinationSheet.getRange(lastRow, unitColumn).setFormula(`=IFNA(VLOOKUP(${itemColumn}${lastRow},ItemFieldsList,4, FALSE), "")`);
 }
 
 function ClearForm() {
