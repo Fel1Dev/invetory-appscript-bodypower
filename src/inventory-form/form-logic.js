@@ -101,6 +101,7 @@ function getCurrentStock(event) {
     return;
   }
   updateCurrentStock('');
+  updateCurrentUnit('');
   lockNewStock();
   hideStockInputFields();
   hideStockOutputFields();
@@ -128,7 +129,8 @@ function searchItemData(name) {
 }
 
 function processItemData(itemData) {
-  updateCurrentStock(parseInt(itemData));
+  updateCurrentStock(parseInt(itemData.stock));
+  updateCurrentUnit(itemData.unit);
   unlockNewStockIfActive();
   enableInputFieldsIfActive();
   enableOutputFieldsIfActive();
@@ -137,6 +139,7 @@ function processItemData(itemData) {
 
 function processEmptyItemData() {
   updateCurrentStock('');
+  updateCurrentUnit('');
   lockNewStock();
   hideStockInputFields();
   hideStockOutputFields();
@@ -149,6 +152,10 @@ function processEmptyItemData() {
 
 function updateCurrentStock(value) {
   document.getElementById(CURRENT_STOCK_ID).value = value;
+}
+
+function updateCurrentUnit(value) {
+document.getElementById(CURRENT_UNIT_ID).value = value;
 }
 
 function getNewStock() {

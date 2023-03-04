@@ -3,6 +3,7 @@ const RECORD_DATE_ID = 'record-date';
 const USER_LIST_ID = 'user-list';
 const ITEM_LIST_ID = 'item-list';
 const CURRENT_STOCK_ID = 'current-stock';
+const CURRENT_UNIT_ID = 'current-unit';
 
 /* New Stock tab */
 const NEW_STOCK_TAB_ID = 'new-stock-tab';
@@ -46,6 +47,7 @@ function clearFields() {
   // General fields
   document.getElementById(ITEM_LIST_ID).value = '';
   document.getElementById(CURRENT_STOCK_ID).value = '';
+  document.getElementById(CURRENT_UNIT_ID).value = '';
 
   // New Stock
   if (isTabActive(NEW_STOCK_TAB_ID)) {
