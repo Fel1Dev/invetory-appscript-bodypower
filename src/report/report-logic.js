@@ -43,7 +43,7 @@ function renderDataOnTable(filteredData) {
     cellHeader.appendChild(cellHText);
     cellHeader.setAttribute('scope', 'row');
 
-    const nameCell = createCell(row[1]);
+    const nameCell = createCell(createItemNameWithUnit(row[1], row[4]));
     const minStockCell = createCell(row[8]);
     const currStockCell = createCell(row[7]);
 
@@ -56,7 +56,7 @@ function renderDataOnTable(filteredData) {
     counter++;
   });
 
-  if(counter === 1) {
+  if (counter === 1) {
     showEmptyResponse();
   }
 }
@@ -69,16 +69,22 @@ function createCell(value) {
 }
 
 function showEmptyResponse() {
-    document.getElementById('empty-response').classList.remove('hidden');
-    document.getElementById(TABLE_CONTENT_ID).classList.add('hidden');
+  document.getElementById('empty-response').classList.remove('hidden');
+  document.getElementById(TABLE_CONTENT_ID).classList.add('hidden');
 }
 
 function hideEmptyResponse() {
-    document.getElementById('empty-response').classList.add('hidden');
-    document.getElementById(TABLE_CONTENT_ID).classList.remove('hidden');
+  document.getElementById('empty-response').classList.add('hidden');
+  document.getElementById(TABLE_CONTENT_ID).classList.remove('hidden');
 }
 
 function failResponse() {
   errorResponse();
   stopLoadingScreen();
+}
+
+function createItemNameWithUnit(name, unit) {
+  if (unit) 
+    return `${name} x ${unit}`;
+  return name;
 }
