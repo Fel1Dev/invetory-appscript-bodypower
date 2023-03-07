@@ -37,6 +37,7 @@ describe('Record Creator UI', () => {
       encargadoCheckbox: document.getElementById('keep-user-list'),
       productField: document.getElementById('item-list'),
       currentStockField: document.getElementById('current-stock'),
+      currentUnitField: document.getElementById('current-unit'),
     };
   };
 
@@ -108,8 +109,9 @@ describe('Record Creator UI', () => {
     commonFields.encargadoField.value = encargadaFer;
     fireEvent.change(commonFields.productField, { target: { value: testProduct } });
 
-    /*Check load static value of current stock */
+    /*Check load static value of current stock and unit*/
     expect(commonFields.currentStockField.value).toBe('10');
+    expect(commonFields.currentUnitField.value).toBe('testUnit');
 
     fireEvent.click(limpiarButton);
 
@@ -123,6 +125,7 @@ describe('Record Creator UI', () => {
 
     const productField = document.getElementById('item-list');
     const currentStockField = document.getElementById('current-stock');
+    const currentUnitField = document.getElementById('current-unit');
 
     const stockFields = getStockFields(document);
 
@@ -133,6 +136,7 @@ describe('Record Creator UI', () => {
 
     fireEvent.change(productField, { target: { value: testProduct } });
     expect(currentStockField.value).toBe('10');
+    expect(currentUnitField.value).toBe('testUnit');
 
     fireEvent.input(stockFields.newStock, { target: { value: currentStockInput } });
     expect(stockFields.differenceField.value).toBe('-5');
