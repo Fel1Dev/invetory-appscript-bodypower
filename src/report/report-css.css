@@ -2,7 +2,7 @@
     --brand-color: #8DBF4F;
     --brand-color-dark: #72a337;
     --gray-backgorund: #dfe4ea;
-  }
+}
 
 html {
     font-size: 62.5%;
@@ -15,23 +15,35 @@ html {
 }
 
 .report {
-    width: 700px;
+    width: 85%;
     height: fit-content;
     background-color: white;
     border-radius: 5px;
     overflow-x: hidden;
+    margin: 0 auto;
 }
 
 .report-content {
-    padding: 10px;
-    margin-bottom: 20px;
+    padding: 10px 0px;
+    display: flex;
+    justify-content: space-around;
 }
 
 .report-title {
-    padding: 10px;
+    padding: 10px 0px;
     font-size: 3em;
     font-weight: 600;
     text-align: center;
+}
+
+.report-subtitle {
+    text-align: center;
+    font-size: 3em;
+    font-weight: 450;
+}
+
+.report-section {
+    margin: 10px 5px;
 }
 
 .report-control {
@@ -48,8 +60,15 @@ table th {
     overflow-y: scroll;
 }
 
-#empty-response {
+.empty-response {
     text-align: center;
     font-size: 3em;
-    font-weight: 400;
+    font-weight: 300;
+}
+
+@media screen and (max-width: 750px) {
+    .report-content {
+        display: flex;
+        flex-direction: column;
+    }
 }
