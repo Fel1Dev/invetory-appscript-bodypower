@@ -122,6 +122,7 @@ function searchItemData(name) {
   }
 
   updateCurrentStock(10);
+  updateCurrentUnit('testUnit');
   unlockNewStockIfActive();
   enableInputFieldsIfActive();
   enableOutputFieldsIfActive();
