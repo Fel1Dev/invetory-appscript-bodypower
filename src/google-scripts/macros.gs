@@ -101,7 +101,12 @@ function getFrontData(recordType, data) {
 function getInventoryData() {
   const fullInvetoryData = getAllInventoryData();
   const filteredData = filterLowerThanMinimal(fullInvetoryData);
-  return filteredData;
+
+  let inventoryData = {
+    ownersInventory:filteredData,
+    localsInventory:filteredData
+  }
+  return inventoryData;
 }
 
 function filterLowerThanMinimal(inventoryData) {
