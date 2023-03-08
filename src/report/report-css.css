@@ -15,11 +15,12 @@ html {
 }
 
 .report {
-    width: 85%;
+    width: 90%;
     height: fit-content;
     background-color: white;
     border-radius: 5px;
     overflow-x: hidden;
+    margin-bottom: 10px;
     margin: 0 auto;
 }
 
@@ -42,12 +43,12 @@ html {
 }
 
 .report-section {
-    margin: 10px 5px;
+    margin: 10px;
 }
 
 .report-control {
     margin: 10px 10px 0px;
-    text-align: right;
+    text-align: center;
 }
 
 table th {
@@ -55,8 +56,7 @@ table th {
 }
 
 .table-content {
-    max-height: 550px;
-    overflow-y: scroll;
+    max-height: fit-content;    
 }
 
 .empty-response {
