@@ -1,8 +1,28 @@
+const report_test_data = [
+  [ '123', 'Copas 2 onz con tapa', '0', '', '', '50', '', '50', '60', '', '', '', '', '', '', '', '', '', '', '', '', '', ],
+  [ '126', 'Aceite de Oliva', '0', '', '', '251', '', '251', '300', '', '', '', '', '', '', '', '', '', '', '', '', '',],
+  [ '132', 'Naranjas', '', '', '', '48', '42', '6', '10', '', '', '', '', '', '', '', '', '', '', '', '', '',],
+  [ '138', 'bolsas ziplo grande', '', '', '', '30', '', '30', '40', '', '', '', '','', '',  '', '', '', '', '', '', '', ],
+  [ '141', 'Chicles Tridents', '', 'Unidades', 'Unidades', '60', '', '60', '70', '120', '', '', '', '', '', '', '', '', '', '', '', '',],
+];
+
+const inventoryData = {
+  ownersInventory: report_test_data,
+  localsInventory: report_test_data
+}
+
 /* Events */
 //document.getElementById('reload-button').addEventListener('click', reloadReport);
 
-const TABLE_BODY_ID = 'table-body';
-const TABLE_CONTENT_ID = 'table-content';
+// CODE TO GOOGLE AFTER THIS LINE
+
+const TABLE_OWNERS_CONTENT_ID = 'table-owners-content';
+const TABLE_OWNERS_BODY_ID = 'table-owners-body';
+const TABLE_OWNERS_RESPONSE_ID = 'empty-owners-response';
+
+const TABLE_LOCALS_CONTENT_ID = 'table-locals-content';
+const TABLE_LOCALS_BODY_ID = 'table-locals-body';
+const TABLE_LOCALS_RESPONSE_ID = 'empty-locals-response';
 
 function reloadReport() {
   startLoadingScreen();
@@ -17,18 +37,33 @@ function getReportData() {
       .getInventoryData();
     return;
   }
+  addContentToTable(inventoryData);
   stopLoadingScreen();
 }
 
-function addContentToTable(dataFromInventory) {
-  hideEmptyResponse();
-  renderDataOnTable(dataFromInventory);
+function addContentToTable(inventoryData) {  
+  console.table(inventoryData);
+  renderData(inventoryData.ownersInventory, inventoryData.localsInventory);
   stopLoadingScreen();
 }
 
-function renderDataOnTable(filteredData) {
-  console.log(filteredData);
-  const tableBody = document.getElementById(TABLE_BODY_ID);
+function renderData(ownersDataFromInventory, localsDataFromInventory) {
+  renderDataOnOwnersTable(ownersDataFromInventory);
+  renderDataOnLocalsTable(localsDataFromInventory);
+}
+
+function renderDataOnOwnersTable(filteredData) {
+  hideEmptyResponse(TABLE_OWNERS_CONTENT_ID, TABLE_OWNERS_RESPONSE_ID);
+  renderDataOnTable(filteredData, TABLE_OWNERS_CONTENT_ID, TABLE_OWNERS_BODY_ID, TABLE_OWNERS_RESPONSE_ID);
+}
+
+function renderDataOnLocalsTable(filteredData) {
+  hideEmptyResponse(TABLE_LOCALS_CONTENT_ID, TABLE_LOCALS_RESPONSE_ID);
+  renderDataOnTable(filteredData, TABLE_LOCALS_CONTENT_ID, TABLE_LOCALS_BODY_ID, TABLE_LOCALS_RESPONSE_ID);
+}
+
+function renderDataOnTable(filteredData, tableContentId, tableBodyId, tableResponseId) {
+  const tableBody = document.getElementById(tableBodyId);
   tableBody.textContent = '';
   let counter = 1;
 
@@ -57,7 +92,7 @@ function renderDataOnTable(filteredData) {
   });
 
   if (counter === 1) {
-    showEmptyResponse();
+    showEmptyResponse(tableContentId, tableResponseId);
   }
 }
 
@@ -68,23 +103,23 @@ function createCell(value) {
   return nameCell;
 }
 
-function showEmptyResponse() {
-  document.getElementById('empty-response').classList.remove('hidden');
-  document.getElementById(TABLE_CONTENT_ID).classList.add('hidden');
+function showEmptyResponse(tableContentId, tableResponseId) {
+  document.getElementById(tableContentId).classList.add('hidden');
+  document.getElementById(tableResponseId).classList.remove('hidden');
 }
 
-function hideEmptyResponse() {
-  document.getElementById('empty-response').classList.add('hidden');
-  document.getElementById(TABLE_CONTENT_ID).classList.remove('hidden');
+function hideEmptyResponse(tableContentId, tableEmptyResponseId) {
+  document.getElementById(tableContentId).classList.remove('hidden');
+  document.getElementById(tableEmptyResponseId).classList.add('hidden');
 }
 
 function failResponse() {
-  errorResponse();
+  showEmptyResponse(TABLE_LOCALS_RESPONSE_ID, TABLE_LOCALS_CONTENT_ID);
+  showEmptyResponse(TABLE_OWNERS_RESPONSE_ID, TABLE_OWNERS_CONTENT_ID);
   stopLoadingScreen();
 }
 
 function createItemNameWithUnit(name, unit) {
-  if (unit) 
-    return `${name} x ${unit}`;
+  if (unit) return `${name} x ${unit}`;
   return name;
 }

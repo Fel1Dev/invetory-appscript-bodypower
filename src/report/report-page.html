@@ -11,34 +11,71 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <!-- <style type="text/css"><?!=include("main-css");?><?!=include("form-css");?></style> -->
+    <link rel="stylesheet" href="../inventory-form/form-css.css">
     <link rel="stylesheet" href="report-css.css">
 </head>
 
 <body>
+    <div id="loading" class="hide">
+        <div class="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
     <!-- ONLY UPLOAD THIS CODE -->
     <article class="report">
         <h2 class="report-title">Reporte Compra Inmediata</h2>
+        <div class="report-control">
+            <button id="reload-button" type="button" class="btn btn-success btn-lg">Recargar reportes</button>
+        </div>
         <div class="report-content">
-            <div class="report-control">
-                <button id="reload-button" type="button" class="btn btn-success btn-lg">Recargar reporte</button>
-            </div>
-            <div id="table-content" class="table-content">
-                <table class="table table-bordered">
-                    <thead class="table-header">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Item</th>
-                            <th scope="col">Stock minimo</th>
-                            <th scope="col">Stock actual</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-body" class="table-group-divider">
-                    </tbody>
-                </table>
-            </div>
-            <div class="hidden" id="empty-response">
-                <span>No hay items por comprar</span>
-            </div>
+            <section class="report-section">
+                <div class="report-subtitle">
+                    <span>Propietarios</span>
+                </div>
+                <div id="table-owners-content" class="table-content">
+                    <table class="table table-bordered">
+                        <thead class="table-header">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Item</th>
+                                <th scope="col">Stock minimo</th>
+                                <th scope="col">Stock actual</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-owners-body" class="table-group-divider">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="empty-response hidden" id="empty-owners-response">
+                    <span>No hay items por comprar</span>
+                </div>
+            </section>
+            <section class="report-section">
+                <div class="report-subtitle">
+                    <span>Pedido en local</span>
+                </div>
+                <div id="table-locals-content" class="table-content">
+                    <table class="table table-bordered">
+                        <thead class="table-header">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Item</th>
+                                <th scope="col">Stock minimo</th>
+                                <th scope="col">Stock actual</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-locals-body" class="table-group-divider">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="empty-response hidden" id="empty-locals-response">
+                    <span>No hay items por comprar</span>
+                </div>
+            </section>
         </div>
     </article>
     <!-- ONLY UPLOAD THIS CODE -->
@@ -50,6 +87,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
         integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
         </script>
+    <script type="text/javascript" src="../inventory-form/form-controls.js"></script>
     <script type="text/javascript" src="report-logic.js"></script>
 </body>
 

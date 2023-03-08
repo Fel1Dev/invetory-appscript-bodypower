@@ -21,6 +21,9 @@ const NEW_STOCK_AMOUNT_CELL = 'C19';
 const INVOICE_NUM_CELL = 'F11';
 const USER_CELL = 'C4';
 
+const BUYER_OWNERS = 'PROPIETARIOS';
+const BUYER_LOCALS = 'PEDIDO EN EL LOCAL';
+
 function doGet() {
   let template = HtmlService.createTemplateFromFile('index');
   let output = template.evaluate();
@@ -101,17 +104,40 @@ function getFrontData(recordType, data) {
 function getInventoryData() {
   const fullInvetoryData = getAllInventoryData();
   const filteredData = filterLowerThanMinimal(fullInvetoryData);
-  return filteredData;
+
+  const buyerColumn = 10;
+
+  let ownersItems = filterByValue(filteredData, buyerColumn, BUYER_OWNERS, false);
+  let localsItems = filterByValue(filteredData, buyerColumn, BUYER_LOCALS, true);
+
+  let inventoryData = {
+    ownersInventory: ownersItems,
+    localsInventory: localsItems
+  }
+  return inventoryData;
 }
 
 function filterLowerThanMinimal(inventoryData) {
   return inventoryData.filter((row) => {
-    if (row[8]) {
+    const minStock = row[8];
+    if (minStock) {
       const currStock = parseInt(row[7]);
-      const minStock = parseInt(row[8]);
-      if ((currStock - minStock) < 0) {
+      const difference = currStock - minStock;
+      if (difference < 0) {
         return row;
       }
+    }
+  });
+}
+
+function filterByValue(inventoryData, field, value, acceptEmptyValues) {
+  return inventoryData.filter((row) => {
+    const valueToFilter = row[field];
+    if (valueToFilter === value) {
+      return row;
+    }
+    if(acceptEmptyValues && !valueToFilter) {
+      return row;
     }
   });
 }
@@ -119,7 +145,7 @@ function filterLowerThanMinimal(inventoryData) {
 function getAllInventoryData() {
   const SS = SpreadsheetApp.getActiveSpreadsheet();
   const itemSheet = SS.getSheetByName('Inventario');
-  const itemsData = itemSheet.getDataRange().getDisplayValues();
+  const itemsData = itemSheet.getDataRange().getValues();
 
   //Delete first 3 lines
   itemsData.splice(0, 3);
