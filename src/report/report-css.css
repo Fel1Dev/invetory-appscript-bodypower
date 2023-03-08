@@ -24,7 +24,6 @@ html {
 }
 
 .report-content {
-    padding: 10px 0px;
     display: flex;
     justify-content: space-around;
 }
@@ -47,7 +46,7 @@ html {
 }
 
 .report-control {
-    margin: 10px;
+    margin: 10px 10px 0px;
     text-align: right;
 }
 
@@ -70,5 +69,13 @@ table th {
     .report-content {
         display: flex;
         flex-direction: column;
+    }
+
+    .report-title {
+        font-size: 2rem;
+    }
+
+    .report-subtitle {
+        font-size: 2rem;
     }
 }
