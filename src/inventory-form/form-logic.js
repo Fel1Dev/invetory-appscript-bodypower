@@ -93,6 +93,7 @@ function loadSimpleListsData() {
 
 function getCurrentStock(event) {
   startLoadingScreen();
+  hideErrorText();
   const itemName = event.target.value;
   setNewStock('');
   //Call backed function to get only one row
@@ -141,6 +142,7 @@ function processItemData(itemData) {
 function processEmptyItemData() {
   updateCurrentStock('');
   updateCurrentUnit('');
+  showItemError();
   lockNewStock();
   hideStockInputFields();
   hideStockOutputFields();
@@ -149,6 +151,14 @@ function processEmptyItemData() {
   disableOutputFields();
 
   stopLoadingScreen();
+}
+
+function showItemError() {
+  document.getElementById(ITEM_ERROR_LABEL_ID).classList.remove(CSS_HIDE_CLASS);
+}
+
+function hideErrorText() {
+  document.getElementById(ITEM_ERROR_LABEL_ID).classList.add(CSS_HIDE_CLASS);
 }
 
 function updateCurrentStock(value) {

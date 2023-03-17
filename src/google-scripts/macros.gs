@@ -82,6 +82,10 @@ function getSingleItemData(itemName) {
 
   console.log('stock: ' + stock);
   console.log('unit: ' + unit);  
+ 
+  if (stock === '') {
+    throw Error();
+  }
 
   let itemData = {
     stock: stock,
