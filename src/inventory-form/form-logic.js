@@ -166,7 +166,7 @@ function updateCurrentStock(value) {
 }
 
 function updateCurrentUnit(value) {
-document.getElementById(CURRENT_UNIT_ID).value = value;
+  document.getElementById(CURRENT_UNIT_ID).value = value;
 }
 
 function getNewStock() {
