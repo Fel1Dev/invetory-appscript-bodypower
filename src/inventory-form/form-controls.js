@@ -4,6 +4,7 @@ const USER_LIST_ID = 'user-list';
 const ITEM_LIST_ID = 'item-list';
 const CURRENT_STOCK_ID = 'current-stock';
 const CURRENT_UNIT_ID = 'current-unit';
+const ITEM_ERROR_LABEL_ID = 'item-error-label';
 
 /* New Stock tab */
 const NEW_STOCK_TAB_ID = 'new-stock-tab';
@@ -33,6 +34,8 @@ const OUTPUT_DESC = 'output-description';
 const OUTPUT_TYPE_BAJA = 'BAJA';
 const ENTRADA_ROW_TYPE = 'ENTRADA';
 const SALIDA_ROW_TYPE = 'SALIDA';
+
+const CSS_HIDE_CLASS = 'hidden';
 
 function clearFields() {
   let keepDate = document.getElementById('keep-date').checked;
@@ -107,53 +110,53 @@ function clearStockOutputFields() {
 }
 
 function showStockInputFields() {
-  document.getElementById('new-stock-input-fields').classList.remove('hidden');
+  document.getElementById('new-stock-input-fields').classList.remove(CSS_HIDE_CLASS);
 
   document.getElementById(STOCK_AMOUNT_ID).disabled = false;
   clearStockInputFields();
 }
 
 function hideStockInputFields() {
-  document.getElementById('new-stock-input-fields').classList.add('hidden');
+  document.getElementById('new-stock-input-fields').classList.add(CSS_HIDE_CLASS);
 
   document.getElementById(STOCK_AMOUNT_ID).disabled = true;
 }
 
 function showStockOutputFields() {
-  document.getElementById('new-stock-output-fields').classList.remove('hidden');
+  document.getElementById('new-stock-output-fields').classList.remove(CSS_HIDE_CLASS);
 
   document.getElementById(STOCK_OUTPUT_TYPE_LIST).disabled = false;
   clearStockOutputFields();
 }
 
 function hideStockOutputFields() {
-  document.getElementById('new-stock-output-fields').classList.add('hidden');
-  document.getElementById('new-stock-output-detail').classList.add('hidden');
+  document.getElementById('new-stock-output-fields').classList.add(CSS_HIDE_CLASS);
+  document.getElementById('new-stock-output-detail').classList.add(CSS_HIDE_CLASS);
 
   document.getElementById(STOCK_OUTPUT_TYPE_LIST).disabled = true;
   document.getElementById(STOCK_OUTPUT_DESC).disabled = true;
 }
 
 function showStockOutputDetail() {
-  document.getElementById('new-stock-output-detail').classList.remove('hidden');
+  document.getElementById('new-stock-output-detail').classList.remove(CSS_HIDE_CLASS);
 
   document.getElementById(STOCK_OUTPUT_DESC).disabled = false;
 }
 
 function hideStockOutputDetail() {
-  document.getElementById('new-stock-output-detail').classList.add('hidden');
+  document.getElementById('new-stock-output-detail').classList.add(CSS_HIDE_CLASS);
 
   document.getElementById(STOCK_OUTPUT_DESC).disabled = true;
 }
 
 function showOutputDetail() {
-  document.getElementById('output-detail').classList.remove('hidden');
+  document.getElementById('output-detail').classList.remove(CSS_HIDE_CLASS);
 
   document.getElementById(OUTPUT_DESC).disabled = false;
 }
 
 function hideOutputDetail() {
-  document.getElementById('output-detail').classList.add('hidden');
+  document.getElementById('output-detail').classList.add(CSS_HIDE_CLASS);
 
   document.getElementById(OUTPUT_DESC).disabled = true;
 }

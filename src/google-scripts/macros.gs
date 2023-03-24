@@ -81,8 +81,9 @@ function getSingleItemData(itemName) {
   let unit = itemSheet.getRange(row, columnWithUnit).getValue();
 
   console.log('stock: ' + stock);
-  console.log('unit: ' + unit);
-  if (!stock) {
+  console.log('unit: ' + unit);  
+ 
+  if (stock === '') {
     throw Error();
   }
 

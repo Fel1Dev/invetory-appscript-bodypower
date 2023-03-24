@@ -86,6 +86,18 @@ body {
     margin-right: 5px;
 }
 
+.common--label__large {
+    width: 90%;
+    margin: 5px;
+    padding-left: 5px;
+}
+
+.error-message {
+    text-align: center;
+    font-weight: 500;
+    color: red;
+}
+
 .common--label__short {
     width: 60px;
     margin-left: 5px;

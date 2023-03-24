@@ -36,7 +36,7 @@ function dataValidation(event) {
       .withSuccessHandler(successResponse)
       .withFailureHandler(failResponse)
       .getFrontData(recordType, [formData]);
-    
+
     setTimeout(() => {
       stopLoadingScreen();
       clearFields();
@@ -88,7 +88,7 @@ function getFormDataAsStockOutput() {
 const getCommonFields = () => {
   return {
     userName: document.getElementById(USER_LIST_ID).value,
-    recordDate: formatDate(document.getElementById(RECORD_DATE_ID).value),
+    recordDate: formatDate2(document.getElementById(RECORD_DATE_ID).value),
     productName: document.getElementById(ITEM_LIST_ID).value,
   };
 };
@@ -101,10 +101,20 @@ const formatDate = (dateText) => {
   const recordDate = new Date(dateText);
   if (recordDate)
     return [
-      padTo2Digits(recordDate.getDate()),
+      padTo2Digits(recordDate.getDate() + 1),
       padTo2Digits(recordDate.getMonth() + 1),
       recordDate.getFullYear(),
     ].join('/');
+};
+
+const formatDate2 = (dateText) => {
+  console.log('dateText: ' + dateText);
+  if (dateText) {
+    const splitedDate = dateText.split('-');
+    const finalDate = `${splitedDate[2]}/${splitedDate[1]}/${splitedDate[0]}`;
+    console.log(`Final date: '${finalDate}`);
+    return finalDate;
+  }
 };
 
 function successResponse() {
