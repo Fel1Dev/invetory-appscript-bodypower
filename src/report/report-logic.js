@@ -1,9 +1,9 @@
 const report_test_data = [
-  [ '123', 'Copas 2 onz con tapa', '0', '', '', '50', '', '50', '60', '', '', '', '', '', '', '', '', '', '', '', '', '', ],
-  [ '126', 'Aceite de Oliva', '0', '', '', '251', '', '251', '300', '', '', '', '', '', '', '', '', '', '', '', '', '',],
-  [ '132', 'Naranjas', '', '', '', '48', '42', '6', '10', '', '', '', '', '', '', '', '', '', '', '', '', '',],
-  [ '138', 'bolsas ziplo grande', '', '', '', '30', '', '30', '40', '', '', '', '','', '',  '', '', '', '', '', '', '', ],
-  [ '141', 'Chicles Tridents', '', 'Unidades', 'Unidades', '60', '', '60', '70', '120', '', '', '', '', '', '', '', '', '', '', '', '',],
+  [ '123', 'Copas 2 onz con tapa', '0', '', '', '50', '', '50', '60', 'PROPIETARIOS', '', '', '', '', '', '', '', '', '', '', '', '', ],
+  [ '126', 'Aceite de Oliva', '0', '', '', '251', '', '251', '300', 'PROPIETARIOS', '', '', '', '', '', '', '', '', '', '', '', '',],
+  [ '132', 'Naranjas', '', '', '', '48', '42', '6', '10', 'PROPIETARIOS', new Date(), '', '', '', '', '', '', '', '', '', '', '',],
+  [ '138', 'bolsas ziplo grande', '', '', '', '30', '', '30', '40', 'PEDIDO EN EL LOCAL', new Date(), '', '','', '',  '', '', '', '', '', '', '', ],
+  [ '141', 'Chicles Tridents', '', 'Unidades', 'Unidades', '60', '', '60', '70', '120', 'PEDIDO EN EL LOCAL', '5/4/2023', '', '', '', '', '', '', '', '', '', '',],
 ];
 
 const inventoryData = {
@@ -12,7 +12,7 @@ const inventoryData = {
 }
 
 /* Events */
-//document.getElementById('reload-button').addEventListener('click', reloadReport);
+document.getElementById('reload-button').addEventListener('click', reloadReport);
 
 // CODE TO GOOGLE AFTER THIS LINE
 
@@ -42,6 +42,11 @@ function getReportData() {
 }
 
 function addContentToTable(inventoryData) {  
+  if(!inventoryData) {
+    console.log('Empty object');
+    failResponse();
+    return;
+  }
   console.table(inventoryData);
   renderData(inventoryData.ownersInventory, inventoryData.localsInventory);
   stopLoadingScreen();
@@ -81,11 +86,13 @@ function renderDataOnTable(filteredData, tableContentId, tableBodyId, tableRespo
     const nameCell = createCell(createItemNameWithUnit(row[1], row[4]));
     const minStockCell = createCell(row[8]);
     const currStockCell = createCell(row[7]);
+    const pendingSince = createCell(row[11]);
 
     tableRow.appendChild(cellHeader);
     tableRow.appendChild(nameCell);
     tableRow.appendChild(minStockCell);
     tableRow.appendChild(currStockCell);
+    tableRow.appendChild(pendingSince);
 
     tableBody.appendChild(tableRow);
     counter++;
