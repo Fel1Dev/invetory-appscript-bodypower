@@ -21,6 +21,7 @@ const NEW_STOCK_AMOUNT_CELL = 'C19';
 const INVOICE_NUM_CELL = 'F11';
 const USER_CELL = 'C4';
 
+const BUYER_FIELD_NAME = 'buyer';
 const BUYER_OWNERS = 'PROPIETARIOS';
 const BUYER_LOCALS = 'PEDIDO EN EL LOCAL';
 
@@ -103,19 +104,44 @@ function getFrontData(recordType, data) {
 }
 
 function getInventoryData() {
-  const fullInvetoryData = getAllInventoryData();
-  const filteredData = filterLowerThanMinimal(fullInvetoryData);
+  const time1 = createTimeCounter('Arrays');
+  //const fullInvetoryData = getAllInventoryData();
+  //const filteredData = filterLowerThanMinimal(fullInvetoryData);
+  time1.endTime();
 
-  const buyerColumn = 10;
+  const time2 = createTimeCounter('Objects');
+  const fullInvetoryData2 = getAllInventoryData();
+  const transformedData = transformToItemObjets(fullInvetoryData2);
+  const filteredData2 = filterLowerThanMinimalItems(transformedData);
+  time2.endTime();
 
-  let ownersItems = filterByValue(filteredData, buyerColumn, BUYER_OWNERS, false);
-  let localsItems = filterByValue(filteredData, buyerColumn, BUYER_LOCALS, true);
+  let ownersItems2 = filterItemsByValue(filteredData2, BUYER_FIELD_NAME, BUYER_OWNERS, false);
+  let localsItems2 = filterItemsByValue(filteredData2, BUYER_FIELD_NAME, BUYER_LOCALS, true);
 
   let inventoryData = {
-    ownersInventory: ownersItems,
-    localsInventory: localsItems
+    ownersInventory: ownersItems2,
+    localsInventory: localsItems2
   }
+  console.log('ownersItems: ' + ownersItems2.length)
+  console.log('localsItems: ' + localsItems2.length)
+  
   return inventoryData;
+}
+
+function transformToItemObjets(inventoryData) {
+  return inventoryData.map((row) => {
+    //return [row[0], row[1], row[3], row[4], row[7], row[8], row[9], row[10], row[11]]
+    return {
+      id: row[0],
+      name: row[1],
+      units: row[3],
+      stock: row[7],
+      min: row[8],
+      max: row[9],
+      buyer: row[10],
+      since: row[11]
+    }
+  });
 }
 
 function filterLowerThanMinimal(inventoryData) {
@@ -131,6 +157,19 @@ function filterLowerThanMinimal(inventoryData) {
   });
 }
 
+function filterLowerThanMinimalItems(inventoryData) {
+  return inventoryData.filter((item) => {
+      const minStock = item.min;
+      if (minStock) {
+        const currStock = item.stock;
+        const difference = currStock - minStock;
+        if (difference < 0) {
+          return item;
+        }
+      }
+    });
+}
+
 function filterByValue(inventoryData, field, value, acceptEmptyValues) {
   return inventoryData.filter((row) => {
     const valueToFilter = row[field];
@@ -139,6 +178,18 @@ function filterByValue(inventoryData, field, value, acceptEmptyValues) {
     }
     if(acceptEmptyValues && !valueToFilter) {
       return row;
+    }
+  });
+}
+
+function filterItemsByValue(inventoryItems, fieldName, value, acceptEmptyValues) {
+  return inventoryItems.filter((item) => {
+    const valueToFilter = item[fieldName];
+    if (valueToFilter === value) {
+      return item;
+    }
+    if(acceptEmptyValues && !valueToFilter) {
+      return item;
     }
   });
 }
@@ -367,4 +418,19 @@ function Lock() {
   var spreadsheet = SpreadsheetApp.getActive();
   spreadsheet.getRange('H10').activate();
   var protection = spreadsheet.getRange('H10').protect();
+}
+
+function createTimeCounter(title) {
+  let startTime = new Date();
+  console.log(`startTime ${title}: ${startTime.toJSON()}`);
+  
+  return {
+    endTime() {
+      let endTime = new Date();
+      let timeDiff = endTime - startTime;
+      console.log(`EndTime ${title}: ${endTime.toJSON()} `);
+      console.log(timeDiff / 1000);
+      console.log('_________________');
+    }
+  }
 }

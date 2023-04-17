@@ -1,10 +1,5 @@
-const report_test_data = [
-  [ '123', 'Copas 2 onz con tapa', '0', '', '', '50', '', '50', '60', 'PROPIETARIOS', '', '', '', '', '', '', '', '', '', '', '', '', ],
-  [ '126', 'Aceite de Oliva', '0', '', '', '251', '', '251', '300', 'PROPIETARIOS', '', '', '', '', '', '', '', '', '', '', '', '',],
-  [ '132', 'Naranjas', '', '', '', '48', '42', '6', '10', 'PROPIETARIOS', new Date(), '', '', '', '', '', '', '', '', '', '', '',],
-  [ '138', 'bolsas ziplo grande', '', '', '', '30', '', '30', '40', 'PEDIDO EN EL LOCAL', new Date(), '', '','', '',  '', '', '', '', '', '', '', ],
-  [ '141', 'Chicles Tridents', '', 'Unidades', 'Unidades', '60', '', '60', '70', '120', 'PEDIDO EN EL LOCAL', '5/4/2023', '', '', '', '', '', '', '', '', '', '',],
-];
+const report_test_data = 
+[{"min":900,"max":"","name":"Mezcla para pancacke","id":44,"units":"Paquete","stock":600,"buyer":"PROPIETARIOS","since":"13/04/2023 00:00:00"},{"min":15,"max":"","name":"Filete de pollo","units":"Frasco","id":62,"stock":10,"buyer":"PROPIETARIOS","since":"13/04/2023 0:00:00"},{"min":1,"max":"","name":"Jabon lava loza","units":"Frasco","id":75,"stock":0,"buyer":"PROPIETARIOS","since":"25/2/2023 00:00:00"},{"min":20,"max":"","name":"Bolsas leche deslactosada 1100","units":"Paquete","id":79,"stock":12,"buyer":"PROPIETARIOS","since":""},{"min":20,"max":"","name":"Gatorade","units":"Frasco","id":91,"stock":13,"buyer":"PROPIETARIOS","since":""},{"min":20,"max":"","name":"Agua 600 Ml","units":"Frasco","id":93,"stock":18,"since":"","buyer":"PROPIETARIOS"},{"min":20,"max":"","name":"Banano","id":95,"units":"N/A","stock":10,"buyer":"PROPIETARIOS","since":""},{"min":150,"max":"","name":"Cafe Buen dia instantaneo","units":"Frasco","id":102,"stock":85,"buyer":"PROPIETARIOS","since":"6/1/2023 00:00:00"},{"min":5,"max":"","name":"Crema de mani","units":"Frasco","id":111,"stock":2,"buyer":"PROPIETARIOS","since":"12/04/2023 00:00:00"},{"min":200,"max":"","name":"jabon para manos","units":"ml","id":137,"stock":0,"buyer":"PROPIETARIOS","since":"13/12/2022 00:00:00"}];
 
 const inventoryData = {
   ownersInventory: report_test_data,
@@ -72,8 +67,8 @@ function renderDataOnTable(filteredData, tableContentId, tableBodyId, tableRespo
   tableBody.textContent = '';
   let counter = 1;
 
-  filteredData.forEach((row) => {
-    if (!row[1]) return;
+  filteredData.forEach((item) => {
+    if (!item.id) return;
 
     const tableRow = document.createElement('tr');
 
@@ -83,10 +78,10 @@ function renderDataOnTable(filteredData, tableContentId, tableBodyId, tableRespo
     cellHeader.appendChild(cellHText);
     cellHeader.setAttribute('scope', 'row');
 
-    const nameCell = createCell(createItemNameWithUnit(row[1], row[4]));
-    const minStockCell = createCell(row[8]);
-    const currStockCell = createCell(row[7]);
-    const pendingSince = createCell(row[11]);
+    const nameCell = createCell(item.units? `${item.name} x ${item.units}` : item.name);
+    const minStockCell = createCell(item.min);
+    const currStockCell = createCell(item.stock);
+    const pendingSince = createCell(item.since);
 
     tableRow.appendChild(cellHeader);
     tableRow.appendChild(nameCell);
@@ -127,6 +122,5 @@ function failResponse() {
 }
 
 function createItemNameWithUnit(name, unit) {
-  if (unit) return `${name} x ${unit}`;
-  return name;
+  return unit? `${name} x ${unit}` : name;
 }
