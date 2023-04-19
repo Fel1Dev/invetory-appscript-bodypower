@@ -73,7 +73,7 @@ function loadPageEventsByName(pageName) {
 function loadInventoryFormLogic() {
   /* Global events */
   document.getElementById('clear-fields').addEventListener('click', clearFields);
-  document.getElementById('form-inventory').addEventListener('submit', dataValidation);
+  document.getElementById('form-inventory').addEventListener('submit', createRecord);
 
   /* Tab Panel events */
   document.getElementById(NEW_STOCK_TAB_ID).addEventListener('click', clickOnNewStock);

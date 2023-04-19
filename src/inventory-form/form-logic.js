@@ -1,7 +1,7 @@
 /* Global events */
 window.addEventListener('load', startUpForm);
 document.getElementById('clear-fields').addEventListener('click', clearFields);
-document.getElementById('form-inventory').addEventListener('submit', dataValidation);
+document.getElementById('form-inventory').addEventListener('submit', createRecord);
 
 // Tab Panel events
 document.getElementById(NEW_STOCK_TAB_ID).addEventListener('click', clickOnNewStock);
@@ -103,6 +103,8 @@ function getCurrentStock(event) {
   }
   updateCurrentStock('');
   updateCurrentUnit('');
+  updateCurrentMinStock('');
+  updateCurrentLowStockSince('');
   lockNewStock();
   hideStockInputFields();
   hideStockOutputFields();
@@ -131,8 +133,11 @@ function searchItemData(name) {
 }
 
 function processItemData(itemData) {
+  console.log('ItemData: ',itemData);
   updateCurrentStock(parseInt(itemData.stock));
   updateCurrentUnit(itemData.unit);
+  updateCurrentMinStock(itemData.min);
+  updateCurrentLowStockSince(itemData.lowStockSince);
   unlockNewStockIfActive();
   enableInputFieldsIfActive();
   enableOutputFieldsIfActive();
@@ -142,6 +147,8 @@ function processItemData(itemData) {
 function processEmptyItemData() {
   updateCurrentStock('');
   updateCurrentUnit('');
+  updateCurrentMinStock('');
+  updateCurrentLowStockSince('');
   showItemError();
   lockNewStock();
   hideStockInputFields();
@@ -169,6 +176,18 @@ function updateCurrentUnit(value) {
   document.getElementById(CURRENT_UNIT_ID).value = value;
 }
 
+function updateCurrentMinStock(value) {
+  document.getElementById(CURRENT_MIN_ID).value = value;
+}
+
+function updateCurrentLowStockSince(value) {
+  document.getElementById(LOW_STOCK_SINCE_ID).value = value;
+}
+
+function getCurrentLowStockSince() {
+  return document.getElementById(LOW_STOCK_SINCE_ID).value;
+}
+
 function getNewStock() {
   return document.getElementById(NEW_STOCK_ID).value;
 }
@@ -179,6 +198,10 @@ function setNewStock(val) {
 
 function getCurrentStockValue() {
   return document.getElementById(CURRENT_STOCK_ID).value;
+}
+
+function getCurrentMinStock() {
+  return document.getElementById(CURRENT_MIN_ID).value = value;
 }
 
 function processNewStock() {

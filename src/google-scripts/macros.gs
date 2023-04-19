@@ -65,8 +65,10 @@ function getSimpleListsData() {
 
 function getSingleItemData(itemName) {
   console.log('Search: ' + itemName);
-  const columnWithStock = 8;
-  const columnWithUnit = 5;
+  const stockColumn = 8;
+  const unitColumn = 5;
+  const minStockColumn = 9;
+  const lowStockSinceColumn = 12;
   const SS = SpreadsheetApp.getActiveSpreadsheet();
   const itemSheet = SS.getSheetByName('Inventario');
 
@@ -78,11 +80,15 @@ function getSingleItemData(itemName) {
   console.log('found: ' + txtFinder.getValue());
   const row = txtFinder.getRow();
   console.log('row: ' + row);
-  let stock = itemSheet.getRange(row, columnWithStock).getValue();
-  let unit = itemSheet.getRange(row, columnWithUnit).getValue();
+  let stock = itemSheet.getRange(row, stockColumn).getValue();
+  let unit = itemSheet.getRange(row, unitColumn).getValue();
+  let minStock = itemSheet.getRange(row, minStockColumn).getValue();
+  let lowStockSince = itemSheet.getRange(row, lowStockSinceColumn).getValue();
 
   console.log('stock: ' + stock);
   console.log('unit: ' + unit);  
+  console.log('minStock: ' + minStock); 
+  console.log('LowStockSince: ' + lowStockSince); 
  
   if (stock === '') {
     throw Error();
@@ -90,7 +96,9 @@ function getSingleItemData(itemName) {
 
   let itemData = {
     stock: stock,
-    unit: unit
+    unit: unit,
+    min: minStock,
+    lowStockSince: lowStockSince
   }
   return itemData;
 }

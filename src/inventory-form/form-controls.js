@@ -4,6 +4,8 @@ const USER_LIST_ID = 'user-list';
 const ITEM_LIST_ID = 'item-list';
 const CURRENT_STOCK_ID = 'current-stock';
 const CURRENT_UNIT_ID = 'current-unit';
+const CURRENT_MIN_ID = 'current-min';
+const LOW_STOCK_SINCE_ID = 'low-stock-since-date';
 const ITEM_ERROR_LABEL_ID = 'item-error-label';
 
 /* New Stock tab */
@@ -51,6 +53,7 @@ function clearFields() {
   document.getElementById(ITEM_LIST_ID).value = '';
   document.getElementById(CURRENT_STOCK_ID).value = '';
   document.getElementById(CURRENT_UNIT_ID).value = '';
+  document.getElementById(CURRENT_MIN_ID).value = '';
 
   // New Stock
   if (isTabActive(NEW_STOCK_TAB_ID)) {
