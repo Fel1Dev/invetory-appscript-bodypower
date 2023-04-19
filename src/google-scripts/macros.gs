@@ -25,6 +25,11 @@ const BUYER_FIELD_NAME = 'buyer';
 const BUYER_OWNERS = 'PROPIETARIOS';
 const BUYER_LOCALS = 'PEDIDO EN EL LOCAL';
 
+const INVENTORY_STOCK_COLUMN = 8;
+const INVENTORY_UNIT_COLUMN = 5;
+const INVENTORY_MIN_STOCK_COLUMN = 9;
+const INVENTORY_LOWSTOCK_SINCE_DATE_COLUMN = 12;
+
 function doGet() {
   let template = HtmlService.createTemplateFromFile('index');
   let output = template.evaluate();
@@ -64,13 +69,10 @@ function getSimpleListsData() {
 }
 
 function getSingleItemData(itemName) {
-  console.log('Search: ' + itemName);
-  const stockColumn = 8;
-  const unitColumn = 5;
-  const minStockColumn = 9;
-  const lowStockSinceColumn = 12;
+  console.log('getSingleItemData Search: ' + itemName);
+
   const SS = SpreadsheetApp.getActiveSpreadsheet();
-  const itemSheet = SS.getSheetByName('Inventario');
+  const itemSheet = SS.getSheetByName(INVENTORY_SHEET);
 
   const txtFinder = itemSheet
     .createTextFinder(itemName)
@@ -80,16 +82,16 @@ function getSingleItemData(itemName) {
   console.log('found: ' + txtFinder.getValue());
   const row = txtFinder.getRow();
   console.log('row: ' + row);
-  let stock = itemSheet.getRange(row, stockColumn).getValue();
-  let unit = itemSheet.getRange(row, unitColumn).getValue();
-  let minStock = itemSheet.getRange(row, minStockColumn).getValue();
-  let lowStockSince = itemSheet.getRange(row, lowStockSinceColumn).getValue();
+  let stock = itemSheet.getRange(row, INVENTORY_STOCK_COLUMN).getValue();
+  let unit = itemSheet.getRange(row, INVENTORY_UNIT_COLUMN).getValue();
+  let minStock = itemSheet.getRange(row, INVENTORY_MIN_STOCK_COLUMN).getValue();
+  let lowStockSince = itemSheet.getRange(row, INVENTORY_LOWSTOCK_SINCE_DATE_COLUMN).getValue();
 
   console.log('stock: ' + stock);
-  console.log('unit: ' + unit);  
-  console.log('minStock: ' + minStock); 
-  console.log('LowStockSince: ' + lowStockSince); 
- 
+  console.log('unit: ' + unit);
+  console.log('minStock: ' + minStock);
+  console.log('LowStockSince: ' + lowStockSince);
+
   if (stock === '') {
     throw Error();
   }
@@ -103,8 +105,24 @@ function getSingleItemData(itemName) {
   return itemData;
 }
 
-function getFrontData(recordType, data) {
-  console.log('getFrontData');
+function updateInventorySinceDate(itemName, newDate) {
+  console.log('updateInventorySinceDate: ', { itemName, newDate });
+  const SS = SpreadsheetApp.getActiveSpreadsheet();
+  const itemSheet = SS.getSheetByName(INVENTORY_SHEET);
+
+  const txtFinder = itemSheet
+    .createTextFinder(itemName)
+    .matchCase(true)
+    .matchEntireCell(true)
+    .findNext();
+  console.log('found: ' + txtFinder.getValue());
+  const row = txtFinder.getRow();
+  console.log('row: ' + row);  
+  itemSheet.getRange(row, INVENTORY_LOWSTOCK_SINCE_DATE_COLUMN).setValue(newDate);
+}
+
+function saveFormData(recordType, data) {
+  console.log('saveFormData');
   console.log('RecordType: ' + recordType);
   console.log('Data from interface: ' + data);
 
@@ -132,7 +150,7 @@ function getInventoryData() {
   }
   console.log('ownersItems: ' + ownersItems2.length)
   console.log('localsItems: ' + localsItems2.length)
-  
+
   return inventoryData;
 }
 
@@ -167,15 +185,15 @@ function filterLowerThanMinimal(inventoryData) {
 
 function filterLowerThanMinimalItems(inventoryData) {
   return inventoryData.filter((item) => {
-      const minStock = item.min;
-      if (minStock) {
-        const currStock = item.stock;
-        const difference = currStock - minStock;
-        if (difference < 0) {
-          return item;
-        }
+    const minStock = item.min;
+    if (minStock) {
+      const currStock = item.stock;
+      const difference = currStock - minStock;
+      if (difference < 0) {
+        return item;
       }
-    });
+    }
+  });
 }
 
 function filterByValue(inventoryData, field, value, acceptEmptyValues) {
@@ -184,7 +202,7 @@ function filterByValue(inventoryData, field, value, acceptEmptyValues) {
     if (valueToFilter === value) {
       return row;
     }
-    if(acceptEmptyValues && !valueToFilter) {
+    if (acceptEmptyValues && !valueToFilter) {
       return row;
     }
   });
@@ -196,7 +214,7 @@ function filterItemsByValue(inventoryItems, fieldName, value, acceptEmptyValues)
     if (valueToFilter === value) {
       return item;
     }
-    if(acceptEmptyValues && !valueToFilter) {
+    if (acceptEmptyValues && !valueToFilter) {
       return item;
     }
   });
@@ -372,13 +390,13 @@ function createRow(recordType, values) {
   if (recordType === ENTRADA || recordType === ENTRADA_STOCK) {
     destinationSheet = spreadsheet.getSheetByName(INPUT_SHEET);
     itemColumn = 'E';
-    unitColumn = 7;
+    INVENTORY_UNIT_COLUMN = 7;
   }
   console.log('OK2');
   if (recordType === SALIDA || recordType === SALIDA_STOCK) {
     destinationSheet = spreadsheet.getSheetByName(OUTPUT_SHEET);
     itemColumn = 'D';
-    unitColumn = 5;
+    INVENTORY_UNIT_COLUMN = 5;
   }
 
   console.log('OK3');
@@ -398,7 +416,7 @@ function createRow(recordType, values) {
   destinationSheet.getRange(lastRow, 1, 1, columnsToInsert).setValues(values);
 
   //Assign formula to get units
-  destinationSheet.getRange(lastRow, unitColumn).setFormula(`=IFNA(VLOOKUP(${itemColumn}${lastRow},ItemFieldsList,4, FALSE), "")`);
+  destinationSheet.getRange(lastRow, INVENTORY_UNIT_COLUMN).setFormula(`=IFNA(VLOOKUP(${itemColumn}${lastRow},ItemFieldsList,4, FALSE), "")`);
 }
 
 function ClearForm() {
@@ -431,7 +449,7 @@ function Lock() {
 function createTimeCounter(title) {
   let startTime = new Date();
   console.log(`startTime ${title}: ${startTime.toJSON()}`);
-  
+
   return {
     endTime() {
       let endTime = new Date();
