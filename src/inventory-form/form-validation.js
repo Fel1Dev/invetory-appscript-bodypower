@@ -5,9 +5,6 @@ function createRecord(event) {
   const formData = saveFormDataOnSpreadSheet();
   console.log('formData: ', formData);
   updateLowStockSince(formData.finalStock);
-
-  clearFields();
-  stopLoadingScreen();
 }
 
 function saveFormDataOnSpreadSheet() {
@@ -43,9 +40,9 @@ function getDataTimeAsString() {
 
   let timeformatted = [
     padTo2Digits(lowStockSince.getHours()),
-    padTo2Digits(lowStockSince.getMinutes())
+    padTo2Digits(lowStockSince.getMinutes()),
   ].join(':');
-  console.log('lowStockSince: ' + dateFormatted + ' ' + timeformatted)
+  console.log('lowStockSince: ' + dateFormatted + ' ' + timeformatted);
   return dateFormatted + ' ' + timeformatted;
 }
 
@@ -68,7 +65,11 @@ function sendDataToSpreadSheet(data, recordType) {
       stopLoadingScreen();
       clearFields();
     }, 500);
+
+    return;
   }
+  clearFields();
+  stopLoadingScreen();
 }
 
 function collectFormDataToSend() {
