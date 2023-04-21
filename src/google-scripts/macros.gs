@@ -8,6 +8,7 @@ const OUTPUT_SHEET = 'Salidas';
 
 const INVENTORY_SHEET = 'Inventario';
 const CREATE_SHEET = 'Crear registro';
+const DATOSLISTAS_SHEET = 'DatosLIstas';
 
 const DATE_CELL = 'C6';
 const NAME_CELL = 'C8';
@@ -36,7 +37,15 @@ function doGet() {
   output.addMetaTag('viewport', 'width=device-width, initial-scale=1');
   output.setTitle('.:: Body Power Lunch ::.');
   output.setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
+  //printLogLines(output.getContent());
   return output;
+}
+
+function printLogLines(output) {
+  const SS = SpreadsheetApp.getActiveSpreadsheet();
+  const dataSheet = SS.getSheetByName(DATOSLISTAS_SHEET);
+  dataSheet.getRange('A27').setValue(output);
+  //A27
 }
 
 function getHTMLPageContent(page = 'home-page') {
@@ -51,7 +60,7 @@ function include(filename) {
 
 function getItemsData() {
   const SS = SpreadsheetApp.getActiveSpreadsheet();
-  const itemSheet = SS.getSheetByName('Inventario');
+  const itemSheet = SS.getSheetByName(INVENTORY_SHEET);
   const itemsData = itemSheet.getDataRange().getDisplayValues();
 
   //Delete first 3 lines
@@ -390,13 +399,13 @@ function createRow(recordType, values) {
   if (recordType === ENTRADA || recordType === ENTRADA_STOCK) {
     destinationSheet = spreadsheet.getSheetByName(INPUT_SHEET);
     itemColumn = 'E';
-    INVENTORY_UNIT_COLUMN = 7;
+    unitColum = 7;
   }
   console.log('OK2');
   if (recordType === SALIDA || recordType === SALIDA_STOCK) {
     destinationSheet = spreadsheet.getSheetByName(OUTPUT_SHEET);
     itemColumn = 'D';
-    INVENTORY_UNIT_COLUMN = 5;
+    unitColum = 5;
   }
 
   console.log('OK3');
@@ -416,7 +425,7 @@ function createRow(recordType, values) {
   destinationSheet.getRange(lastRow, 1, 1, columnsToInsert).setValues(values);
 
   //Assign formula to get units
-  destinationSheet.getRange(lastRow, INVENTORY_UNIT_COLUMN).setFormula(`=IFNA(VLOOKUP(${itemColumn}${lastRow},ItemFieldsList,4, FALSE), "")`);
+  destinationSheet.getRange(lastRow, unitColum).setFormula(`=IFNA(VLOOKUP(${itemColumn}${lastRow},ItemFieldsList,4, FALSE), "")`);
 }
 
 function ClearForm() {
