@@ -43,8 +43,7 @@ function getDataTimeAsString() {
 
   let timeformatted = [
     padTo2Digits(lowStockSince.getHours()),
-    padTo2Digits(lowStockSince.getMinutes()),
-    padTo2Digits(lowStockSince.getSeconds()),
+    padTo2Digits(lowStockSince.getMinutes())
   ].join(':');
   console.log('lowStockSince: ' + dateFormatted + ' ' + timeformatted)
   return dateFormatted + ' ' + timeformatted;
