@@ -3,6 +3,7 @@ function createRecord(event) {
   startLoadingScreen();
 
   const formData = saveFormDataOnSpreadSheet();
+  console.log('formData: ', formData);
   updateLowStockSince(formData.finalStock);
 
   clearFields();
@@ -12,7 +13,7 @@ function createRecord(event) {
 function saveFormDataOnSpreadSheet() {
   const formData = collectFormDataToSend();
   sendDataToSpreadSheet(formData.data, formData.recordType);
-  return formData.data;
+  return formData;
 }
 
 function updateLowStockSince(finalStock) {
@@ -22,16 +23,31 @@ function updateLowStockSince(finalStock) {
 
   if (lowStockSinceDate && finalStock > minStock) {
     updateLowStockSinceDate(itemName, '');
+    return;
   }
-  if (!lowStockSinceDate && finalStock < minStock) {
+
+  if (!lowStockSinceDate && minStock > finalStock) {
     updateLowStockSinceDate(itemName, getDataTimeAsString());
   }
 }
 
 function getDataTimeAsString() {
   let lowStockSince = new Date();
-  lowStockSince.setMinutes(lowStockSince.getMinutes() - lowStockSince.getTimezoneOffset());
-  return lowStockSince.toJSON().replace('T', ' ').split('.')[0];
+
+  console.log(lowStockSince);
+  let dateFormatted = [
+    padTo2Digits(lowStockSince.getDate()),
+    padTo2Digits(lowStockSince.getMonth() + 1),
+    lowStockSince.getFullYear(),
+  ].join('/');
+
+  let timeformatted = [
+    padTo2Digits(lowStockSince.getHours()),
+    padTo2Digits(lowStockSince.getMinutes()),
+    padTo2Digits(lowStockSince.getSeconds()),
+  ].join(':');
+  console.log('lowStockSince: ' + dateFormatted + ' ' + timeformatted)
+  return dateFormatted + ' ' + timeformatted;
 }
 
 function updateLowStockSinceDate(itemName, sinceDate) {
@@ -141,16 +157,6 @@ const getCommonFields = () => {
 
 const padTo2Digits = (num) => {
   return num.toString().padStart(2, '0');
-};
-
-const formatDate = (dateText) => {
-  const recordDate = new Date(dateText);
-  if (recordDate)
-    return [
-      padTo2Digits(recordDate.getDate() + 1),
-      padTo2Digits(recordDate.getMonth() + 1),
-      recordDate.getFullYear(),
-    ].join('/');
 };
 
 const formatDate2 = (dateText) => {

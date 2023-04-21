@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <base target="_top">
+    <title>.:: Body Power Lunch ::.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&amp;display=swap" rel="stylesheet" />
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <style type="text/css">
+      :root {
+  --brand-color: #8DBF4F;
+  --gray-backgorund: #dfe4ea;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar-link {
+  color: var(--gray-backgorund);
+}
+
+.navbar-link:hover {
+  cursor: pointer;
+}
+
+nav li {
+  text-align: center;
+}
+
+.nav-menu .active {
+  color: var(--brand-color);
+}
+
+.logo {
+  margin: 5px;
+  font-size: 2rem;
+  height: 50px;
+  width: 50px;
+}
+
+.logo img {
+  height: 50px;
+  border-radius: 50%;
+}
+
+.logo:hover {
+  cursor: pointer;
+}
+
+.nav-gen {
+  display: grid;
+  background-color: var(--bs-dark);
+  color: white;
+  font-size: 1.5rem;
+  grid-template-columns: 70px 1fr;
+  align-items: center;
+  justify-items: end;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-menu {
+  background-color: var(--bs-dark);
+  color: white;
+  font-size: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  gap: 2rem;
+  margin-right: 50px;
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+  background: var(--gray-backgorund);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2000' height='437'%3E%3Cpath fill='%238DBF45' fill-rule='evenodd' d='M0 249.974c218.558 116.035 460.05 116.035 1224.475 0s802.933-136.035 715.525 0V0H0v349.974z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  overflow-x: hidden;
+}
+
+.footer {
+  height: 50px;
+  background-color: var(--bs-dark);
+}      :root {
+    --brand-color: #8DBF4F;
+    --brand-color-dark: #72a337;
+    --gray-backgorund: #dfe4ea;
+  }
+  
+html {
+    font-size: 62.5%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    width: 100vw;
+    height: 100vh;
+}
+
+.main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+    background: #dfe4ea;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2000' height='437'%3E%3Cpath fill='%238DBF45' fill-rule='evenodd' d='M0 249.974c218.558 116.035 460.05 116.035 1224.475 0s802.933-136.035 715.525 0V0H0v349.974z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+}
+
+.main--article {
+    background-color: white;
+    border-radius: 8px;
+    height: fit-content;
+}
+
+.record-form {
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+.record-form--content {
+    padding-top: 10px;
+    margin: 0px 2px;
+    margin-bottom: 10px;
+    border-left: 1px solid var(--bs-gray-300);
+    border-right: 1px solid var(--bs-gray-300);
+    border-bottom: 1px solid var(--bs-gray-300);
+}
+
+.record-form--title {
+    text-align: center;
+    margin: 20px 0px;
+    font-size: 4em;
+    font-weight: 600;
+    border-bottom: 1px solid var(--bs-gray-400);
+}
+
+.record-form--common {
+    margin: 20px 0px;
+}
+
+.record-form--fields {
+    margin-bottom: 20px;
+    margin-right: 5px;
+}
+
+.record-form--fields li {
+    margin: 10px 0px;
+}
+
+.common--label {
+    width: 90px;
+    font-size: 1.5rem;
+}
+
+.common--label__small {
+    font-size: 1.5rem;
+    margin-right: 5px;
+}
+
+.common--label__large {
+    width: 90%;
+    margin: 5px;
+    padding-left: 5px;
+}
+
+.error-message {
+    text-align: center;
+    font-weight: 500;
+    color: red;
+}
+
+.common--label__short {
+    width: 60px;
+    margin-left: 5px;
+}
+
+.common--input {
+    width: 150px;
+    margin: 0px 20px 0px 0px;
+    padding-left: 5px;
+    padding-right: 2px;
+    border: 1px solid var(--bs-gray-400);
+    border-radius: 4px;
+    font-size: 1.5rem;
+}
+
+.common--input__short {
+    width: 60px;
+    margin: 0px;
+    padding-left: 5px;
+}
+
+.common--input__medium {
+    width: 85px;
+    margin: 0px;
+    padding-left: 5px;
+}
+
+
+.common--input__close {
+    margin-right: 5px;
+}
+
+input[type=search]::-webkit-search-cancel-button {
+    -webkit-appearance: searchfield-cancel-button;
+}
+
+.common--input:disabled {
+    opacity: 1;
+    background-color: var(--bs-gray-200);
+}
+
+.common--input__large {
+    width: 65%;
+}
+
+.record-form-tabs {
+    margin: 0px 2px;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.record-form-tabs .nav-link {
+    color: var(--brand-color-dark);
+}
+
+.tabs--type-titles {
+    font-size: 1.6rem;
+}
+
+.tabs--type-titles__weight {
+    font-weight: 600;
+}
+
+.record-form--footer {
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer--btn {
+    height: 30px;
+}
+
+.output--details {
+    display: flex;
+    align-items: center;
+    resize: none;
+}
+
+.output--details textarea {
+    resize: none;
+    width: 200px;
+    margin: 0px 10px 0px 0px;
+    padding: 0px 5px;
+    border: 1px solid var(--bs-gray-400);
+    border-radius: 4px;
+    font-size: 1.5rem;
+}
+
+.hidden {
+    display: none;
+}
+
+
+ 
+#loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+ 
+#loading>div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+ 
+#loading.hide {
+    display: none;
+}
+
+ 
+
+ 
+.lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid #fff;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #fff transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}      :root {
+    --brand-color: #8DBF4F;
+    --brand-color-dark: #72a337;
+    --gray-backgorund: #dfe4ea;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    width: 100vw;
+    height: 100vh;
+}
+
+.home {    
+    width: 100%;
+    display: flex;
+    justify-content: center;
+     
+}
+
+.home--card {
+    margin: 0px 5px;
+    min-width: 170px;
+    max-width: 250px;
+    height: fit-content;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--gray-backgorund);
+    font-size: 1.5rem;
+}
+
+.card-title {
+    font-weight: 600;
+    text-align: center;
+}
+
+.home--card:hover {
+    cursor: pointer;
+}      :root {
+    --brand-color: #8DBF4F;
+    --brand-color-dark: #72a337;
+    --gray-backgorund: #dfe4ea;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.report {
+    width: 90%;
+    height: fit-content;
+    background-color: white;
+    border-radius: 5px;
+    overflow-x: hidden;
+    margin: 0 auto;
+}
+
+.report-content {
+    display: flex;
+    justify-content: space-around;
+}
+
+.report-title {
+    padding: 10px 0px;
+    font-size: 3em;
+    font-weight: 600;
+    text-align: center;
+}
+
+.report-subtitle {
+    text-align: center;
+    font-size: 3em;
+    font-weight: 450;
+}
+
+.report-section {
+    margin: 10px;
+}
+
+.report-control {
+    margin: 10px 10px 0px;
+    text-align: center;
+}
+
+table th {
+    text-align: center;
+}
+
+.table-content {
+    max-height: fit-content;    
+}
+
+.empty-response {
+    text-align: center;
+    font-size: 3em;
+    font-weight: 300;
+}
+
+@media screen and (max-width: 750px) {
+    .report-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .report-title {
+        font-size: 2rem;
+    }
+
+    .report-subtitle {
+        font-size: 2rem;
+    }
+}    </style>
+</head>
+
+<body>
+    <div id="loading" class="hide">
+        <div class="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+    </div>
+    <header>
+        <nav class="nav-gen">
+            <div id="main-logo" class="logo">
+                <img src="https://waiter-tools.netlify.app/assets/logo_body.png" alt="Body Power Lunch logo"/>
+            </div>
+            <ul class="nav-menu" id="header-navbar">
+                <li class="navbar-link active" id="home-page">Inicio</li>
+                <li class="navbar-link" id="inventory-form-page">Inventario</li>
+                <li class="navbar-link" id="report-page">Reporte</li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main" id="main-content">
+
+    </main>
+
+    <footer>
+        <div class="footer"></div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
+        </script>
+    
+    <script type="text/javascript">
+      const HOME_PAGE_ID = 'home-page';
+const INVENTORY_PAGE_ID = 'inventory-form-page';
+const REPORT_PAGE_ID = 'report-page';
+
+const INVENTORY_HOME_CARD_ID = 'inventory-card';
+const REPORT_HOME_CARD_ID = 'report-card';
+
+document.getElementById('header-navbar').addEventListener('click', navbarClicked);
+document.getElementById('main-logo').addEventListener('click', redirecToHomePage);
+window.addEventListener('load', startUpMainPage);
+
+function startUpMainPage() {
+  startLoadingScreen();
+  getPageContent(HOME_PAGE_ID);
+}
+
+function navbarClicked(e) {
+  const pageId = e.target.id;
+  console.log('pageId: ' + pageId);
+  if (pageId !== 'header-navbar') {
+    activePageByName(pageId);
+  }
+}
+
+function activePageByName(pageName) {
+  startLoadingScreen();
+  removeActiveLinks();
+  activeNavbarLink(pageName);
+  getPageContent(pageName);
+}
+
+function removeActiveLinks() {
+  document.getElementById(HOME_PAGE_ID).classList.remove('active');
+  document.getElementById(INVENTORY_PAGE_ID).classList.remove('active');
+  document.getElementById(REPORT_PAGE_ID).classList.remove('active');
+}
+
+function activeNavbarLink(id) {
+  document.getElementById(id).classList.add('active');
+}
+
+function getPageContent(pageId) {
+  if ('undefined' !== typeof google) {
+    google.script.run
+      .withSuccessHandler(putHTMLContent)
+      .withFailureHandler(failResponse)
+      .getHTMLPageContent(pageId);
+    return;
+  }
+}
+
+function failResponse() {
+  stopLoadingScreen();
+}
+
+function putHTMLContent(HTMLContent) {
+  document.getElementById('main-content').innerHTML = HTMLContent.content;
+  loadPageEventsByName(HTMLContent.pageName);
+}
+
+function loadPageEventsByName(pageName) {
+  console.log('pageName: ' + pageName);
+
+  const pageLoader = {
+    [HOME_PAGE_ID]: () => loadHomePage(),
+    [INVENTORY_PAGE_ID]: () => loadInventoryFormLogic(),
+    [REPORT_PAGE_ID]: () => loadReportPage(),
+  };
+
+  (pageLoader[pageName] || loadHomePage)();
+}
+
+function loadInventoryFormLogic() {
+   
+  document.getElementById('clear-fields').addEventListener('click', clearFields);
+  document.getElementById('form-inventory').addEventListener('submit', createRecord);
+
+   
+  document.getElementById(NEW_STOCK_TAB_ID).addEventListener('click', clickOnNewStock);
+  document.getElementById(INPUT_TAB_ID).addEventListener('click', clickOnInput);
+  document.getElementById(OUTPUT_TAB_ID).addEventListener('click', clickOnOutput);
+
+   
+  document.getElementById(ITEM_LIST_ID).addEventListener('change', getCurrentStock);
+  document.getElementById(NEW_STOCK_ID).addEventListener('input', processNewStock);
+  document.getElementById(STOCK_OUTPUT_TYPE_LIST).addEventListener('input', processStockOutputType);
+
+   
+  document.getElementById(QUANTITY_ID).addEventListener('input', processInQuantity);
+
+   
+  document.getElementById(OUT_QUANTITY_ID).addEventListener('input', processOutQuantity);
+  document.getElementById(OUTPUT_TYPE_LIST).addEventListener('input', processOutputTypeList);
+  startUpForm();
+}
+
+function loadReportPage() {
+  document.getElementById('reload-button').addEventListener('click', reloadReport);
+  reloadReport();
+}
+
+function loadHomePage() {
+  console.log('rendering HomePage....');
+  document.getElementById(INVENTORY_HOME_CARD_ID).addEventListener('click', redirectToInventory);
+  document.getElementById(REPORT_HOME_CARD_ID).addEventListener('click', redirectToReportPage);
+  stopLoadingScreen();
+}
+
+function redirectToReportPage() {
+  console.log('rendering ReportPage....');
+  activePageByName(REPORT_PAGE_ID);
+}
+
+function redirectToInventory() {
+  console.log('rendering InventoryPage....');
+  activePageByName(INVENTORY_PAGE_ID);
+}
+
+function redirecToHomePage() {
+  console.log('rendering HomePage....');
+  activePageByName(HOME_PAGE_ID);
+}
+       
+const RECORD_DATE_ID = 'record-date';
+const USER_LIST_ID = 'user-list';
+const ITEM_LIST_ID = 'item-list';
+const CURRENT_STOCK_ID = 'current-stock';
+const CURRENT_UNIT_ID = 'current-unit';
+const CURRENT_MIN_ID = 'current-min';
+const LOW_STOCK_SINCE_ID = 'low-stock-since-date';
+const ITEM_ERROR_LABEL_ID = 'item-error-label';
+
+ 
+const NEW_STOCK_TAB_ID = 'new-stock-tab';
+const NEW_STOCK_ID = 'new-stock';
+const DIFFERENCE_ID = 'difference';
+const STOCK_INVOICE_ID = 'stock-invoice';
+const STOCK_AMOUNT_ID = 'stock-amount';
+
+const STOCK_OUTPUT_TYPE_LIST = 'stock-output-type-list';
+const STOCK_OUTPUT_DESC = 'new-output-desc';
+
+ 
+const INPUT_TAB_ID = 'input-tab';
+const INVOICE_ID = 'invoice';
+const AMOUNT_ID = 'amount';
+const QUANTITY_ID = 'quantity';
+const FINAL_STOCK_INPUT_ID = 'final-stock-input';
+
+ 
+const OUTPUT_TAB_ID = 'output-tab';
+const OUT_QUANTITY_ID = 'out-quantity';
+const FINAL_STOCK_OUT_ID = 'final-stock-out';
+const OUTPUT_TYPE_LIST = 'output-type-list';
+const OUTPUT_DESC = 'output-description';
+
+ 
+const OUTPUT_TYPE_BAJA = 'BAJA';
+const ENTRADA_ROW_TYPE = 'ENTRADA';
+const SALIDA_ROW_TYPE = 'SALIDA';
+
+const CSS_HIDE_CLASS = 'hidden';
+
+function clearFields() {
+  let keepDate = document.getElementById('keep-date').checked;
+  let keepUserList = document.getElementById('keep-user-list').checked;
+
+  if (!keepDate) {
+    document.getElementById(RECORD_DATE_ID).value = '';
+  }
+  if (!keepUserList) {
+    document.getElementById(USER_LIST_ID).value = '';
+  }
+  
+  document.getElementById(ITEM_LIST_ID).value = '';
+  document.getElementById(CURRENT_STOCK_ID).value = '';
+  document.getElementById(CURRENT_UNIT_ID).value = '';
+  document.getElementById(CURRENT_MIN_ID).value = '';
+
+  
+  if (isTabActive(NEW_STOCK_TAB_ID)) {
+    clearNewStockFields();
+    hideStockFields();
+  }
+
+  
+  if (isTabActive(INPUT_TAB_ID)) {
+    clearInputFields();
+    disableInputFields();
+  }
+
+  
+  if (isTabActive(OUTPUT_TAB_ID)) {
+    clearOutputFields();
+    disableOutputFields();
+  }
+}
+
+function clearNewStockFields() {
+  
+  document.getElementById(NEW_STOCK_ID).value = '';
+  document.getElementById(DIFFERENCE_ID).value = '';
+
+  document.getElementById(STOCK_INVOICE_ID).value = '';
+  document.getElementById(STOCK_AMOUNT_ID).value = '';
+
+  document.getElementById(STOCK_OUTPUT_TYPE_LIST).value = '';
+  document.getElementById(STOCK_OUTPUT_DESC).value = '';
+}
+
+function clearInputFields() {
+  
+  document.getElementById(INVOICE_ID).value = '';
+  document.getElementById(AMOUNT_ID).value = '';
+  document.getElementById(QUANTITY_ID).value = '';
+  document.getElementById(FINAL_STOCK_INPUT_ID).value = '';
+}
+
+function clearOutputFields() {
+  
+  document.getElementById(OUT_QUANTITY_ID).value = '';
+  document.getElementById(FINAL_STOCK_OUT_ID).value = '';
+  document.getElementById(OUTPUT_TYPE_LIST).value = '';
+  document.getElementById(OUTPUT_DESC).value = '';
+}
+
+function clearStockInputFields() {
+  document.getElementById(STOCK_INVOICE_ID).value = '';
+  document.getElementById(STOCK_AMOUNT_ID).value = '';
+}
+
+function clearStockOutputFields() {
+  document.getElementById(STOCK_OUTPUT_TYPE_LIST).value = '';
+  document.getElementById(STOCK_OUTPUT_DESC).value = '';
+}
+
+function showStockInputFields() {
+  document.getElementById('new-stock-input-fields').classList.remove(CSS_HIDE_CLASS);
+
+  document.getElementById(STOCK_AMOUNT_ID).disabled = false;
+  clearStockInputFields();
+}
+
+function hideStockInputFields() {
+  document.getElementById('new-stock-input-fields').classList.add(CSS_HIDE_CLASS);
+
+  document.getElementById(STOCK_AMOUNT_ID).disabled = true;
+}
+
+function showStockOutputFields() {
+  document.getElementById('new-stock-output-fields').classList.remove(CSS_HIDE_CLASS);
+
+  document.getElementById(STOCK_OUTPUT_TYPE_LIST).disabled = false;
+  clearStockOutputFields();
+}
+
+function hideStockOutputFields() {
+  document.getElementById('new-stock-output-fields').classList.add(CSS_HIDE_CLASS);
+  document.getElementById('new-stock-output-detail').classList.add(CSS_HIDE_CLASS);
+
+  document.getElementById(STOCK_OUTPUT_TYPE_LIST).disabled = true;
+  document.getElementById(STOCK_OUTPUT_DESC).disabled = true;
+}
+
+function showStockOutputDetail() {
+  document.getElementById('new-stock-output-detail').classList.remove(CSS_HIDE_CLASS);
+
+  document.getElementById(STOCK_OUTPUT_DESC).disabled = false;
+}
+
+function hideStockOutputDetail() {
+  document.getElementById('new-stock-output-detail').classList.add(CSS_HIDE_CLASS);
+
+  document.getElementById(STOCK_OUTPUT_DESC).disabled = true;
+}
+
+function showOutputDetail() {
+  document.getElementById('output-detail').classList.remove(CSS_HIDE_CLASS);
+
+  document.getElementById(OUTPUT_DESC).disabled = false;
+}
+
+function hideOutputDetail() {
+  document.getElementById('output-detail').classList.add(CSS_HIDE_CLASS);
+
+  document.getElementById(OUTPUT_DESC).disabled = true;
+}
+
+function enableInputFields() {
+  document.getElementById(INVOICE_ID).disabled = false;
+  document.getElementById(AMOUNT_ID).disabled = false;
+  document.getElementById(QUANTITY_ID).disabled = false;
+}
+
+function enableInputFieldsIfActive() {
+  if (isTabActive(INPUT_TAB_ID)) {
+    enableInputFields();
+  }
+}
+
+function enableInputFieldsIfItem() {
+  if (getCurrentStockValue()) {
+    enableInputFields();
+  }
+}
+
+function disableInputFields() {
+  document.getElementById(INVOICE_ID).disabled = true;
+  document.getElementById(AMOUNT_ID).disabled = true;
+  document.getElementById(QUANTITY_ID).disabled = true;
+}
+
+function enableOutputFields() {
+  document.getElementById(OUT_QUANTITY_ID).disabled = false;
+  document.getElementById(OUTPUT_TYPE_LIST).disabled = false;
+}
+
+function enableOutputFieldsIfActive() {
+  if (isTabActive(OUTPUT_TAB_ID)) {
+    enableOutputFields();
+  }
+}
+
+function enableOutputFieldsIfItem() {
+  if (getCurrentStockValue()) {
+    enableOutputFields();
+  }
+}
+
+function disableOutputFields() {
+  document.getElementById(OUT_QUANTITY_ID).disabled = true;
+  document.getElementById(OUTPUT_TYPE_LIST).disabled = true;
+  document.getElementById(OUTPUT_DESC).disabled = true;
+}
+
+function hideStockFields() {
+  lockNewStock();
+  hideStockInputFields();
+  hideStockOutputFields();
+}
+
+function clickOnInput() {
+  clearNewStockFields();
+  hideStockFields();
+
+  clearOutputFields();
+  disableOutputFields();
+  hideOutputDetail();
+
+  enableInputFieldsIfItem();
+}
+
+function clickOnOutput() {
+  clearNewStockFields();
+  hideStockFields();
+
+  clearInputFields();
+  disableInputFields();
+
+  enableOutputFieldsIfItem();
+}
+
+function clickOnNewStock() {
+  clearOutputFields();
+  hideOutputDetail();
+  disableOutputFields();
+
+  clearInputFields();
+  disableInputFields();
+
+  unlockNewStockIfItem();
+}
+
+function stopLoadingScreen() {
+  document.getElementById('loading').classList.add('hide');
+}
+
+function startLoadingScreen() {
+  document.getElementById('loading').classList.remove('hide');
+}
+
+function lockNewStock() {
+  document.getElementById(NEW_STOCK_ID).disabled = true;
+}
+
+function unlockNewStockField() {
+  document.getElementById(NEW_STOCK_ID).disabled = false;
+}
+
+function unlockNewStockIfItem() {
+  if (getCurrentStockValue()) {
+    unlockNewStockField();
+  }
+}
+
+function unlockNewStockIfActive() {
+  if (isTabActive(NEW_STOCK_TAB_ID)) {
+    unlockNewStockField();
+  }
+}
+
+const isTabActive = (tabId) => {
+  const tab = document.getElementById(tabId);
+  return tab.classList.contains('active');
+};
+      
+function startUpForm() {
+  startLoadingScreen();
+
+  initCurrDateField();
+  
+  loadItemsData();
+  loadSimpleListsData();
+}
+
+function initCurrDateField() {
+  
+  document.getElementById('record-date').value = getLocalDateAsValue();
+}
+
+function getLocalDateAsValue() {
+  let local = new Date();
+  local.setMinutes(local.getMinutes() - local.getTimezoneOffset());
+  return local.toJSON().slice(0, 10);
+}
+
+function createItemsOptionsStopLoader(itemsData) {
+  createItemsOptions(itemsData);
+  stopLoadingScreen();
+}
+
+function createItemsOptions(itemsData) {
+  const itemListInput = document.getElementById('item-list-options');
+  itemListInput.textContent = '';
+  itemsData.forEach((item) => {
+    const option = document.createElement('option');
+    option.value = item[1];
+    option.text = `Cantidad actual: ${item[7]} ${item[4]}`;
+    itemListInput.appendChild(option);
+  });
+}
+
+function loadItemsData() {
+  if ('undefined' !== typeof google) {
+    google.script.run.withSuccessHandler(createItemsOptions).getItemsData();
+    return;
+  }
+  stopLoadingScreen();
+}
+
+function createSimpleListsOptions(allListsData) {
+  const usersListInput = document.getElementById('user-list-options');
+  const newOutTypesListInput = document.getElementById('new-output-list-options');
+  const outOutTypesListInput = document.getElementById('output-list-options');
+  allListsData.forEach((dataRow) => {
+    createListOption(usersListInput, dataRow[1]);
+    createListOption(newOutTypesListInput, dataRow[3]);
+    createListOption(outOutTypesListInput, dataRow[3]);
+  });
+  stopLoadingScreen();
+}
+
+function createListOption(inputElement, value) {
+  if (value) {
+    const option = document.createElement('option');
+    option.value = value;
+    inputElement.appendChild(option);
+  }
+}
+
+function loadSimpleListsData() {
+  if ('undefined' !== typeof google)
+    google.script.run.withSuccessHandler(createSimpleListsOptions).getSimpleListsData();
+}
+
+function getCurrentStock(event) {
+  startLoadingScreen();
+  hideErrorText();
+  const itemName = event.target.value;
+  setNewStock('');
+  
+  if (itemName) {
+    searchItemData(itemName);
+    return;
+  }
+  updateCurrentStock('');
+  updateCurrentUnit('');
+  updateCurrentMinStock('');
+  updateCurrentLowStockSince('');
+  lockNewStock();
+  hideStockInputFields();
+  hideStockOutputFields();
+
+  disableInputFields();
+  disableOutputFields();
+
+  stopLoadingScreen();
+}
+
+function searchItemData(name) {
+  if ('undefined' !== typeof google) {
+    google.script.run
+      .withSuccessHandler(processItemData)
+      .withFailureHandler(processEmptyItemData)
+      .getSingleItemData(name);
+    return;
+  }
+
+  updateCurrentStock(10);
+  updateCurrentUnit('testUnit');
+  unlockNewStockIfActive();
+  enableInputFieldsIfActive();
+  enableOutputFieldsIfActive();
+  stopLoadingScreen();
+}
+
+function processItemData(itemData) {
+  console.log('ItemData: ',itemData);
+  updateCurrentStock(parseInt(itemData.stock));
+  updateCurrentUnit(itemData.unit);
+  updateCurrentMinStock(itemData.min);
+  updateCurrentLowStockSince(itemData.lowStockSince);
+  unlockNewStockIfActive();
+  enableInputFieldsIfActive();
+  enableOutputFieldsIfActive();
+  stopLoadingScreen();
+}
+
+function processEmptyItemData() {
+  updateCurrentStock('');
+  updateCurrentUnit('');
+  updateCurrentMinStock('');
+  updateCurrentLowStockSince('');
+  showItemError();
+  lockNewStock();
+  hideStockInputFields();
+  hideStockOutputFields();
+
+  disableInputFields();
+  disableOutputFields();
+
+  stopLoadingScreen();
+}
+
+function showItemError() {
+  document.getElementById(ITEM_ERROR_LABEL_ID).classList.remove(CSS_HIDE_CLASS);
+}
+
+function hideErrorText() {
+  document.getElementById(ITEM_ERROR_LABEL_ID).classList.add(CSS_HIDE_CLASS);
+}
+
+function updateCurrentStock(value) {
+  document.getElementById(CURRENT_STOCK_ID).value = value;
+}
+
+function updateCurrentUnit(value) {
+  document.getElementById(CURRENT_UNIT_ID).value = value;
+}
+
+function updateCurrentMinStock(value) {
+  document.getElementById(CURRENT_MIN_ID).value = value;
+}
+
+function updateCurrentLowStockSince(value) {
+  document.getElementById(LOW_STOCK_SINCE_ID).value = value;
+}
+
+function getCurrentLowStockSince() {
+  return document.getElementById(LOW_STOCK_SINCE_ID).value;
+}
+
+function getNewStock() {
+  return document.getElementById(NEW_STOCK_ID).value;
+}
+
+function setNewStock(val) {
+  document.getElementById(NEW_STOCK_ID).value = val;
+}
+
+function getCurrentStockValue() {
+  return document.getElementById(CURRENT_STOCK_ID).value;
+}
+
+function getCurrentMinStock() {
+  return document.getElementById(CURRENT_MIN_ID).value = value;
+}
+
+function processNewStock() {
+  let newStock = getNewStock();
+  if (newStock) {
+    let currentStock = getCurrentStockValue();
+    let difference = newStock - currentStock;
+    updateDifferenceValue(difference);
+
+    if (difference > 0) {
+      showStockInputFields();
+      hideStockOutputFields();
+      return;
+    }
+    showStockOutputFields();
+    hideStockInputFields();
+  }
+}
+
+function updateDifferenceValue(newValue) {
+  document.getElementById(DIFFERENCE_ID).value = newValue;
+}
+
+function processStockOutputType(event) {
+  if (event.target.value.toUpperCase() === OUTPUT_TYPE_BAJA) {
+    showStockOutputDetail();
+    return;
+  }
+  hideStockOutputDetail();
+}
+
+function processInQuantity() {
+  const inputQuantity = document.getElementById(QUANTITY_ID).value;
+  if (inputQuantity > 0) {
+    const currStock = document.getElementById(CURRENT_STOCK_ID).value;
+    const finalStock = parseInt(currStock) + parseInt(inputQuantity);
+    document.getElementById(FINAL_STOCK_INPUT_ID).value = finalStock;
+    return;
+  }
+  document.getElementById(FINAL_STOCK_INPUT_ID).value = '';
+}
+
+function processOutQuantity() {
+  const outputQuantity = document.getElementById(OUT_QUANTITY_ID).value;
+  if (outputQuantity > 0) {
+    const currStock = document.getElementById(CURRENT_STOCK_ID).value;
+    const finalStock = parseInt(currStock) - parseInt(outputQuantity);
+    document.getElementById(FINAL_STOCK_OUT_ID).value = finalStock;
+    return;
+  }
+  document.getElementById(FINAL_STOCK_OUT_ID).value = '';
+}
+
+function processOutputTypeList(event) {
+  if (event.target.value.toUpperCase() === OUTPUT_TYPE_BAJA) {
+    showOutputDetail();
+    return;
+  }
+  hideOutputDetail();
+}
+      function createRecord(event) {
+  event.preventDefault();
+  startLoadingScreen();
+
+  const formData = saveFormDataOnSpreadSheet();
+  updateLowStockSince(formData.finalStock);
+
+  clearFields();
+  stopLoadingScreen();
+}
+
+function saveFormDataOnSpreadSheet() {
+  const formData = collectFormDataToSend();
+  sendDataToSpreadSheet(formData.data, formData.recordType);
+  return formData.data;
+}
+
+function updateLowStockSince(finalStock) {
+  const minStock = getCurrentMinStock();
+  const lowStockSinceDate = getCurrentLowStockSince();
+  const itemName = document.getElementById(ITEM_LIST_ID).value;
+
+  if (lowStockSinceDate && finalStock > minStock) {
+    updateLowStockSinceDate(itemName, '');
+  }
+  if (!lowStockSinceDate && finalStock &lt;&lt; minStock) {
+    updateLowStockSinceDate(itemName, getDataTimeAsString());
+  }
+}
+
+function getDataTimeAsString() {
+  let lowStockSince = new Date();
+  lowStockSince.setMinutes(lowStockSince.getMinutes() - lowStockSince.getTimezoneOffset());
+  return lowStockSince.toJSON().replace('T', ' ').split('.')[0];
+}
+
+function updateLowStockSinceDate(itemName, sinceDate) {
+  if ('undefined' !== typeof google) {
+    google.script.run
+      .withFailureHandler(failResponse)
+      .updateInventorySinceDate(itemName, sinceDate);
+  }
+}
+
+function sendDataToSpreadSheet(data, recordType) {
+  if ('undefined' !== typeof google) {
+    google.script.run
+      .withSuccessHandler(saveRecordSucessResponse)
+      .withFailureHandler(failResponse)
+      .saveFormData(recordType, [data]);
+
+    setTimeout(() => {
+      stopLoadingScreen();
+      clearFields();
+    }, 500);
+  }
+}
+
+function collectFormDataToSend() {
+  let recordType = '';
+  let formData = [];
+  let finalStock = null;
+
+  const stockDifference = parseInt(document.getElementById(DIFFERENCE_ID).value);
+  const inputQuantity = document.getElementById(QUANTITY_ID).value;
+  const outputQuantity = document.getElementById(OUT_QUANTITY_ID).value;
+
+  if (inputQuantity) {
+    recordType = ENTRADA_ROW_TYPE;
+    formData = getFormDataAsInput();
+    finalStock = document.getElementById(FINAL_STOCK_INPUT_ID).value;
+  }
+
+  if (outputQuantity) {
+    recordType = SALIDA_ROW_TYPE;
+    formData = getFormDataAsOutput();
+    finalStock = document.getElementById(FINAL_STOCK_OUT_ID).value;
+  }
+
+  if (stockDifference > 0) {
+    recordType = ENTRADA_ROW_TYPE;
+    formData = getFormDataAsStockInput();
+    finalStock = document.getElementById(NEW_STOCK_ID).value;
+  }
+
+  if (0 > stockDifference) {
+    recordType = SALIDA_ROW_TYPE;
+    formData = getFormDataAsStockOutput();
+    finalStock = document.getElementById(NEW_STOCK_ID).value;
+  }
+
+  console.log('recordType: ' + recordType);
+  console.table(formData);
+
+  return { data: formData, recordType: recordType, finalStock: finalStock };
+}
+
+function getFormDataAsInput() {
+  const { userName, recordDate, productName } = getCommonFields();
+  const invoice = document.getElementById(INVOICE_ID).value;
+  const inputQuantity = document.getElementById(QUANTITY_ID).value;
+  const amount = document.getElementById(AMOUNT_ID).value;
+
+  return ['', userName, invoice, recordDate, productName, inputQuantity, '', amount];
+}
+
+function getFormDataAsOutput() {
+  const { userName, recordDate, productName } = getCommonFields();
+  const outputQuantity = document.getElementById(OUT_QUANTITY_ID).value;
+  const outType = document.getElementById(OUTPUT_TYPE_LIST).value;
+  const outDesc = document.getElementById(OUTPUT_DESC).value;
+
+  return ['', userName, recordDate, productName, '', outputQuantity, outType, outDesc];
+}
+
+function getFormDataAsStockInput() {
+  const { userName, recordDate, productName } = getCommonFields();
+  const invoice = document.getElementById(STOCK_INVOICE_ID).value;
+  const inputQuantity = document.getElementById(DIFFERENCE_ID).value;
+  const amount = document.getElementById(STOCK_AMOUNT_ID).value;
+
+  return ['', userName, invoice, recordDate, productName, inputQuantity, '', amount];
+}
+
+function getFormDataAsStockOutput() {
+  const { userName, recordDate, productName } = getCommonFields();
+  const outputQuantity = document.getElementById(DIFFERENCE_ID).value * -1;
+  const outType = document.getElementById(STOCK_OUTPUT_TYPE_LIST).value;
+  const outDesc = document.getElementById(STOCK_OUTPUT_DESC).value;
+
+  return ['', userName, recordDate, productName, '', outputQuantity, outType, outDesc];
+}
+
+const getCommonFields = () => {
+  return {
+    userName: document.getElementById(USER_LIST_ID).value,
+    recordDate: formatDate2(document.getElementById(RECORD_DATE_ID).value),
+    productName: document.getElementById(ITEM_LIST_ID).value,
+  };
+};
+
+const padTo2Digits = (num) => {
+  return num.toString().padStart(2, '0');
+};
+
+const formatDate = (dateText) => {
+  const recordDate = new Date(dateText);
+  if (recordDate)
+    return [
+      padTo2Digits(recordDate.getDate() + 1),
+      padTo2Digits(recordDate.getMonth() + 1),
+      recordDate.getFullYear(),
+    ].join('/');
+};
+
+const formatDate2 = (dateText) => {
+  console.log('dateText: ' + dateText);
+  if (dateText) {
+    const splitedDate = dateText.split('-');
+    const finalDate = `${splitedDate[2]}/${splitedDate[1]}/${splitedDate[0]}`;
+    console.log(`Final date: '${finalDate}`);
+    return finalDate;
+  }
+};
+
+function saveRecordSucessResponse() {
+  console.log('Success response');
+  clearFields();
+  loadItemsData();
+}
+
+function failResponse(event) {
+  console.log('Fail response');
+  console.log(event);
+  stopLoadingScreen();
+}
+      const TABLE_OWNERS_CONTENT_ID = 'table-owners-content';
+const TABLE_OWNERS_BODY_ID = 'table-owners-body';
+const TABLE_OWNERS_RESPONSE_ID = 'empty-owners-response';
+
+const TABLE_LOCALS_CONTENT_ID = 'table-locals-content';
+const TABLE_LOCALS_BODY_ID = 'table-locals-body';
+const TABLE_LOCALS_RESPONSE_ID = 'empty-locals-response';
+
+function reloadReport() {
+  startLoadingScreen();
+  getReportData();
+}
+
+function getReportData() {
+  if ('undefined' !== typeof google) {
+    google.script.run
+      .withSuccessHandler(addContentToTable)
+      .withFailureHandler(failResponse)
+      .getInventoryData();
+    return;
+  }
+  addContentToTable(inventoryData);
+  stopLoadingScreen();
+}
+
+function addContentToTable(inventoryData) {  
+  if(!inventoryData) {
+    console.log('Empty object');
+    failResponse();
+    return;
+  }
+  console.table(inventoryData);
+  renderData(inventoryData.ownersInventory, inventoryData.localsInventory);
+  stopLoadingScreen();
+}
+
+function renderData(ownersDataFromInventory, localsDataFromInventory) {
+  renderDataOnOwnersTable(ownersDataFromInventory);
+  renderDataOnLocalsTable(localsDataFromInventory);
+}
+
+function renderDataOnOwnersTable(filteredData) {
+  hideEmptyResponse(TABLE_OWNERS_CONTENT_ID, TABLE_OWNERS_RESPONSE_ID);
+  renderDataOnTable(filteredData, TABLE_OWNERS_CONTENT_ID, TABLE_OWNERS_BODY_ID, TABLE_OWNERS_RESPONSE_ID);
+}
+
+function renderDataOnLocalsTable(filteredData) {
+  hideEmptyResponse(TABLE_LOCALS_CONTENT_ID, TABLE_LOCALS_RESPONSE_ID);
+  renderDataOnTable(filteredData, TABLE_LOCALS_CONTENT_ID, TABLE_LOCALS_BODY_ID, TABLE_LOCALS_RESPONSE_ID);
+}
+
+function renderDataOnTable(filteredData, tableContentId, tableBodyId, tableResponseId) {
+  const tableBody = document.getElementById(tableBodyId);
+  tableBody.textContent = '';
+  let counter = 1;
+
+  filteredData.forEach((item) => {
+    if (!item.id) return;
+
+    const tableRow = document.createElement('tr');
+
+    const cellHeader = document.createElement('th');
+    const cellHText = document.createTextNode(counter);
+
+    cellHeader.appendChild(cellHText);
+    cellHeader.setAttribute('scope', 'row');
+
+    const nameCell = createCell(item.units? `${item.name} x ${item.units}` : item.name);
+    const minStockCell = createCell(item.min);
+    const currStockCell = createCell(item.stock);
+    const pendingSince = createCell(item.since);
+
+    tableRow.appendChild(cellHeader);
+    tableRow.appendChild(nameCell);
+    tableRow.appendChild(minStockCell);
+    tableRow.appendChild(currStockCell);
+    tableRow.appendChild(pendingSince);
+
+    tableBody.appendChild(tableRow);
+    counter++;
+  });
+
+  if (counter === 1) {
+    showEmptyResponse(tableContentId, tableResponseId);
+  }
+}
+
+function createCell(value) {
+  const nameCell = document.createElement('td');
+  const nameTextNode = document.createTextNode(value);
+  nameCell.appendChild(nameTextNode);
+  return nameCell;
+}
+
+function showEmptyResponse(tableContentId, tableResponseId) {
+  document.getElementById(tableContentId).classList.add('hidden');
+  document.getElementById(tableResponseId).classList.remove('hidden');
+}
+
+function hideEmptyResponse(tableContentId, tableEmptyResponseId) {
+  document.getElementById(tableContentId).classList.remove('hidden');
+  document.getElementById(tableEmptyResponseId).classList.add('hidden');
+}
+
+function failResponse() {
+  showEmptyResponse(TABLE_LOCALS_RESPONSE_ID, TABLE_LOCALS_CONTENT_ID);
+  showEmptyResponse(TABLE_OWNERS_RESPONSE_ID, TABLE_OWNERS_CONTENT_ID);
+  stopLoadingScreen();
+}
+
+function createItemNameWithUnit(name, unit) {
+  return unit? `${name} x ${unit}` : name;
+}
+    
+    </script>
+</body>
+
+</html>

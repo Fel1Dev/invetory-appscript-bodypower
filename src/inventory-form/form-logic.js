@@ -201,7 +201,7 @@ function getCurrentStockValue() {
 }
 
 function getCurrentMinStock() {
-  return document.getElementById(CURRENT_MIN_ID).value = value;
+  return document.getElementById(CURRENT_MIN_ID).value;
 }
 
 function processNewStock() {
