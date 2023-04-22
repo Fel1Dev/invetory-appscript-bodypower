@@ -8,6 +8,7 @@ const OUTPUT_SHEET = 'Salidas';
 
 const INVENTORY_SHEET = 'Inventario';
 const CREATE_SHEET = 'Crear registro';
+const DATOSLISTAS_SHEET = 'DatosLIstas';
 
 const DATE_CELL = 'C6';
 const NAME_CELL = 'C8';
@@ -21,8 +22,14 @@ const NEW_STOCK_AMOUNT_CELL = 'C19';
 const INVOICE_NUM_CELL = 'F11';
 const USER_CELL = 'C4';
 
+const BUYER_FIELD_NAME = 'buyer';
 const BUYER_OWNERS = 'PROPIETARIOS';
 const BUYER_LOCALS = 'PEDIDO EN EL LOCAL';
+
+const INVENTORY_STOCK_COLUMN = 8;
+const INVENTORY_UNIT_COLUMN = 5;
+const INVENTORY_MIN_STOCK_COLUMN = 9;
+const INVENTORY_LOWSTOCK_SINCE_DATE_COLUMN = 12;
 
 function doGet() {
   let template = HtmlService.createTemplateFromFile('index');
@@ -30,7 +37,15 @@ function doGet() {
   output.addMetaTag('viewport', 'width=device-width, initial-scale=1');
   output.setTitle('.:: Body Power Lunch ::.');
   output.setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
+  //printLogLines(output.getContent());
   return output;
+}
+
+function printLogLines(output) {
+  const SS = SpreadsheetApp.getActiveSpreadsheet();
+  const dataSheet = SS.getSheetByName(DATOSLISTAS_SHEET);
+  dataSheet.getRange('A27').setValue(output);
+  //A27
 }
 
 function getHTMLPageContent(page = 'home-page') {
@@ -45,7 +60,7 @@ function include(filename) {
 
 function getItemsData() {
   const SS = SpreadsheetApp.getActiveSpreadsheet();
-  const itemSheet = SS.getSheetByName('Inventario');
+  const itemSheet = SS.getSheetByName(INVENTORY_SHEET);
   const itemsData = itemSheet.getDataRange().getDisplayValues();
 
   //Delete first 3 lines
@@ -63,11 +78,10 @@ function getSimpleListsData() {
 }
 
 function getSingleItemData(itemName) {
-  console.log('Search: ' + itemName);
-  const columnWithStock = 8;
-  const columnWithUnit = 5;
+  console.log('getSingleItemData Search: ' + itemName);
+
   const SS = SpreadsheetApp.getActiveSpreadsheet();
-  const itemSheet = SS.getSheetByName('Inventario');
+  const itemSheet = SS.getSheetByName(INVENTORY_SHEET);
 
   const txtFinder = itemSheet
     .createTextFinder(itemName)
@@ -77,25 +91,47 @@ function getSingleItemData(itemName) {
   console.log('found: ' + txtFinder.getValue());
   const row = txtFinder.getRow();
   console.log('row: ' + row);
-  let stock = itemSheet.getRange(row, columnWithStock).getValue();
-  let unit = itemSheet.getRange(row, columnWithUnit).getValue();
+  let stock = itemSheet.getRange(row, INVENTORY_STOCK_COLUMN).getValue();
+  let unit = itemSheet.getRange(row, INVENTORY_UNIT_COLUMN).getValue();
+  let minStock = itemSheet.getRange(row, INVENTORY_MIN_STOCK_COLUMN).getValue();
+  let lowStockSince = itemSheet.getRange(row, INVENTORY_LOWSTOCK_SINCE_DATE_COLUMN).getValue();
 
   console.log('stock: ' + stock);
-  console.log('unit: ' + unit);  
- 
+  console.log('unit: ' + unit);
+  console.log('minStock: ' + minStock);
+  console.log('LowStockSince: ' + lowStockSince);
+
   if (stock === '') {
     throw Error();
   }
 
   let itemData = {
     stock: stock,
-    unit: unit
+    unit: unit,
+    min: minStock,
+    lowStockSince: lowStockSince
   }
   return itemData;
 }
 
-function getFrontData(recordType, data) {
-  console.log('getFrontData');
+function updateInventorySinceDate(itemName, newDate) {
+  console.log('updateInventorySinceDate: ', { itemName, newDate });
+  const SS = SpreadsheetApp.getActiveSpreadsheet();
+  const itemSheet = SS.getSheetByName(INVENTORY_SHEET);
+
+  const txtFinder = itemSheet
+    .createTextFinder(itemName)
+    .matchCase(true)
+    .matchEntireCell(true)
+    .findNext();
+  console.log('found: ' + txtFinder.getValue());
+  const row = txtFinder.getRow();
+  console.log('row: ' + row);  
+  itemSheet.getRange(row, INVENTORY_LOWSTOCK_SINCE_DATE_COLUMN).setValue(newDate);
+}
+
+function saveFormData(recordType, data) {
+  console.log('saveFormData');
   console.log('RecordType: ' + recordType);
   console.log('Data from interface: ' + data);
 
@@ -103,19 +139,44 @@ function getFrontData(recordType, data) {
 }
 
 function getInventoryData() {
-  const fullInvetoryData = getAllInventoryData();
-  const filteredData = filterLowerThanMinimal(fullInvetoryData);
+  const time1 = createTimeCounter('Arrays');
+  //const fullInvetoryData = getAllInventoryData();
+  //const filteredData = filterLowerThanMinimal(fullInvetoryData);
+  time1.endTime();
 
-  const buyerColumn = 10;
+  const time2 = createTimeCounter('Objects');
+  const fullInvetoryData2 = getAllInventoryData();
+  const transformedData = transformToItemObjets(fullInvetoryData2);
+  const filteredData2 = filterLowerThanMinimalItems(transformedData);
+  time2.endTime();
 
-  let ownersItems = filterByValue(filteredData, buyerColumn, BUYER_OWNERS, false);
-  let localsItems = filterByValue(filteredData, buyerColumn, BUYER_LOCALS, true);
+  let ownersItems2 = filterItemsByValue(filteredData2, BUYER_FIELD_NAME, BUYER_OWNERS, false);
+  let localsItems2 = filterItemsByValue(filteredData2, BUYER_FIELD_NAME, BUYER_LOCALS, true);
 
   let inventoryData = {
-    ownersInventory: ownersItems,
-    localsInventory: localsItems
+    ownersInventory: ownersItems2,
+    localsInventory: localsItems2
   }
+  console.log('ownersItems: ' + ownersItems2.length)
+  console.log('localsItems: ' + localsItems2.length)
+
   return inventoryData;
+}
+
+function transformToItemObjets(inventoryData) {
+  return inventoryData.map((row) => {
+    //return [row[0], row[1], row[3], row[4], row[7], row[8], row[9], row[10], row[11]]
+    return {
+      id: row[0],
+      name: row[1],
+      units: row[3],
+      stock: row[7],
+      min: row[8],
+      max: row[9],
+      buyer: row[10],
+      since: row[11]
+    }
+  });
 }
 
 function filterLowerThanMinimal(inventoryData) {
@@ -131,14 +192,39 @@ function filterLowerThanMinimal(inventoryData) {
   });
 }
 
+function filterLowerThanMinimalItems(inventoryData) {
+  return inventoryData.filter((item) => {
+    const minStock = item.min;
+    if (minStock) {
+      const currStock = item.stock;
+      const difference = currStock - minStock;
+      if (difference < 0) {
+        return item;
+      }
+    }
+  });
+}
+
 function filterByValue(inventoryData, field, value, acceptEmptyValues) {
   return inventoryData.filter((row) => {
     const valueToFilter = row[field];
     if (valueToFilter === value) {
       return row;
     }
-    if(acceptEmptyValues && !valueToFilter) {
+    if (acceptEmptyValues && !valueToFilter) {
       return row;
+    }
+  });
+}
+
+function filterItemsByValue(inventoryItems, fieldName, value, acceptEmptyValues) {
+  return inventoryItems.filter((item) => {
+    const valueToFilter = item[fieldName];
+    if (valueToFilter === value) {
+      return item;
+    }
+    if (acceptEmptyValues && !valueToFilter) {
+      return item;
     }
   });
 }
@@ -313,13 +399,13 @@ function createRow(recordType, values) {
   if (recordType === ENTRADA || recordType === ENTRADA_STOCK) {
     destinationSheet = spreadsheet.getSheetByName(INPUT_SHEET);
     itemColumn = 'E';
-    unitColumn = 7;
+    unitColum = 7;
   }
   console.log('OK2');
   if (recordType === SALIDA || recordType === SALIDA_STOCK) {
     destinationSheet = spreadsheet.getSheetByName(OUTPUT_SHEET);
     itemColumn = 'D';
-    unitColumn = 5;
+    unitColum = 5;
   }
 
   console.log('OK3');
@@ -339,7 +425,7 @@ function createRow(recordType, values) {
   destinationSheet.getRange(lastRow, 1, 1, columnsToInsert).setValues(values);
 
   //Assign formula to get units
-  destinationSheet.getRange(lastRow, unitColumn).setFormula(`=IFNA(VLOOKUP(${itemColumn}${lastRow},ItemFieldsList,4, FALSE), "")`);
+  destinationSheet.getRange(lastRow, unitColum).setFormula(`=IFNA(VLOOKUP(${itemColumn}${lastRow},ItemFieldsList,4, FALSE), "")`);
 }
 
 function ClearForm() {
@@ -367,4 +453,19 @@ function Lock() {
   var spreadsheet = SpreadsheetApp.getActive();
   spreadsheet.getRange('H10').activate();
   var protection = spreadsheet.getRange('H10').protect();
+}
+
+function createTimeCounter(title) {
+  let startTime = new Date();
+  console.log(`startTime ${title}: ${startTime.toJSON()}`);
+
+  return {
+    endTime() {
+      let endTime = new Date();
+      let timeDiff = endTime - startTime;
+      console.log(`EndTime ${title}: ${endTime.toJSON()} `);
+      console.log(timeDiff / 1000);
+      console.log('_________________');
+    }
+  }
 }
